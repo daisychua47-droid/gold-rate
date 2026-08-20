@@ -1,1 +1,43 @@
 
+name: Update Crypto Rates
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+
+  update-rates:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update crypto rates
+        run: node scripts/update-rates.js
+
+      - name: Commit updated rates
+        run: |
+
+          git config user.name "github-actions[bot]"
+
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add rates.json
+
+          git diff --cached --quiet || git commit -m "Update crypto rates"
+
+          git push
