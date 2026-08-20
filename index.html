@@ -16,30 +16,42 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f4f4;
+    background:
+        radial-gradient(circle at top, #172554 0%, #0b1020 45%, #050814 100%);
     color: #111;
+    min-height: 100vh;
 }
 
 /* =========================
-   HEADER
+   HEADER - GAMING THEME
 ========================= */
 
 header {
-    background: linear-gradient(135deg, #8f2f00, #d95700);
+    background:
+        linear-gradient(135deg, #061a5c, #123fc4 45%, #08164f);
     color: white;
     padding: 22px 15px;
     text-align: center;
-    border-bottom: 4px solid #111;
+    border-bottom: 4px solid #ffd21f;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(35, 92, 255, 0.35);
 }
 
 header h1 {
     font-size: 30px;
     font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow:
+        2px 2px 0 #09236e,
+        0 0 12px rgba(255, 210, 31, 0.35);
 }
 
 header p {
     margin-top: 6px;
     font-size: 14px;
+    color: #ffe76a;
+    font-weight: bold;
 }
 
 /* =========================
@@ -63,19 +75,24 @@ header p {
 }
 
 .menu-card {
-    background: white;
+    background: linear-gradient(145deg, #ffffff, #eef4ff);
     border-radius: 16px;
     padding: 38px 20px;
     text-align: center;
     cursor: pointer;
-    border: 1px solid #ddd;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border: 2px solid #1f55d6;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.25),
+        0 0 15px rgba(31,85,214,0.18);
     transition: 0.2s;
 }
 
 .menu-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    border-color: #ffd21f;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.3),
+        0 0 20px rgba(255,210,31,0.35);
 }
 
 .menu-icon {
@@ -84,21 +101,24 @@ header p {
     margin: auto;
     margin-bottom: 18px;
     border-radius: 50%;
-    background: #d95700;
-    color: white;
+    background: linear-gradient(135deg, #1261ff, #07258f);
+    color: #ffd21f;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
     font-weight: bold;
+    border: 3px solid #ffd21f;
+    box-shadow: 0 0 15px rgba(255,210,31,0.4);
 }
 
 .menu-card h2 {
     margin-bottom: 8px;
+    color: #071b66;
 }
 
 .menu-card p {
-    color: #777;
+    color: #555;
 }
 
 /* =========================
@@ -107,10 +127,13 @@ header p {
 
 .section {
     display: none;
-    background: white;
+    background: linear-gradient(145deg, #ffffff, #f3f7ff);
     padding: 25px;
     border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border: 2px solid #1e4ed8;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.25),
+        0 0 20px rgba(31,85,214,0.15);
 }
 
 .section.active {
@@ -119,16 +142,18 @@ header p {
 
 .back {
     border: none;
-    background: #eee;
+    background: #e8efff;
+    color: #08206f;
     padding: 10px 17px;
     border-radius: 8px;
     cursor: pointer;
     margin-bottom: 20px;
     font-weight: bold;
+    border: 1px solid #9bb5ff;
 }
 
 .back:hover {
-    background: #ddd;
+    background: #d4e1ff;
 }
 
 /* =========================
@@ -145,9 +170,12 @@ header p {
 .dashboard-left,
 .dashboard-center,
 .dashboard-right {
-    background: white;
+    background: linear-gradient(145deg, #ffffff, #f2f6ff);
     border-radius: 14px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border: 2px solid #1f55d6;
+    box-shadow:
+        0 6px 20px rgba(0,0,0,0.22),
+        0 0 15px rgba(31,85,214,0.14);
 }
 
 .dashboard-left {
@@ -165,19 +193,23 @@ header p {
 .dashboard-menu-title {
     font-size: 14px;
     font-weight: 900;
-    color: #777;
+    color: #17347d;
     margin-bottom: 10px;
     padding: 5px;
 }
 
+/* =========================
+   DASHBOARD BUTTONS
+========================= */
+
 .dashboard-btn {
     width: 100%;
-    border: none;
+    border: 2px solid #d4def7;
     border-radius: 10px;
     padding: 16px 8px;
     margin-bottom: 10px;
-    background: #f3f3f3;
-    color: #222;
+    background: #edf2ff;
+    color: #14275e;
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
@@ -185,38 +217,53 @@ header p {
 }
 
 .dashboard-btn:hover {
-    background: #d95700;
+    background: linear-gradient(135deg, #1261ff, #09298e);
     color: white;
+    border-color: #ffd21f;
     transform: translateX(3px);
+    box-shadow: 0 0 12px rgba(18,97,255,0.35);
 }
 
 .dashboard-btn.active {
-    background: #d95700;
+    background: linear-gradient(135deg, #1261ff, #09298e);
     color: white;
+    border-color: #ffd21f;
+    box-shadow: 0 0 14px rgba(18,97,255,0.4);
 }
 
 .dashboard-btn.admin {
     margin-top: 20px;
 }
 
+/* =========================
+   TITLES
+========================= */
+
 .dashboard-section-title {
     font-size: 17px;
     font-weight: 900;
     margin-bottom: 14px;
-    border-bottom: 3px solid #d95700;
+    border-bottom: 3px solid #ffd21f;
     padding-bottom: 8px;
+    color: #071b66;
 }
 
 .live-rate-title {
     font-size: 18px;
     font-weight: 900;
     margin-bottom: 14px;
+    color: #071b66;
 }
 
+/* =========================
+   LIVE CRYPTO RATES
+========================= */
+
 .live-rate-box {
-    background: #f7f7f7;
+    background: #eef3ff;
     border-radius: 10px;
     overflow: hidden;
+    border: 1px solid #b9caff;
 }
 
 .live-rate-row {
@@ -224,7 +271,7 @@ header p {
     justify-content: space-between;
     align-items: center;
     padding: 12px 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #c9d5f2;
     font-size: 14px;
 }
 
@@ -234,12 +281,14 @@ header p {
 
 .live-rate-row strong {
     font-size: 15px;
+    color: #08298e;
 }
 
 .live-status {
     margin-top: 15px;
     font-size: 13px;
     font-weight: bold;
+    color: #159447;
 }
 
 .live-updated {
@@ -248,22 +297,28 @@ header p {
     font-size: 12px;
 }
 
+/* =========================
+   GOLD CENTER
+========================= */
+
 .gold-center-title {
     text-align: center;
     font-size: 24px;
     font-weight: 900;
     margin-bottom: 18px;
+    color: #071b66;
 }
 
 .gold-center-rate {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: 3px solid #111;
+    border: 3px solid #071b66;
     margin-bottom: 18px;
+    box-shadow: 0 0 15px rgba(255,210,31,0.2);
 }
 
 .gold-center-rate-label {
-    background: #ff650d;
+    background: linear-gradient(135deg, #ffb300, #ff7a00);
     color: white;
     display: flex;
     align-items: center;
@@ -271,10 +326,12 @@ header p {
     font-size: 28px;
     font-weight: 900;
     padding: 15px;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.25);
 }
 
 .gold-center-rate-value {
-    background: #fff0df;
+    background: linear-gradient(135deg, #fff8d6, #fff0a3);
+    color: #071b66;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -283,18 +340,23 @@ header p {
     padding: 10px;
 }
 
+/* =========================
+   GOLD TABLE
+========================= */
+
 .gold-center-table {
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid #111;
+    border: 2px solid #071b66;
+    overflow: hidden;
 }
 
 .gold-center-table th {
-    background: #b83e00;
-    color: white;
+    background: linear-gradient(135deg, #0a3ebd, #072276);
+    color: #ffd21f;
     padding: 10px;
     font-size: 17px;
-    border: 1px solid #111;
+    border: 1px solid #071b66;
 }
 
 .gold-center-table td {
@@ -302,41 +364,52 @@ header p {
     padding: 9px;
     font-size: 17px;
     font-weight: bold;
-    border: 1px solid #111;
+    border: 1px solid #b8c7eb;
 }
 
 .gold-center-table tr:nth-child(even) td {
-    background: #ffad7a;
+    background: #fff0a8;
 }
 
 .gold-center-table tr:nth-child(odd) td {
     background: white;
 }
 
+/* =========================
+   GCASH
+========================= */
+
 .dashboard-payment {
     margin-top: 15px;
     text-align: center;
     font-size: 14px;
     font-style: italic;
+    color: #24386e;
 }
 
 .dashboard-gcash {
     margin-top: 8px;
-    background: #c94b00;
+    background: linear-gradient(135deg, #ff3b30, #d71920);
     color: white;
     text-align: center;
     font-size: 19px;
     font-weight: 900;
     padding: 10px;
+    border: 2px solid #8e0b12;
 }
 
 .dashboard-gcash-name {
-    background: #ffad7a;
+    background: #ffd96a;
+    color: #111;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
     padding: 9px;
 }
+
+/* =========================
+   POSTER BUTTON
+========================= */
 
 .dashboard-poster-btn {
     width: 100%;
@@ -344,15 +417,257 @@ header p {
     padding: 12px;
     border: none;
     border-radius: 8px;
-    background: #111;
+    background: linear-gradient(135deg, #061b68, #1261ff);
     color: white;
     font-weight: bold;
     cursor: pointer;
+    border: 2px solid #ffd21f;
 }
 
 .dashboard-poster-btn:hover {
-    background: #d95700;
+    background: linear-gradient(135deg, #ff3b30, #ff7a00);
 }
+
+/* =========================
+   GOLD PAGE
+========================= */
+
+.gold-page-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gold-page-title h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #071b66;
+}
+
+/* Rate */
+
+.rate-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 3px solid #071b66;
+    margin-bottom: 25px;
+}
+
+.rate-label {
+    background: linear-gradient(135deg, #ffb300, #ff6500);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 900;
+    padding: 18px;
+}
+
+.rate-value {
+    background: linear-gradient(135deg, #fff8d6, #fff0a3);
+    color: #071b66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-weight: 900;
+    padding: 10px;
+}
+
+/* Conversion table */
+
+.gold-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid #071b66;
+    margin-top: 15px;
+}
+
+.gold-table th {
+    background: linear-gradient(135deg, #0a3ebd, #072276);
+    color: #ffd21f;
+    font-size: 25px;
+    padding: 15px;
+    border: 2px solid #071b66;
+}
+
+.gold-table td {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 12px;
+    border: 2px solid #b8c7eb;
+}
+
+.gold-table tr:nth-child(even) td {
+    background: #fff0a8;
+}
+
+.gold-table tr:nth-child(odd) td {
+    background: #fff;
+}
+
+/* GCash */
+
+.payment-note {
+    text-align: center;
+    font-size: 21px;
+    font-style: italic;
+    margin: 25px 0 12px;
+    color: #24386e;
+}
+
+.payment-note strong {
+    font-style: normal;
+}
+
+.gcash-number {
+    background: linear-gradient(135deg, #ff3b30, #d71920);
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    padding: 15px;
+}
+
+.gcash-name {
+    background: #ffd96a;
+    color: #111;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 14px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.poster-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #071b66, #1261ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #ffd21f;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #ff3b30, #ff7a00);
+}
+
+.btn-orange {
+    background: linear-gradient(135deg, #ffb300, #ff6500);
+}
+
+.btn-orange:hover {
+    background: linear-gradient(135deg, #ff3b30, #d71920);
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    margin-top: 7px;
+    margin-bottom: 18px;
+    border: 2px solid #c4d1ef;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #1261ff;
+    box-shadow: 0 0 0 3px rgba(18,97,255,0.12);
+}
+
+label {
+    font-weight: bold;
+    color: #14275e;
+}
+
+/* =========================
+   SELLER RESULT
+========================= */
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background: #eef3ff;
+    border-radius: 10px;
+    border: 1px solid #c4d1ef;
+    display: none;
+}
+
+.result.show {
+    display: block;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px solid #c9d5f2;
+}
+
+.result-row:last-child {
+    border-bottom: none;
+}
+
+.result-total {
+    font-size: 22px;
+    font-weight: 900;
+    color: #07298e;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-panel {
+    display: none;
+}
+
+.admin-panel.show {
+    display: block;
+}
+
+.error {
+    color: #d00000;
+    margin-bottom: 15px;
+    display: none;
+    font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #b9c6e5;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 950px) {
 
@@ -370,11 +685,33 @@ header p {
     }
 
     .live-rate-row {
-        border-right: 1px solid #ddd;
+        border-right: 1px solid #c9d5f2;
     }
 }
 
 @media (max-width: 700px) {
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .container {
+        margin: 15px auto;
+        padding: 12px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .menu-card {
+        padding: 25px 15px;
+    }
+
+    .section {
+        padding: 16px;
+    }
 
     .dashboard {
         display: flex;
@@ -432,253 +769,9 @@ header p {
     .live-rate-row {
         border-right: none;
     }
-}
-    
-/* =========================
-   GOLD PAGE
-========================= */
 
-.gold-page-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.gold-page-title h2 {
-    font-size: 28px;
-    font-weight: 900;
-}
-
-/* Rate */
-
-.rate-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 3px solid #111;
-    margin-bottom: 25px;
-}
-
-.rate-label {
-    background: #ff650d;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: 900;
-    padding: 18px;
-}
-
-.rate-value {
-    background: #fff0df;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: 900;
-    padding: 10px;
-}
-
-/* Conversion table */
-
-.gold-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 3px solid #111;
-    margin-top: 15px;
-}
-
-.gold-table th {
-    background: #b83e00;
-    color: white;
-    font-size: 25px;
-    padding: 15px;
-    border: 2px solid #111;
-}
-
-.gold-table td {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    padding: 12px;
-    border: 2px solid #111;
-}
-
-.gold-table tr:nth-child(even) td {
-    background: #ffad7a;
-}
-
-.gold-table tr:nth-child(odd) td {
-    background: #fff;
-}
-
-/* GCash */
-
-.payment-note {
-    text-align: center;
-    font-size: 21px;
-    font-style: italic;
-    margin: 25px 0 12px;
-}
-
-.payment-note strong {
-    font-style: normal;
-}
-
-.gcash-number {
-    background: #c94b00;
-    color: white;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 900;
-    padding: 15px;
-}
-
-.gcash-name {
-    background: #ffad7a;
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    padding: 14px;
-}
-
-/* Poster button */
-
-.poster-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 25px;
-}
-
-.btn {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 9px;
-    background: #111;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: #333;
-}
-
-.btn-orange {
-    background: #d95700;
-}
-
-.btn-orange:hover {
-    background: #b83e00;
-}
-
-/* =========================
-   SELLER
-========================= */
-
-input,
-select {
-    width: 100%;
-    padding: 13px;
-    margin-top: 7px;
-    margin-bottom: 18px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-label {
-    font-weight: bold;
-}
-
-.result {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f7f7f7;
-    border-radius: 10px;
-    display: none;
-}
-
-.result.show {
-    display: block;
-}
-
-.result-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 11px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.result-row:last-child {
-    border-bottom: none;
-}
-
-.result-total {
-    font-size: 22px;
-    font-weight: 900;
-}
-
-/* =========================
-   ADMIN
-========================= */
-
-.admin-panel {
-    display: none;
-}
-
-.admin-panel.show {
-    display: block;
-}
-
-.error {
-    color: #d00000;
-    margin-bottom: 15px;
-    display: none;
-    font-weight: bold;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #777;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    header h1 {
+    .gold-page-title h2 {
         font-size: 22px;
-    }
-
-    .container {
-        margin: 15px auto;
-        padding: 12px;
-    }
-
-    .menu {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .menu-card {
-        padding: 25px 15px;
-    }
-
-    .section {
-        padding: 16px;
-    }
-
-    .rate-box {
-        grid-template-columns: 1fr 1fr;
     }
 
     .rate-label {
