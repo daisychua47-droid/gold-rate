@@ -1,1 +1,72 @@
+name: Update Settings
 
+on:
+  workflow_dispatch:
+    inputs:
+      goldRate:
+        description: "MIR4 Gold Rate"
+        required: true
+        type: string
+
+      gcashNumber:
+        description: "GCash Number"
+        required: true
+        type: string
+
+      gcashName:
+        description: "GCash Name"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update-settings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update settings.json
+        env:
+          GOLD_RATE: ${{ inputs.goldRate }}
+          GCASH_NUMBER: ${{ inputs.gcashNumber }}
+          GCASH_NAME: ${{ inputs.gcashName }}
+
+        run: |
+          python - <<'PY'
+          import json
+          import os
+
+          gold_rate = float(os.environ["GOLD_RATE"])
+
+          if gold_rate <= 0:
+              raise ValueError("Gold rate must be greater than 0.")
+
+          data = {
+              "goldRate": gold_rate,
+              "gcashNumber": os.environ["GCASH_NUMBER"],
+              "gcashName": os.environ["GCASH_NAME"]
+          }
+
+          with open("settings.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, indent=2)
+              f.write("\n")
+          PY
+
+      - name: Commit settings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add settings.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to save."
+            exit 0
+          fi
+
+          git commit -m "Update Gold Rate settings"
+          git push
