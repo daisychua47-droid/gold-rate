@@ -1292,6 +1292,36 @@ footer {
     }
 }
 
+   
+
+
+.site-logo {
+    display: block;
+    width: 180px;
+    max-width: 60%;
+    height: auto;
+    margin: 0 auto 10px;
+}
+
+   
+@media (max-width: 700px) {
+
+    .site-logo {
+        width: 140px;
+        max-width: 55%;
+    }
+
+    header h1 {
+        font-size: 21px;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+    /* keep the rest of your existing mobile CSS */
+}   
+
 </style>
 
     
@@ -1302,11 +1332,15 @@ footer {
 
 <header>
 
+    <img
+        src="./GAMETOPUPZONE LOGO.png"
+        alt="GAME TOP-UP ZONE"
+        class="site-logo"
+    >
+
     <h1>MIR4 GOLD RATE SYSTEM</h1>
 
-    <p>
-        Gold Rate & Crypto Selling Calculator
-    </p>
+    <p>Gold Rate & Crypto Selling Calculator</p>
 
 </header>
 
