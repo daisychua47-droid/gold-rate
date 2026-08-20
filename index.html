@@ -1263,11 +1263,52 @@ const goldAmounts = [
     3000
 ];
 
+/* =====================================================
+   settings
+===================================================== */
+async function loadSettings() {
 
+    try {
+
+        const response = await fetch(
+            "./settings.json?time=" + Date.now()
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load settings.json");
+        }
+
+        const data = await response.json();
+
+        if (typeof data.goldRate === "number") {
+            settings.goldRate = data.goldRate;
+        }
+
+        if (data.gcashNumber) {
+            settings.gcashNumber = data.gcashNumber;
+        }
+
+        if (data.gcashName) {
+            settings.gcashName = data.gcashName;
+        }
+
+        console.log("Settings loaded:", data);
+
+    } catch (error) {
+
+        console.error(
+            "Settings loading error:",
+            error
+        );
+
+    }
+
+}
 /* =====================================================
    INITIALIZE
 ===================================================== */
 async function initialize() {
+    await loadSettings();
     updateGoldTable();
     updateGoldDisplay();
     await loadLiveRates();
