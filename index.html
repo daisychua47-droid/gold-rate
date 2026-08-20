@@ -1,1 +1,579 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Rate System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: #111;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 6px;
+            color: #ccc;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .menu-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .menu-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .menu-card p {
+            color: #666;
+        }
+
+        .section {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .back {
+            border: none;
+            background: #eee;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back:hover {
+            background: #ddd;
+        }
+
+        .rate-box {
+            background: #fff8df;
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .rate {
+            font-size: 42px;
+            font-weight: bold;
+            color: #b8860b;
+            margin-top: 10px;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #333;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.show {
+            display: block;
+        }
+
+        .error {
+            color: #d00;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            .menu {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+                margin: 15px auto;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🪙 GOLD RATE SYSTEM</h1>
+    <p>Gold Rate & Crypto Selling Calculator</p>
+</header>
+
+<div class="container">
+
+    <!-- MAIN MENU -->
+    <div id="home" class="menu">
+
+        <div class="menu-card" onclick="showSection('gold')">
+            <div class="menu-icon">🪙</div>
+            <h2>Gold Rate</h2>
+            <p>View current gold rate</p>
+        </div>
+
+        <div class="menu-card" onclick="showSection('seller')">
+            <div class="menu-icon">💰</div>
+            <h2>Seller</h2>
+            <p>Crypto selling calculator</p>
+        </div>
+
+        <div class="menu-card" onclick="showSection('adminLogin')">
+            <div class="menu-icon">🔐</div>
+            <h2>Admin</h2>
+            <p>Manage rates and settings</p>
+        </div>
+
+    </div>
+
+
+    <!-- GOLD RATE -->
+    <div id="gold" class="section">
+
+        <button class="back" onclick="goHome()">← Back</button>
+
+        <h2>🪙 Gold Rate</h2>
+
+        <br>
+
+        <div class="rate-box">
+            <div>Current Gold Rate</div>
+            <div class="rate">₱4.60</div>
+        </div>
+
+        <h3>Gold Conversion</h3>
+
+        <br>
+
+        <div class="result-row">
+            <span>₱100</span>
+            <strong>460 Gold</strong>
+        </div>
+
+        <div class="result-row">
+            <span>₱200</span>
+            <strong>920 Gold</strong>
+        </div>
+
+        <div class="result-row">
+            <span>₱300</span>
+            <strong>1,380 Gold</strong>
+        </div>
+
+        <div class="result-row">
+            <span>₱500</span>
+            <strong>2,300 Gold</strong>
+        </div>
+
+        <div class="result-row">
+            <span>₱1,000</span>
+            <strong>4,600 Gold</strong>
+        </div>
+
+    </div>
+
+
+    <!-- SELLER -->
+    <div id="seller" class="section">
+
+        <button class="back" onclick="goHome()">← Back</button>
+
+        <h2>💰 Seller Calculator</h2>
+
+        <br>
+
+        <label>Token</label>
+
+        <select id="token">
+            <option value="WEMIX">WEMIX</option>
+            <option value="EXDRA1">EXDRA1</option>
+            <option value="EXDRA2">EXDRA2</option>
+            <option value="EXDRA3">EXDRA3</option>
+            <option value="EXDRA4">EXDRA4</option>
+        </select>
+
+        <label>Order Quantity</label>
+
+        <input
+            type="number"
+            id="quantity"
+            placeholder="Enter quantity"
+            min="0"
+        >
+
+        <button class="btn" onclick="calculate()">
+            CALCULATE
+        </button>
+
+        <div id="sellerResult" class="result">
+
+            <h3>Customer Order</h3>
+
+            <br>
+
+            <div class="result-row">
+                <span>Token</span>
+                <strong id="resultToken"></strong>
+            </div>
+
+            <div class="result-row">
+                <span>Quantity</span>
+                <strong id="resultQuantity"></strong>
+            </div>
+
+            <div class="result-row">
+                <span>Base Rate</span>
+                <strong id="resultBase"></strong>
+            </div>
+
+            <div class="result-row">
+                <span>Markup</span>
+                <strong id="resultMarkup"></strong>
+            </div>
+
+            <div class="result-row">
+                <span>Final Price / Token</span>
+                <strong id="resultFinal"></strong>
+            </div>
+
+            <br>
+
+            <div class="result-row">
+                <span>Total PHP</span>
+                <strong id="resultPHP"></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN LOGIN -->
+    <div id="adminLogin" class="section">
+
+        <button class="back" onclick="goHome()">← Back</button>
+
+        <div class="admin-login">
+
+            <h2>🔐 Admin Login</h2>
+
+            <br>
+
+            <div id="loginError" class="error">
+                Incorrect password.
+            </div>
+
+            <label>Admin Password</label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Enter password"
+            >
+
+            <button class="btn" onclick="loginAdmin()">
+                LOGIN
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="section">
+
+        <button class="back" onclick="goHome()">← Back</button>
+
+        <h2>🔐 Admin Dashboard</h2>
+
+        <br>
+
+        <label>Gold Rate</label>
+
+        <input
+            type="number"
+            id="goldRate"
+            value="4.60"
+            step="0.01"
+        >
+
+        <h3>Crypto Rates</h3>
+
+        <br>
+
+        <label>WEMIX</label>
+        <input type="number" value="12.02" step="0.01">
+
+        <label>EXDRA1</label>
+        <input type="number" value="15.04" step="0.01">
+
+        <label>EXDRA2</label>
+        <input type="number" value="4.51" step="0.01">
+
+        <label>EXDRA3</label>
+        <input type="number" value="3.34" step="0.01">
+
+        <label>EXDRA4</label>
+        <input type="number" value="3.91" step="0.01">
+
+        <button class="btn" onclick="saveSettings()">
+            SAVE SETTINGS
+        </button>
+
+    </div>
+
+</div>
+
+<footer>
+    Gold Rate System
+</footer>
+
+
+<script>
+
+    /*
+       TEMPORARY ADMIN PASSWORD
+
+       We will replace this with secure
+       Supabase authentication later.
+    */
+    const ADMIN_PASSWORD = "123456";
+
+
+    function showSection(section) {
+
+        document.getElementById("home").style.display = "none";
+
+        document.querySelectorAll(".section").forEach(function(el) {
+            el.classList.remove("active");
+        });
+
+        document.getElementById(section).classList.add("active");
+    }
+
+
+    function goHome() {
+
+        document.querySelectorAll(".section").forEach(function(el) {
+            el.classList.remove("active");
+        });
+
+        document.getElementById("home").style.display = "grid";
+    }
+
+
+    function loginAdmin() {
+
+        const password =
+            document.getElementById("adminPassword").value;
+
+        if (password === ADMIN_PASSWORD) {
+
+            document
+                .getElementById("loginError")
+                .style.display = "none";
+
+            showSection("adminPanel");
+
+        } else {
+
+            document
+                .getElementById("loginError")
+                .style.display = "block";
+        }
+    }
+
+
+    function calculate() {
+
+        const token =
+            document.getElementById("token").value;
+
+        const quantity =
+            parseFloat(document.getElementById("quantity").value);
+
+        if (!quantity || quantity <= 0) {
+            alert("Please enter a valid quantity.");
+            return;
+        }
+
+        const rates = {
+            WEMIX: 12.02,
+            EXDRA1: 15.04,
+            EXDRA2: 4.51,
+            EXDRA3: 3.34,
+            EXDRA4: 3.91
+        };
+
+        const baseRate = rates[token];
+
+        let markup;
+
+        if (quantity <= 30) {
+            markup = 3;
+        }
+        else if (quantity <= 100) {
+            markup = 2;
+        }
+        else if (quantity > 500) {
+            markup = 0.60;
+        }
+        else {
+            markup = 1;
+        }
+
+        const finalPrice = baseRate + markup;
+        const totalPHP = quantity * finalPrice;
+
+        document.getElementById("resultToken").textContent = token;
+        document.getElementById("resultQuantity").textContent = quantity;
+        document.getElementById("resultBase").textContent =
+            "₱" + baseRate.toFixed(2);
+
+        document.getElementById("resultMarkup").textContent =
+            "₱" + markup.toFixed(2);
+
+        document.getElementById("resultFinal").textContent =
+            "₱" + finalPrice.toFixed(2);
+
+        document.getElementById("resultPHP").textContent =
+            "₱" + totalPHP.toFixed(2);
+
+        document
+            .getElementById("sellerResult")
+            .classList.add("show");
+    }
+
+
+    function saveSettings() {
+
+        alert("Settings saved temporarily. Database will be added later.");
+
+    }
+
+</script>
+
+</body>
+</html>
