@@ -2428,122 +2428,206 @@ function saveSettings() {
    SELLER CALCULATOR
 ===================================================== */
 
-function calculate() {
-
-    const token =
-        document
-        .getElementById("token")
-        .value;
-
-
-    const quantity =
-        parseFloat(
-            document
-            .getElementById("quantity")
-            .value
-        );
-
-
-    if (!quantity || quantity <= 0) {
-
-        alert("Please enter a valid quantity.");
-
-        return;
-
-    }
-
-
-    const baseRate =
-        settings.cryptoRates[token];
-
-
-    let markup;
-
-
-    if (quantity <= 30) {
-
-        markup = 3;
-
-    }
-
-    else if (quantity <= 100) {
-
-        markup = 2;
-
-    }
-
-    else if (quantity > 500) {
-
-        markup = 0.60;
-
-    }
-
-    else {
-
-        markup = 1;
-
-    }
-
-
-    const finalPrice =
-        baseRate + markup;
-
-
-    const totalPHP =
-        quantity * finalPrice;
-
-
-    const totalUSDT =
-        totalPHP / 61.86821841;
-
-
-    document
-        .getElementById("resultToken")
-        .textContent = token;
-
-
-    document
-        .getElementById("resultQuantity")
-        .textContent =
-            quantity.toLocaleString();
-
-
-    document
-        .getElementById("resultBase")
-        .textContent =
-            "₱" + baseRate.toFixed(2);
-
-
-    document
-        .getElementById("resultMarkup")
-        .textContent =
-            "₱" + markup.toFixed(2);
-
-
-    document
-        .getElementById("resultFinal")
-        .textContent =
-            "₱" + finalPrice.toFixed(2);
-
-
-    document
-        .getElementById("resultPHP")
-        .textContent =
-            "₱" + totalPHP.toFixed(2);
-
-
-    document
-        .getElementById("resultUSDT")
-        .textContent =
-            "$" + totalUSDT.toFixed(2);
-
-
-    document
-        .getElementById("sellerResult")
-        .classList.add("show");
-
-}
-
+      function calculate() {
+      
+          const token =
+              document
+              .getElementById("token")
+              .value;
+      
+      
+          const quantity =
+              parseFloat(
+                  document
+                  .getElementById("quantity")
+                  .value
+              );
+      
+      
+          if (!quantity || quantity <= 0) {
+      
+              alert("Please enter a valid quantity.");
+      
+              return;
+      
+          }
+      
+      
+          /* =================================================
+             RATES
+          ================================================= */
+      
+          const tokenRate =
+              settings.cryptoRates[token];
+      
+          const wemixRate =
+              settings.cryptoRates.WEMIX;
+      
+      
+          if (
+              !tokenRate ||
+              !wemixRate ||
+              tokenRate <= 0 ||
+              wemixRate <= 0
+          ) {
+      
+              alert("Live rates are not available yet.");
+      
+              return;
+      
+          }
+      
+      
+          /* =================================================
+             WEMIX NEEDED
+          ================================================= */
+      
+          const wemixNeeded =
+              quantity *
+              (tokenRate / wemixRate);
+      
+      
+          /* =================================================
+             MARKUP
+             BASED ON WEMIX NEEDED
+          ================================================= */
+      
+          let markup;
+      
+      
+          if (wemixNeeded <= 30) {
+      
+              markup = 3;
+      
+          }
+      
+          else if (wemixNeeded <= 100) {
+      
+              markup = 2;
+      
+          }
+      
+          else if (wemixNeeded > 500) {
+      
+              markup = 0.60;
+      
+          }
+      
+          else {
+      
+              markup = 1;
+      
+          }
+      
+      
+          /* =================================================
+             FEE
+             10% OF WEMIX NEEDED
+          ================================================= */
+      
+          const fee =
+              wemixNeeded * 0.10;
+      
+      
+          /* =================================================
+             FINAL SELLING PRICE
+          ================================================= */
+      
+          const finalPrice =
+              tokenRate +
+              markup +
+              fee;
+      
+      
+          /* =================================================
+             TOTAL PHP
+      
+             WEMIX NEEDED × FINAL PRICE
+          ================================================= */
+      
+          const totalPHP =
+              wemixNeeded *
+              finalPrice;
+      
+      
+          /* =================================================
+             TOTAL USDT
+          ================================================= */
+      
+          const totalUSDT =
+              totalPHP /
+              settings.usdtPHP;
+      
+      
+          /* =================================================
+             DISPLAY RESULTS
+          ================================================= */
+      
+          document
+              .getElementById("resultToken")
+              .textContent =
+                  token;
+      
+      
+          document
+              .getElementById("resultQuantity")
+              .textContent =
+                  quantity.toLocaleString();
+      
+      
+          document
+              .getElementById("resultBase")
+              .textContent =
+                  "₱" +
+                  tokenRate.toFixed(2);
+      
+      
+          document
+              .getElementById("resultWemixNeeded")
+              .textContent =
+                  wemixNeeded.toFixed(2);
+      
+      
+          document
+              .getElementById("resultMarkup")
+              .textContent =
+                  "₱" +
+                  markup.toFixed(2);
+      
+      
+          document
+              .getElementById("resultFee")
+              .textContent =
+                  "₱" +
+                  fee.toFixed(3);
+      
+      
+          document
+              .getElementById("resultFinal")
+              .textContent =
+                  "₱" +
+                  finalPrice.toFixed(3);
+      
+      
+          document
+              .getElementById("resultPHP")
+              .textContent =
+                  "₱" +
+                  totalPHP.toFixed(2);
+      
+      
+          document
+              .getElementById("resultUSDT")
+              .textContent =
+                  "$" +
+                  totalUSDT.toFixed(2);
+      
+      
+          document
+              .getElementById("sellerResult")
+              .classList.add("show");
+      
+      }
 
 /* =====================================================
    GENERATE GOLD POSTER
