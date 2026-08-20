@@ -132,6 +132,309 @@ header p {
 }
 
 /* =========================
+   MAIN DASHBOARD
+========================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 180px minmax(420px, 1fr) 260px;
+    gap: 18px;
+    align-items: start;
+}
+
+.dashboard-left,
+.dashboard-center,
+.dashboard-right {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.dashboard-left {
+    padding: 14px;
+}
+
+.dashboard-center {
+    padding: 20px;
+}
+
+.dashboard-right {
+    padding: 18px;
+}
+
+.dashboard-menu-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #777;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.dashboard-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 8px;
+    margin-bottom: 10px;
+    background: #f3f3f3;
+    color: #222;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.dashboard-btn:hover {
+    background: #d95700;
+    color: white;
+    transform: translateX(3px);
+}
+
+.dashboard-btn.active {
+    background: #d95700;
+    color: white;
+}
+
+.dashboard-btn.admin {
+    margin-top: 20px;
+}
+
+.dashboard-section-title {
+    font-size: 17px;
+    font-weight: 900;
+    margin-bottom: 14px;
+    border-bottom: 3px solid #d95700;
+    padding-bottom: 8px;
+}
+
+.live-rate-title {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 14px;
+}
+
+.live-rate-box {
+    background: #f7f7f7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.live-rate-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.live-rate-row:last-child {
+    border-bottom: none;
+}
+
+.live-rate-row strong {
+    font-size: 15px;
+}
+
+.live-status {
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.live-updated {
+    margin-top: 4px;
+    color: #777;
+    font-size: 12px;
+}
+
+.gold-center-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.gold-center-rate {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 3px solid #111;
+    margin-bottom: 18px;
+}
+
+.gold-center-rate-label {
+    background: #ff650d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 900;
+    padding: 15px;
+}
+
+.gold-center-rate-value {
+    background: #fff0df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 900;
+    padding: 10px;
+}
+
+.gold-center-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #111;
+}
+
+.gold-center-table th {
+    background: #b83e00;
+    color: white;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid #111;
+}
+
+.gold-center-table td {
+    text-align: center;
+    padding: 9px;
+    font-size: 17px;
+    font-weight: bold;
+    border: 1px solid #111;
+}
+
+.gold-center-table tr:nth-child(even) td {
+    background: #ffad7a;
+}
+
+.gold-center-table tr:nth-child(odd) td {
+    background: white;
+}
+
+.dashboard-payment {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.dashboard-gcash {
+    margin-top: 8px;
+    background: #c94b00;
+    color: white;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 900;
+    padding: 10px;
+}
+
+.dashboard-gcash-name {
+    background: #ffad7a;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 9px;
+}
+
+.dashboard-poster-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dashboard-poster-btn:hover {
+    background: #d95700;
+}
+
+@media (max-width: 950px) {
+
+    .dashboard {
+        grid-template-columns: 150px minmax(350px, 1fr);
+    }
+
+    .dashboard-right {
+        grid-column: 1 / -1;
+    }
+
+    .live-rate-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .live-rate-row {
+        border-right: 1px solid #ddd;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .dashboard-left,
+    .dashboard-center,
+    .dashboard-right {
+        width: 100%;
+    }
+
+    .dashboard-left {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .dashboard-menu-title {
+        grid-column: 1 / -1;
+        margin-bottom: 0;
+    }
+
+    .dashboard-btn {
+        margin-bottom: 0;
+    }
+
+    .dashboard-btn.admin {
+        margin-top: 0;
+    }
+
+    .gold-center-title {
+        font-size: 19px;
+    }
+
+    .gold-center-rate-label {
+        font-size: 21px;
+    }
+
+    .gold-center-rate-value {
+        font-size: 32px;
+    }
+
+    .gold-center-table th,
+    .gold-center-table td {
+        font-size: 15px;
+        padding: 8px 5px;
+    }
+
+    .live-rate-box {
+        display: block;
+    }
+
+    .live-rate-row {
+        border-right: none;
+    }
+}
+    
+/* =========================
    GOLD PAGE
 ========================= */
 
@@ -434,158 +737,182 @@ footer {
 
 
 <!-- =====================================================
-     HOME
+     MAIN DASHBOARD
 ===================================================== -->
 
-<div id="home" class="menu">
+<div id="home" class="dashboard">
 
-    <div class="menu-card" onclick="showSection('gold')">
+    <!-- LEFT -->
+    <div class="dashboard-left">
 
-        <div class="menu-icon">
-            G
+        <div class="dashboard-menu-title">
+            MENU
         </div>
-
-        <h2>Gold Rate</h2>
-
-        <p>
-            View current MIR4 gold rate
-        </p>
-
-    </div>
-
-
-    <div class="menu-card" onclick="showSection('seller')">
-
-        <div class="menu-icon">
-            S
-        </div>
-
-        <h2>Seller</h2>
-
-        <p>
-            Crypto selling calculator
-        </p>
-
-    </div>
-
-
-    <div class="menu-card" onclick="showSection('adminLogin')">
-
-        <div class="menu-icon">
-            A
-        </div>
-
-        <h2>Admin</h2>
-
-        <p>
-            Manage rates and settings
-        </p>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     GOLD RATE
-===================================================== -->
-
-<div id="gold" class="section">
-
-    <button class="back" onclick="goHome()">
-        ← Back
-    </button>
-
-
-    <div class="gold-page-title">
-
-        <h2>
-            MIR4 GOLD CONVERSION RATE SUMMARY
-        </h2>
-
-    </div>
-
-
-    <!-- RATE -->
-
-    <div class="rate-box">
-
-        <div class="rate-label">
-            RATE
-        </div>
-
-        <div class="rate-value" id="goldRateDisplay">
-            4.60
-        </div>
-
-    </div>
-
-
-    <!-- TABLE -->
-
-    <table class="gold-table">
-
-        <thead>
-
-            <tr>
-                <th>GCASH</th>
-                <th>GOLD</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="goldTableBody">
-
-        </tbody>
-
-    </table>
-
-
-    <!-- PAYMENT -->
-
-    <div class="payment-note">
-
-        All transactions must send to:
-        <strong>GCASH</strong>
-
-    </div>
-
-
-    <div class="gcash-number" id="gcashNumberDisplay">
-        #09393413842
-    </div>
-
-
-    <div class="gcash-name" id="gcashNameDisplay">
-        Da..y c
-    </div>
-
-
-    <!-- BUTTONS -->
-
-    <div class="poster-buttons">
 
         <button
-            class="btn btn-orange"
+            class="dashboard-btn active"
+            onclick="goHome()">
+
+            GOLD RATE
+
+        </button>
+
+        <button
+            class="dashboard-btn"
+            onclick="showSection('seller')">
+
+            SELLER
+
+        </button>
+
+        <button
+            class="dashboard-btn admin"
+            onclick="showSection('adminLogin')">
+
+            ADMIN
+
+        </button>
+
+    </div>
+
+
+    <!-- CENTER -->
+    <div class="dashboard-center">
+
+        <div class="gold-center-title">
+            MIR4 GOLD CONVERSION RATE SUMMARY
+        </div>
+
+
+        <div class="gold-center-rate">
+
+            <div class="gold-center-rate-label">
+                RATE
+            </div>
+
+            <div
+                class="gold-center-rate-value"
+                id="goldRateDisplay">
+
+                4.60
+
+            </div>
+
+        </div>
+
+
+        <table class="gold-center-table">
+
+            <thead>
+
+                <tr>
+                    <th>GCASH</th>
+                    <th>GOLD</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="goldTableBody">
+            </tbody>
+
+        </table>
+
+
+        <div class="dashboard-payment">
+
+            All transactions must send to:
+            <strong>GCASH</strong>
+
+        </div>
+
+
+        <div
+            class="dashboard-gcash"
+            id="gcashNumberDisplay">
+
+            #09393413842
+
+        </div>
+
+
+        <div
+            class="dashboard-gcash-name"
+            id="gcashNameDisplay">
+
+            Da..y c
+
+        </div>
+
+
+        <button
+            class="dashboard-poster-btn"
             onclick="generatePoster()">
 
             GENERATE PNG POSTER
 
         </button>
 
-        <button
-            class="btn"
-            onclick="goHome()">
+    </div>
 
-            BACK TO MENU
 
-        </button>
+    <!-- RIGHT -->
+    <div class="dashboard-right">
+
+        <div class="live-rate-title">
+            CRYPTO LIVE RATES
+        </div>
+
+
+        <div class="live-rate-box">
+
+            <div class="live-rate-row">
+                <span>WEMIX</span>
+                <strong id="adminWemixRate">--</strong>
+            </div>
+
+            <div class="live-rate-row">
+                <span>EXDRA1</span>
+                <strong id="adminExdra1Rate">--</strong>
+            </div>
+
+            <div class="live-rate-row">
+                <span>EXDRA2</span>
+                <strong id="adminExdra2Rate">--</strong>
+            </div>
+
+            <div class="live-rate-row">
+                <span>EXDRA3</span>
+                <strong id="adminExdra3Rate">--</strong>
+            </div>
+
+            <div class="live-rate-row">
+                <span>EXDRA4</span>
+                <strong id="adminExdra4Rate">--</strong>
+            </div>
+
+        </div>
+
+
+        <div
+            id="liveRateStatus"
+            class="live-status">
+
+            ● LOADING...
+
+        </div>
+
+
+        <div
+            id="rateUpdated"
+            class="live-updated">
+
+            Loading live rates...
+
+        </div>
 
     </div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -863,99 +1190,6 @@ footer {
     >
 
 
-  <h3>
-    CRYPTO LIVE RATES
-</h3>
-
-<div style="
-    margin: 15px 0;
-    padding: 15px;
-    background: #f7f7f7;
-    border-radius: 10px;
-">
-
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        padding:10px 0;
-        border-bottom:1px solid #ddd;
-    ">
-        <strong>WEMIX</strong>
-        <strong id="adminWemixRate">--</strong>
-    </div>
-
-
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        padding:10px 0;
-        border-bottom:1px solid #ddd;
-    ">
-        <strong>EXDRA1</strong>
-        <strong id="adminExdra1Rate">--</strong>
-    </div>
-
-
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        padding:10px 0;
-        border-bottom:1px solid #ddd;
-    ">
-        <strong>EXDRA2</strong>
-        <strong id="adminExdra2Rate">--</strong>
-    </div>
-
-
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        padding:10px 0;
-        border-bottom:1px solid #ddd;
-    ">
-        <strong>EXDRA3</strong>
-        <strong id="adminExdra3Rate">--</strong>
-    </div>
-
-
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        padding:10px 0;
-    ">
-        <strong>EXDRA4</strong>
-        <strong id="adminExdra4Rate">--</strong>
-    </div>
-
-</div>
-
-
-<div
-    id="liveRateStatus"
-    style="
-        font-weight:bold;
-        margin-top:10px;
-    "
->
-    ● LOADING...
-</div>
-
-
-<div
-    id="rateUpdated"
-    style="
-        color:#777;
-        font-size:14px;
-        margin-top:5px;
-    "
->
-    Loading live rates...
-</div>
-
-
-    <br>
-
-
     <button
         class="btn btn-orange"
         onclick="saveSettings()">
@@ -1158,7 +1392,6 @@ function updateLiveRateDisplay() {
 /* =====================================================
    SHOW SECTION
 ===================================================== */
-
 function showSection(section) {
 
     document.getElementById("home").style.display = "none";
@@ -1171,34 +1404,22 @@ function showSection(section) {
 
         });
 
-
     document
         .getElementById(section)
         .classList.add("active");
-
 }
-
 
 /* =====================================================
    HOME
 ===================================================== */
-
 function goHome() {
-
     document
         .querySelectorAll(".section")
         .forEach(function(el) {
-
             el.classList.remove("active");
-
         });
-
-
     document.getElementById("home").style.display = "grid";
-
 }
-
-
 /* =====================================================
    GOLD TABLE
 ===================================================== */
