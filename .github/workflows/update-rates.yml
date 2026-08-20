@@ -1,11 +1,14 @@
-
 name: Update Crypto Rates
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
+  push:
+    branches:
+      - main
 
   workflow_dispatch:
+
+  schedule:
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
