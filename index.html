@@ -1297,8 +1297,6 @@ footer {
     }
 }
 
-   
-
 
 .site-logo {
     position: absolute;
@@ -1309,27 +1307,6 @@ footer {
     width: 100px;
     height: auto;
 }
-
-   
-@media (max-width: 700px) {
-
-    .site-logo {
-        width: 75px;
-        left: 12px;
-        max-width: none;
-    }
-
-    header h1 {
-        font-size: 21px;
-    }
-
-    header p {
-        font-size: 12px;
-    }
-
-    /* keep the rest of your existing mobile CSS */
-}   
-
 
 /* =========================
    FIXED SOCIAL BAR
@@ -1452,88 +1429,85 @@ footer {
 
 
 /* =========================================
-   MOBILE HEADER - FINAL FIX
+   MOBILE HEADER + LOGO FINAL FIX
 ========================================= */
 
 @media (max-width: 600px) {
 
     header {
         display: grid !important;
-        grid-template-columns: 90px minmax(0, 1fr) !important;
+
+        grid-template-columns: 82px minmax(0, 1fr) !important;
+
+        min-height: 110px !important;
+
+        padding: 12px 10px !important;
+
         align-items: center !important;
 
-        min-height: 125px !important;
-        height: auto !important;
-
-        padding: 14px 12px !important;
-        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
 
-    /* LOGO */
-    header img {
+    header .site-logo {
         position: static !important;
 
-        width: 78px !important;
-        max-width: 78px !important;
+        display: block !important;
+
+        width: 68px !important;
+
+        max-width: 68px !important;
+
         height: auto !important;
 
         margin: 0 auto !important;
-        display: block !important;
+
+        transform: none !important;
 
         grid-column: 1 !important;
+
         grid-row: 1 / span 2 !important;
     }
 
-    /* TITLE */
     header h1 {
         grid-column: 2 !important;
+
         grid-row: 1 !important;
 
         width: 100% !important;
-        max-width: 100% !important;
 
         margin: 0 !important;
+
         padding: 0 !important;
+
+        font-size: 19px !important;
+
+        line-height: 1.15 !important;
 
         text-align: center !important;
 
-        font-size: 21px !important;
-        line-height: 1.15 !important;
+        white-space: normal !important;
 
-        overflow-wrap: normal !important;
+        overflow-wrap: break-word !important;
     }
 
-    /* SUBTITLE */
     header p {
         grid-column: 2 !important;
+
         grid-row: 2 !important;
 
         width: 100% !important;
 
-        margin: 5px 0 0 0 !important;
+        margin: 4px 0 0 !important;
+
         padding: 0 !important;
 
-        text-align: center !important;
+        font-size: 10px !important;
 
-        font-size: 11px !important;
         line-height: 1.2 !important;
-    }
 
-    .back-button {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-
-        width: auto !important;
-        min-width: 70px;
-
-        padding: 8px 14px !important;
-        margin-bottom: 15px;
-
-        font-size: 13px;
+        text-align: center !important;
     }
 }
-   
 
 </style>
 
@@ -2317,29 +2291,32 @@ function updateLiveRateDisplay() {
 ===================================================== */
 function showSection(section) {
 
-    document.getElementById("home").style.display = "none";
+    const home = document.getElementById("home");
 
+    // Hide home
+    home.style.display = "none";
+
+    // Hide all sections
     document
         .querySelectorAll(".section")
         .forEach(function(el) {
-
             el.classList.remove("active");
-
         });
 
-    document
-        .getElementById(section)
-        .classList.add("active");
+    // Show selected section
+    const target = document.getElementById(section);
 
-    // Always open the new page from the top
+    if (target) {
+        target.classList.add("active");
+    }
+
+    // Start at top
     window.scrollTo({
         top: 0,
         left: 0,
         behavior: "instant"
     });
-
 }
-
 /* =====================================================
    HOME
 ===================================================== */
@@ -2351,9 +2328,12 @@ function goHome() {
             el.classList.remove("active");
         });
 
-    document.getElementById("home").style.display = "grid";
+    const home = document.getElementById("home");
 
-    // Reset page position when going back
+    // Remove inline display so responsive CSS works again
+    home.style.display = "";
+
+    // Go back to the top
     window.scrollTo({
         top: 0,
         left: 0,
