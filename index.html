@@ -1,579 +1,1731 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gold Rate System</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>MIR4 Gold Rate System</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
-        }
+<style>
 
-        header {
-            background: #111;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        header h1 {
-            font-size: 28px;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    color: #111;
+}
 
-        header p {
-            margin-top: 6px;
-            color: #ccc;
-        }
+/* =========================
+   HEADER
+========================= */
 
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-        }
+header {
+    background: linear-gradient(135deg, #8f2f00, #d95700);
+    color: white;
+    padding: 22px 15px;
+    text-align: center;
+    border-bottom: 4px solid #111;
+}
 
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+header h1 {
+    font-size: 30px;
+    font-weight: 900;
+}
 
-        .menu-card {
-            background: white;
-            border-radius: 15px;
-            padding: 35px 20px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: 0.2s;
-        }
+header p {
+    margin-top: 6px;
+    font-size: 14px;
+}
 
-        .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
+/* =========================
+   MAIN
+========================= */
 
-        .menu-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-        }
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
 
-        .menu-card h2 {
-            margin-bottom: 8px;
-        }
+/* =========================
+   HOME MENU
+========================= */
 
-        .menu-card p {
-            color: #666;
-        }
+.menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
 
-        .section {
-            display: none;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
+.menu-card {
+    background: white;
+    border-radius: 16px;
+    padding: 38px 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
 
-        .section.active {
-            display: block;
-        }
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
 
-        .back {
-            border: none;
-            background: #eee;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
+.menu-icon {
+    width: 65px;
+    height: 65px;
+    margin: auto;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: #d95700;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
 
-        .back:hover {
-            background: #ddd;
-        }
+.menu-card h2 {
+    margin-bottom: 8px;
+}
 
-        .rate-box {
-            background: #fff8df;
-            border: 2px solid #d4af37;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+.menu-card p {
+    color: #777;
+}
 
-        .rate {
-            font-size: 42px;
-            font-weight: bold;
-            color: #b8860b;
-            margin-top: 10px;
-        }
+/* =========================
+   SECTIONS
+========================= */
 
-        .admin-login {
-            max-width: 400px;
-            margin: auto;
-        }
+.section {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
 
-        input,
-        select {
-            width: 100%;
-            padding: 13px;
-            margin-top: 8px;
-            margin-bottom: 18px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+.section.active {
+    display: block;
+}
 
-        label {
-            font-weight: bold;
-        }
+.back {
+    border: none;
+    background: #eee;
+    padding: 10px 17px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: #111;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.back:hover {
+    background: #ddd;
+}
 
-        .btn:hover {
-            background: #333;
-        }
+/* =========================
+   GOLD PAGE
+========================= */
 
-        .result {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f7f7f7;
-            border-radius: 10px;
-            display: none;
-        }
+.gold-page-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .result.show {
-            display: block;
-        }
+.gold-page-title h2 {
+    font-size: 28px;
+    font-weight: 900;
+}
 
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
+/* Rate */
 
-        .result-row:last-child {
-            border-bottom: none;
-        }
+.rate-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 3px solid #111;
+    margin-bottom: 25px;
+}
 
-        .admin-panel {
-            display: none;
-        }
+.rate-label {
+    background: #ff650d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 900;
+    padding: 18px;
+}
 
-        .admin-panel.show {
-            display: block;
-        }
+.rate-value {
+    background: #fff0df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-weight: 900;
+    padding: 10px;
+}
 
-        .error {
-            color: #d00;
-            margin-bottom: 15px;
-            display: none;
-        }
+/* Conversion table */
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-        }
+.gold-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid #111;
+    margin-top: 15px;
+}
 
-        @media (max-width: 700px) {
-            .menu {
-                grid-template-columns: 1fr;
-            }
+.gold-table th {
+    background: #b83e00;
+    color: white;
+    font-size: 25px;
+    padding: 15px;
+    border: 2px solid #111;
+}
 
-            .container {
-                padding: 15px;
-                margin: 15px auto;
-            }
+.gold-table td {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 12px;
+    border: 2px solid #111;
+}
 
-            .section {
-                padding: 20px;
-            }
+.gold-table tr:nth-child(even) td {
+    background: #ffad7a;
+}
 
-            header h1 {
-                font-size: 22px;
-            }
-        }
-    </style>
+.gold-table tr:nth-child(odd) td {
+    background: #fff;
+}
+
+/* GCash */
+
+.payment-note {
+    text-align: center;
+    font-size: 21px;
+    font-style: italic;
+    margin: 25px 0 12px;
+}
+
+.payment-note strong {
+    font-style: normal;
+}
+
+.gcash-number {
+    background: #c94b00;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    padding: 15px;
+}
+
+.gcash-name {
+    background: #ffad7a;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 14px;
+}
+
+/* Poster button */
+
+.poster-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: #111;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #333;
+}
+
+.btn-orange {
+    background: #d95700;
+}
+
+.btn-orange:hover {
+    background: #b83e00;
+}
+
+/* =========================
+   SELLER
+========================= */
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    margin-top: 7px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    display: none;
+}
+
+.result.show {
+    display: block;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-row:last-child {
+    border-bottom: none;
+}
+
+.result-total {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-panel {
+    display: none;
+}
+
+.admin-panel.show {
+    display: block;
+}
+
+.error {
+    color: #d00000;
+    margin-bottom: 15px;
+    display: none;
+    font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .container {
+        margin: 15px auto;
+        padding: 12px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .menu-card {
+        padding: 25px 15px;
+    }
+
+    .section {
+        padding: 16px;
+    }
+
+    .rate-box {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .rate-label {
+        font-size: 22px;
+    }
+
+    .rate-value {
+        font-size: 32px;
+    }
+
+    .gold-table th {
+        font-size: 18px;
+        padding: 10px 5px;
+    }
+
+    .gold-table td {
+        font-size: 18px;
+        padding: 10px 5px;
+    }
+
+    .payment-note {
+        font-size: 17px;
+    }
+
+    .gcash-number {
+        font-size: 23px;
+    }
+
+    .gcash-name {
+        font-size: 20px;
+    }
+
+    .poster-buttons {
+        flex-direction: column;
+    }
+}
+
+</style>
 </head>
+
 
 <body>
 
 <header>
-    <h1>🪙 GOLD RATE SYSTEM</h1>
-    <p>Gold Rate & Crypto Selling Calculator</p>
+
+    <h1>MIR4 GOLD RATE SYSTEM</h1>
+
+    <p>
+        Gold Rate & Crypto Selling Calculator
+    </p>
+
 </header>
+
 
 <div class="container">
 
-    <!-- MAIN MENU -->
-    <div id="home" class="menu">
 
-        <div class="menu-card" onclick="showSection('gold')">
-            <div class="menu-icon">🪙</div>
-            <h2>Gold Rate</h2>
-            <p>View current gold rate</p>
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<div id="home" class="menu">
+
+    <div class="menu-card" onclick="showSection('gold')">
+
+        <div class="menu-icon">
+            G
         </div>
 
-        <div class="menu-card" onclick="showSection('seller')">
-            <div class="menu-icon">💰</div>
-            <h2>Seller</h2>
-            <p>Crypto selling calculator</p>
+        <h2>Gold Rate</h2>
+
+        <p>
+            View current MIR4 gold rate
+        </p>
+
+    </div>
+
+
+    <div class="menu-card" onclick="showSection('seller')">
+
+        <div class="menu-icon">
+            S
         </div>
 
-        <div class="menu-card" onclick="showSection('adminLogin')">
-            <div class="menu-icon">🔐</div>
-            <h2>Admin</h2>
-            <p>Manage rates and settings</p>
+        <h2>Seller</h2>
+
+        <p>
+            Crypto selling calculator
+        </p>
+
+    </div>
+
+
+    <div class="menu-card" onclick="showSection('adminLogin')">
+
+        <div class="menu-icon">
+            A
+        </div>
+
+        <h2>Admin</h2>
+
+        <p>
+            Manage rates and settings
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     GOLD RATE
+===================================================== -->
+
+<div id="gold" class="section">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+
+    <div class="gold-page-title">
+
+        <h2>
+            MIR4 GOLD CONVERSION RATE SUMMARY
+        </h2>
+
+    </div>
+
+
+    <!-- RATE -->
+
+    <div class="rate-box">
+
+        <div class="rate-label">
+            RATE
+        </div>
+
+        <div class="rate-value" id="goldRateDisplay">
+            4.60
         </div>
 
     </div>
 
 
-    <!-- GOLD RATE -->
-    <div id="gold" class="section">
+    <!-- TABLE -->
 
-        <button class="back" onclick="goHome()">← Back</button>
+    <table class="gold-table">
 
-        <h2>🪙 Gold Rate</h2>
+        <thead>
 
-        <br>
+            <tr>
+                <th>GCASH</th>
+                <th>GOLD</th>
+            </tr>
 
-        <div class="rate-box">
-            <div>Current Gold Rate</div>
-            <div class="rate">₱4.60</div>
-        </div>
+        </thead>
 
-        <h3>Gold Conversion</h3>
+        <tbody id="goldTableBody">
 
-        <br>
+        </tbody>
 
-        <div class="result-row">
-            <span>₱100</span>
-            <strong>460 Gold</strong>
-        </div>
+    </table>
 
-        <div class="result-row">
-            <span>₱200</span>
-            <strong>920 Gold</strong>
-        </div>
 
-        <div class="result-row">
-            <span>₱300</span>
-            <strong>1,380 Gold</strong>
-        </div>
+    <!-- PAYMENT -->
 
-        <div class="result-row">
-            <span>₱500</span>
-            <strong>2,300 Gold</strong>
-        </div>
+    <div class="payment-note">
 
-        <div class="result-row">
-            <span>₱1,000</span>
-            <strong>4,600 Gold</strong>
-        </div>
+        All transactions must send to:
+        <strong>GCASH</strong>
 
     </div>
 
 
-    <!-- SELLER -->
-    <div id="seller" class="section">
+    <div class="gcash-number" id="gcashNumberDisplay">
+        #09393413842
+    </div>
 
-        <button class="back" onclick="goHome()">← Back</button>
 
-        <h2>💰 Seller Calculator</h2>
+    <div class="gcash-name" id="gcashNameDisplay">
+        Da..y c
+    </div>
 
-        <br>
 
-        <label>Token</label>
+    <!-- BUTTONS -->
 
-        <select id="token">
-            <option value="WEMIX">WEMIX</option>
-            <option value="EXDRA1">EXDRA1</option>
-            <option value="EXDRA2">EXDRA2</option>
-            <option value="EXDRA3">EXDRA3</option>
-            <option value="EXDRA4">EXDRA4</option>
-        </select>
+    <div class="poster-buttons">
 
-        <label>Order Quantity</label>
+        <button
+            class="btn btn-orange"
+            onclick="generatePoster()">
 
-        <input
-            type="number"
-            id="quantity"
-            placeholder="Enter quantity"
-            min="0"
-        >
+            GENERATE PNG POSTER
 
-        <button class="btn" onclick="calculate()">
-            CALCULATE
         </button>
 
-        <div id="sellerResult" class="result">
+        <button
+            class="btn"
+            onclick="goHome()">
 
-            <h3>Customer Order</h3>
+            BACK TO MENU
 
-            <br>
-
-            <div class="result-row">
-                <span>Token</span>
-                <strong id="resultToken"></strong>
-            </div>
-
-            <div class="result-row">
-                <span>Quantity</span>
-                <strong id="resultQuantity"></strong>
-            </div>
-
-            <div class="result-row">
-                <span>Base Rate</span>
-                <strong id="resultBase"></strong>
-            </div>
-
-            <div class="result-row">
-                <span>Markup</span>
-                <strong id="resultMarkup"></strong>
-            </div>
-
-            <div class="result-row">
-                <span>Final Price / Token</span>
-                <strong id="resultFinal"></strong>
-            </div>
-
-            <br>
-
-            <div class="result-row">
-                <span>Total PHP</span>
-                <strong id="resultPHP"></strong>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ADMIN LOGIN -->
-    <div id="adminLogin" class="section">
-
-        <button class="back" onclick="goHome()">← Back</button>
-
-        <div class="admin-login">
-
-            <h2>🔐 Admin Login</h2>
-
-            <br>
-
-            <div id="loginError" class="error">
-                Incorrect password.
-            </div>
-
-            <label>Admin Password</label>
-
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Enter password"
-            >
-
-            <button class="btn" onclick="loginAdmin()">
-                LOGIN
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- ADMIN PANEL -->
-    <div id="adminPanel" class="section">
-
-        <button class="back" onclick="goHome()">← Back</button>
-
-        <h2>🔐 Admin Dashboard</h2>
-
-        <br>
-
-        <label>Gold Rate</label>
-
-        <input
-            type="number"
-            id="goldRate"
-            value="4.60"
-            step="0.01"
-        >
-
-        <h3>Crypto Rates</h3>
-
-        <br>
-
-        <label>WEMIX</label>
-        <input type="number" value="12.02" step="0.01">
-
-        <label>EXDRA1</label>
-        <input type="number" value="15.04" step="0.01">
-
-        <label>EXDRA2</label>
-        <input type="number" value="4.51" step="0.01">
-
-        <label>EXDRA3</label>
-        <input type="number" value="3.34" step="0.01">
-
-        <label>EXDRA4</label>
-        <input type="number" value="3.91" step="0.01">
-
-        <button class="btn" onclick="saveSettings()">
-            SAVE SETTINGS
         </button>
 
     </div>
 
 </div>
 
+
+
+<!-- =====================================================
+     SELLER
+===================================================== -->
+
+<div id="seller" class="section">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+    <h2>
+        CRYPTO SELLING CALCULATOR
+    </h2>
+
+    <br>
+
+
+    <label>
+        Token
+    </label>
+
+    <select id="token">
+
+        <option value="WEMIX">
+            WEMIX
+        </option>
+
+        <option value="EXDRA1">
+            EXDRA1
+        </option>
+
+        <option value="EXDRA2">
+            EXDRA2
+        </option>
+
+        <option value="EXDRA3">
+            EXDRA3
+        </option>
+
+        <option value="EXDRA4">
+            EXDRA4
+        </option>
+
+    </select>
+
+
+    <label>
+        Order Quantity
+    </label>
+
+    <input
+        type="number"
+        id="quantity"
+        placeholder="Enter order quantity"
+        min="0"
+        step="0.01"
+    >
+
+
+    <button
+        class="btn btn-orange"
+        onclick="calculate()">
+
+        CALCULATE
+
+    </button>
+
+
+    <div id="sellerResult" class="result">
+
+        <h3>
+            CUSTOMER ORDER
+        </h3>
+
+        <br>
+
+
+        <div class="result-row">
+
+            <span>
+                Token
+            </span>
+
+            <strong id="resultToken"></strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Quantity
+            </span>
+
+            <strong id="resultQuantity"></strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Base Rate
+            </span>
+
+            <strong id="resultBase"></strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Markup
+            </span>
+
+            <strong id="resultMarkup"></strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Final Price / Token
+            </span>
+
+            <strong id="resultFinal"></strong>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="result-row result-total">
+
+            <span>
+                TOTAL PHP
+            </span>
+
+            <strong id="resultPHP"></strong>
+
+        </div>
+
+
+        <div class="result-row result-total">
+
+            <span>
+                TOTAL USDT
+            </span>
+
+            <strong id="resultUSDT"></strong>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN LOGIN
+===================================================== -->
+
+<div id="adminLogin" class="section">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+
+    <h2>
+        ADMIN LOGIN
+    </h2>
+
+    <br>
+
+
+    <div id="loginError" class="error">
+        Incorrect password.
+    </div>
+
+
+    <label>
+        Admin Password
+    </label>
+
+    <input
+        type="password"
+        id="adminPassword"
+        placeholder="Enter password"
+    >
+
+
+    <button
+        class="btn btn-orange"
+        onclick="loginAdmin()">
+
+        LOGIN
+
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN PANEL
+===================================================== -->
+
+<div id="adminPanel" class="section">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+
+    <h2>
+        ADMIN DASHBOARD
+    </h2>
+
+    <br>
+
+
+    <h3>
+        GOLD RATE
+    </h3>
+
+    <br>
+
+
+    <label>
+        Gold Rate
+    </label>
+
+    <input
+        type="number"
+        id="goldRateInput"
+        value="4.60"
+        step="0.01"
+    >
+
+
+    <h3>
+        GCASH INFORMATION
+    </h3>
+
+    <br>
+
+
+    <label>
+        GCash Number
+    </label>
+
+    <input
+        type="text"
+        id="gcashNumberInput"
+        value="09393413842"
+    >
+
+
+    <label>
+        GCash Name
+    </label>
+
+    <input
+        type="text"
+        id="gcashNameInput"
+        value="Da..y c"
+    >
+
+
+    <h3>
+        CRYPTO RATES
+    </h3>
+
+    <br>
+
+
+    <label>
+        WEMIX
+    </label>
+
+    <input
+        type="number"
+        id="wemixRateInput"
+        value="12.02"
+        step="0.01"
+    >
+
+
+    <label>
+        EXDRA1
+    </label>
+
+    <input
+        type="number"
+        id="exdra1RateInput"
+        value="15.04"
+        step="0.01"
+    >
+
+
+    <label>
+        EXDRA2
+    </label>
+
+    <input
+        type="number"
+        id="exdra2RateInput"
+        value="4.51"
+        step="0.01"
+    >
+
+
+    <label>
+        EXDRA3
+    </label>
+
+    <input
+        type="number"
+        id="exdra3RateInput"
+        value="3.34"
+        step="0.01"
+    >
+
+
+    <label>
+        EXDRA4
+    </label>
+
+    <input
+        type="number"
+        id="exdra4RateInput"
+        value="3.91"
+        step="0.01"
+    >
+
+
+    <br>
+
+
+    <button
+        class="btn btn-orange"
+        onclick="saveSettings()">
+
+        SAVE SETTINGS
+
+    </button>
+
+</div>
+
+</div>
+
+
 <footer>
-    Gold Rate System
+
+    MIR4 Gold Rate System
+
 </footer>
+
 
 
 <script>
 
-    /*
-       TEMPORARY ADMIN PASSWORD
+/* =====================================================
+   SETTINGS
+===================================================== */
 
-       We will replace this with secure
-       Supabase authentication later.
-    */
-    const ADMIN_PASSWORD = "123456";
+let settings = {
+
+    goldRate: 4.60,
+
+    gcashNumber: "09393413842",
+
+    gcashName: "Da..y c",
+
+    cryptoRates: {
+
+        WEMIX: 12.02,
+
+        EXDRA1: 15.04,
+
+        EXDRA2: 4.51,
+
+        EXDRA3: 3.34,
+
+        EXDRA4: 3.91
+
+    }
+
+};
 
 
-    function showSection(section) {
+/* =====================================================
+   GOLD AMOUNTS
+===================================================== */
 
-        document.getElementById("home").style.display = "none";
+const goldAmounts = [
+    100,
+    200,
+    300,
+    400,
+    500,
+    1000,
+    2000,
+    3000
+];
 
-        document.querySelectorAll(".section").forEach(function(el) {
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+function initialize() {
+
+    updateGoldTable();
+
+    updateGoldDisplay();
+
+}
+
+
+/* =====================================================
+   SHOW SECTION
+===================================================== */
+
+function showSection(section) {
+
+    document.getElementById("home").style.display = "none";
+
+    document
+        .querySelectorAll(".section")
+        .forEach(function(el) {
+
             el.classList.remove("active");
+
         });
 
-        document.getElementById(section).classList.add("active");
-    }
+
+    document
+        .getElementById(section)
+        .classList.add("active");
+
+}
 
 
-    function goHome() {
+/* =====================================================
+   HOME
+===================================================== */
 
-        document.querySelectorAll(".section").forEach(function(el) {
+function goHome() {
+
+    document
+        .querySelectorAll(".section")
+        .forEach(function(el) {
+
             el.classList.remove("active");
+
         });
 
-        document.getElementById("home").style.display = "grid";
-    }
+
+    document.getElementById("home").style.display = "grid";
+
+}
 
 
-    function loginAdmin() {
+/* =====================================================
+   GOLD TABLE
+===================================================== */
 
-        const password =
-            document.getElementById("adminPassword").value;
+function updateGoldTable() {
 
-        if (password === ADMIN_PASSWORD) {
+    const table =
+        document.getElementById("goldTableBody");
 
-            document
-                .getElementById("loginError")
-                .style.display = "none";
-
-            showSection("adminPanel");
-
-        } else {
-
-            document
-                .getElementById("loginError")
-                .style.display = "block";
-        }
-    }
+    table.innerHTML = "";
 
 
-    function calculate() {
+    goldAmounts.forEach(function(amount) {
 
-        const token =
-            document.getElementById("token").value;
+        const gold =
+            Math.round(amount * settings.goldRate);
 
-        const quantity =
-            parseFloat(document.getElementById("quantity").value);
 
-        if (!quantity || quantity <= 0) {
-            alert("Please enter a valid quantity.");
-            return;
-        }
+        const row =
+            document.createElement("tr");
 
-        const rates = {
-            WEMIX: 12.02,
-            EXDRA1: 15.04,
-            EXDRA2: 4.51,
-            EXDRA3: 3.34,
-            EXDRA4: 3.91
-        };
 
-        const baseRate = rates[token];
+        row.innerHTML = `
 
-        let markup;
+            <td>
+                ${amount.toLocaleString()}
+            </td>
 
-        if (quantity <= 30) {
-            markup = 3;
-        }
-        else if (quantity <= 100) {
-            markup = 2;
-        }
-        else if (quantity > 500) {
-            markup = 0.60;
-        }
-        else {
-            markup = 1;
-        }
+            <td>
+                ${gold.toLocaleString()}
+            </td>
 
-        const finalPrice = baseRate + markup;
-        const totalPHP = quantity * finalPrice;
+        `;
 
-        document.getElementById("resultToken").textContent = token;
-        document.getElementById("resultQuantity").textContent = quantity;
-        document.getElementById("resultBase").textContent =
-            "₱" + baseRate.toFixed(2);
 
-        document.getElementById("resultMarkup").textContent =
-            "₱" + markup.toFixed(2);
+        table.appendChild(row);
 
-        document.getElementById("resultFinal").textContent =
-            "₱" + finalPrice.toFixed(2);
+    });
 
-        document.getElementById("resultPHP").textContent =
-            "₱" + totalPHP.toFixed(2);
+}
+
+
+/* =====================================================
+   GOLD DISPLAY
+===================================================== */
+
+function updateGoldDisplay() {
+
+    document
+        .getElementById("goldRateDisplay")
+        .textContent =
+            settings.goldRate.toFixed(2);
+
+
+    document
+        .getElementById("gcashNumberDisplay")
+        .textContent =
+            "#" + settings.gcashNumber;
+
+
+    document
+        .getElementById("gcashNameDisplay")
+        .textContent =
+            settings.gcashName;
+
+
+    updateGoldTable();
+
+}
+
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
+
+const ADMIN_PASSWORD = "123456";
+
+
+function loginAdmin() {
+
+    const password =
+        document
+        .getElementById("adminPassword")
+        .value;
+
+
+    if (password === ADMIN_PASSWORD) {
 
         document
-            .getElementById("sellerResult")
-            .classList.add("show");
+            .getElementById("loginError")
+            .style.display = "none";
+
+
+        document
+            .getElementById("adminPassword")
+            .value = "";
+
+
+        showSection("adminPanel");
+
+
+    } else {
+
+        document
+            .getElementById("loginError")
+            .style.display = "block";
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE SETTINGS
+===================================================== */
+
+function saveSettings() {
+
+    settings.goldRate =
+        parseFloat(
+            document
+            .getElementById("goldRateInput")
+            .value
+        );
+
+
+    settings.gcashNumber =
+        document
+        .getElementById("gcashNumberInput")
+        .value;
+
+
+    settings.gcashName =
+        document
+        .getElementById("gcashNameInput")
+        .value;
+
+
+    settings.cryptoRates.WEMIX =
+        parseFloat(
+            document
+            .getElementById("wemixRateInput")
+            .value
+        );
+
+
+    settings.cryptoRates.EXDRA1 =
+        parseFloat(
+            document
+            .getElementById("exdra1RateInput")
+            .value
+        );
+
+
+    settings.cryptoRates.EXDRA2 =
+        parseFloat(
+            document
+            .getElementById("exdra2RateInput")
+            .value
+        );
+
+
+    settings.cryptoRates.EXDRA3 =
+        parseFloat(
+            document
+            .getElementById("exdra3RateInput")
+            .value
+        );
+
+
+    settings.cryptoRates.EXDRA4 =
+        parseFloat(
+            document
+            .getElementById("exdra4RateInput")
+            .value
+        );
+
+
+    updateGoldDisplay();
+
+
+    alert("Settings updated successfully.");
+
+}
+
+
+/* =====================================================
+   SELLER CALCULATOR
+===================================================== */
+
+function calculate() {
+
+    const token =
+        document
+        .getElementById("token")
+        .value;
+
+
+    const quantity =
+        parseFloat(
+            document
+            .getElementById("quantity")
+            .value
+        );
+
+
+    if (!quantity || quantity <= 0) {
+
+        alert("Please enter a valid quantity.");
+
+        return;
+
     }
 
 
-    function saveSettings() {
+    const baseRate =
+        settings.cryptoRates[token];
 
-        alert("Settings saved temporarily. Database will be added later.");
+
+    let markup;
+
+
+    if (quantity <= 30) {
+
+        markup = 3;
 
     }
+
+    else if (quantity <= 100) {
+
+        markup = 2;
+
+    }
+
+    else if (quantity > 500) {
+
+        markup = 0.60;
+
+    }
+
+    else {
+
+        markup = 1;
+
+    }
+
+
+    const finalPrice =
+        baseRate + markup;
+
+
+    const totalPHP =
+        quantity * finalPrice;
+
+
+    const totalUSDT =
+        totalPHP / 61.86821841;
+
+
+    document
+        .getElementById("resultToken")
+        .textContent = token;
+
+
+    document
+        .getElementById("resultQuantity")
+        .textContent =
+            quantity.toLocaleString();
+
+
+    document
+        .getElementById("resultBase")
+        .textContent =
+            "₱" + baseRate.toFixed(2);
+
+
+    document
+        .getElementById("resultMarkup")
+        .textContent =
+            "₱" + markup.toFixed(2);
+
+
+    document
+        .getElementById("resultFinal")
+        .textContent =
+            "₱" + finalPrice.toFixed(2);
+
+
+    document
+        .getElementById("resultPHP")
+        .textContent =
+            "₱" + totalPHP.toFixed(2);
+
+
+    document
+        .getElementById("resultUSDT")
+        .textContent =
+            "$" + totalUSDT.toFixed(2);
+
+
+    document
+        .getElementById("sellerResult")
+        .classList.add("show");
+
+}
+
+
+/* =====================================================
+   GENERATE GOLD POSTER
+===================================================== */
+
+function generatePoster() {
+
+    const canvas =
+        document.createElement("canvas");
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    const width = 1200;
+
+    const height = 1350;
+
+
+    canvas.width = width;
+
+    canvas.height = height;
+
+
+    /* Background */
+
+    ctx.fillStyle = "#ffffff";
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /* Title */
+
+    ctx.fillStyle = "#b83e00";
+
+    ctx.fillRect(
+        20,
+        20,
+        1160,
+        80
+    );
+
+
+    ctx.strokeStyle = "#111";
+
+    ctx.lineWidth = 4;
+
+    ctx.strokeRect(
+        20,
+        20,
+        1160,
+        80
+    );
+
+
+    ctx.fillStyle = "#fff";
+
+    ctx.font =
+        "bold 42px Arial";
+
+    ctx.textAlign = "center";
+
+    ctx.fillText(
+        "MIR4 GOLD CONVERSION RATE SUMMARY",
+        width / 2,
+        73
+    );
+
+
+    /* Rate */
+
+    ctx.fillStyle = "#ff650d";
+
+    ctx.fillRect(
+        20,
+        100,
+        580,
+        85
+    );
+
+
+    ctx.fillStyle = "#fff";
+
+    ctx.font =
+        "bold 46px Arial";
+
+    ctx.fillText(
+        "RATE",
+        310,
+        158
+    );
+
+
+    ctx.fillStyle = "#fff0df";
+
+    ctx.fillRect(
+        600,
+        100,
+        580,
+        85
+    );
+
+
+    ctx.fillStyle = "#111";
+
+    ctx.font =
+        "bold 60px Arial";
+
+    ctx.fillText(
+        settings.goldRate.toFixed(2),
+        890,
+        160
+    );
+
+
+    ctx.strokeStyle = "#111";
+
+    ctx.lineWidth = 4;
+
+    ctx.strokeRect(
+        20,
+        100,
+        1160,
+        85
+    );
+
+
+    /* Table */
+
+    let y = 230;
+
+    const rowHeight = 82;
+
+
+    ctx.fillStyle = "#b83e00";
+
+    ctx.fillRect(
+        20,
+        y,
+        1160,
+        rowHeight
+    );
+
+
+    ctx.fillStyle = "#fff";
+
+    ctx.font =
+        "bold 38px Arial";
+
+
+    ctx.fillText(
+        "GCASH",
+        310,
+        y + 52
+    );
+
+
+    ctx.fillText(
+        "GOLD",
+        890,
+        y + 52
+    );
+
+
+    y += rowHeight;
+
+
+    goldAmounts.forEach(
+        function(amount, index) {
+
+            if (index % 2 === 1) {
+
+                ctx.fillStyle =
+                    "#ffad7a";
+
+            } else {
+
+                ctx.fillStyle =
+                    "#ffffff";
+
+            }
+
+
+            ctx.fillRect(
+                20,
+                y,
+                1160,
+                rowHeight
+            );
+
+
+            const gold =
+                Math.round(
+                    amount *
+                    settings.goldRate
+                );
+
+
+            ctx.fillStyle = "#111";
+
+            ctx.font =
+                "bold 36px Arial";
+
+
+            ctx.fillText(
+                amount.toLocaleString(),
+                310,
+                y + 52
+            );
+
+
+            ctx.fillText(
+                gold.toLocaleString(),
+                890,
+                y + 52
+            );
+
+
+            ctx.strokeStyle = "#111";
+
+            ctx.lineWidth = 2;
+
+            ctx.strokeRect(
+                20,
+                y,
+                1160,
+                rowHeight
+            );
+
+
+            y += rowHeight;
+
+        }
+    );
+
+
+    /* Vertical center */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        600,
+        230
+    );
+
+    ctx.lineTo(
+        600,
+        y
+    );
+
+    ctx.stroke();
+
+
+    /* Payment text */
+
+    y += 45;
+
+
+    ctx.fillStyle = "#111";
+
+    ctx.font =
+        "italic 28px Arial";
+
+
+    ctx.fillText(
+        "All transactions must send to: GCASH",
+        width / 2,
+        y
+    );
+
+
+    y += 35;
+
+
+    /* GCash number */
+
+    ctx.fillStyle = "#c94b00";
+
+    ctx.fillRect(
+        20,
+        y,
+        1160,
+        70
+    );
+
+
+    ctx.fillStyle = "#111";
+
+    ctx.font =
+        "bold 42px Arial";
+
+
+    ctx.fillText(
+        "#" + settings.gcashNumber,
+        width / 2,
+        y + 48
+    );
+
+
+    y += 70;
+
+
+    /* GCash name */
+
+    ctx.fillStyle = "#ffad7a";
+
+    ctx.fillRect(
+        20,
+        y,
+        1160,
+        65
+    );
+
+
+    ctx.fillStyle = "#111";
+
+    ctx.font =
+        "bold 30px Arial";
+
+
+    ctx.fillText(
+        settings.gcashName,
+        width / 2,
+        y + 43
+    );
+
+
+    /* Download */
+
+    const link =
+        document.createElement("a");
+
+
+    link.download =
+        "MIR4-GOLD-RATE-" +
+        settings.goldRate.toFixed(2) +
+        ".png";
+
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+
+    link.click();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+initialize();
 
 </script>
+
 
 </body>
 </html>
