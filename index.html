@@ -1411,6 +1411,45 @@ footer {
 
 }   
 
+
+/* =====================================================
+   SELLER LIVE RATE
+===================================================== */
+
+.seller-live-rate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: -5px;
+    margin-bottom: 17px;
+
+    padding: 12px 14px;
+
+    background: #f8fafc;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+}
+
+.seller-live-rate span {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.seller-live-rate strong {
+    color: var(--navy);
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+   
+
 </style>
 
     
@@ -1674,55 +1713,47 @@ footer {
         step="0.01"
     >
 
+    <div class="seller-live-rate">
+       <span>Live Token Rate</span>
+       <strong id="sellerTokenRate">₱0.00</strong>
+   </div>
+
 
     <button
         class="btn btn-orange"
         onclick="calculate()">
-
         CALCULATE
-
     </button>
 
 
     <div id="sellerResult" class="result">
-
         <h3>
             CUSTOMER ORDER
         </h3>
-
         <br>
 
 
         <div class="result-row">
-
             <span>
                 Token
             </span>
-
             <strong id="resultToken"></strong>
-
         </div>
 
 
         <div class="result-row">
-
             <span>
                 Quantity
             </span>
-
             <strong id="resultQuantity"></strong>
-
         </div>
 
 
         <div class="result-row">
-
             <span>
                 Base Rate
             </span>
-
             <strong id="resultBase"></strong>
-
         </div>
 
 
@@ -2102,10 +2133,38 @@ async function loadLiveRates() {
 
 }    
 
+function updateSellerLiveRate() {
 
+    const token =
+        document.getElementById("token").value;
+
+    const rate =
+        settings.cryptoRates[token];
+
+    const display =
+        document.getElementById("sellerTokenRate");
+
+    if (
+        settings.ratesLoaded &&
+        typeof rate === "number" &&
+        rate > 0
+    ) {
+
+        display.textContent =
+            "₱" + rate.toFixed(2);
+
+    } else {
+
+        display.textContent =
+            "₱0.00";
+
+    }
+}
+   
 
 function updateLiveRateDisplay() {
     updateAdminRates();
+    updateSellerLiveRate();
 
     const status =
         document.getElementById("liveRateStatus");
@@ -2993,6 +3052,10 @@ function generatePoster() {
 ===================================================== */
 
 initialize();
+
+document
+    .getElementById("token")
+    .addEventListener("change", updateSellerLiveRate);   
 
 function updateAdminRates() {
 
