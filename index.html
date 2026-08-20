@@ -65,6 +65,7 @@ body {
     color: var(--text);
 
     min-height: 100vh;
+    padding-bottom: 60px;
 }
 
 
@@ -73,15 +74,19 @@ body {
 ===================================================== */
 
 header {
+    position: relative;
+
     background: var(--navy);
 
     color: white;
 
-    padding: 22px 15px;
+    padding: 22px 120px;
 
     text-align: center;
 
     border-bottom: 3px solid var(--gold);
+
+    min-height: 100px;
 }
 
 header h1 {
@@ -1296,19 +1301,22 @@ footer {
 
 
 .site-logo {
-    display: block;
-    width: 180px;
-    max-width: 60%;
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 100px;
     height: auto;
-    margin: 0 auto 10px;
 }
 
    
 @media (max-width: 700px) {
 
     .site-logo {
-        width: 140px;
-        max-width: 55%;
+        width: 75px;
+        left: 12px;
+        max-width: none;
     }
 
     header h1 {
@@ -1320,6 +1328,87 @@ footer {
     }
 
     /* keep the rest of your existing mobile CSS */
+}   
+
+
+/* =========================
+   FIXED SOCIAL BAR
+========================= */
+
+.social-bar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 15px;
+
+    background: #172554;
+
+    border-top: 2px solid #f4b400;
+
+    box-shadow:
+        0 -3px 12px rgba(15, 23, 42, 0.12);
+
+    z-index: 9999;
+}
+
+.social-bar a {
+    display: inline-block;
+
+    padding: 8px 16px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border-radius: 6px;
+
+    background: rgba(255,255,255,0.08);
+
+    transition: .15s;
+}
+
+.social-bar a:hover {
+    background: #2563eb;
+}
+
+.social-bar a b {
+    color: #f4b400;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    body {
+        padding-bottom: 55px;
+    }
+
+    .social-bar {
+        gap: 6px;
+        padding: 8px 10px;
+    }
+
+    .social-bar a {
+        flex: 1;
+        text-align: center;
+        padding: 8px 5px;
+        font-size: 11px;
+    }
+
 }   
 
 </style>
@@ -1817,11 +1906,23 @@ footer {
 </div>
 
 
-<footer>
+<div class="social-bar">
 
-    MIR4 Gold Rate System
+    <a
+        href="https://discord.gg/hYqXJPyVjw"
+        target="_blank"
+        rel="noopener noreferrer">
+        Discord: <b>JOIN NOW</b>
+    </a>
 
-</footer>
+    <a
+        href="https://facebook.com/share/16FTGzDfQ6/"
+        target="_blank"
+        rel="noopener noreferrer">
+        Facebook: <b>VISIT PAGE</b>
+    </a>
+
+</div>
 
 
 
