@@ -863,71 +863,94 @@ footer {
     >
 
 
-    <h3>
-        CRYPTO RATES
-    </h3>
+  <h3>
+    CRYPTO LIVE RATES
+</h3>
 
-    <br>
+<div style="
+    margin: 15px 0;
+    padding: 15px;
+    background: #f7f7f7;
+    border-radius: 10px;
+">
 
-
-    <label>
-        WEMIX
-    </label>
-
-    <input
-        type="number"
-        id="wemixRateInput"
-        value="12.02"
-        step="0.01"
-    >
-
-
-    <label>
-        EXDRA1
-    </label>
-
-    <input
-        type="number"
-        id="exdra1RateInput"
-        value="15.04"
-        step="0.01"
-    >
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:10px 0;
+        border-bottom:1px solid #ddd;
+    ">
+        <strong>WEMIX</strong>
+        <strong id="adminWemixRate">--</strong>
+    </div>
 
 
-    <label>
-        EXDRA2
-    </label>
-
-    <input
-        type="number"
-        id="exdra2RateInput"
-        value="4.51"
-        step="0.01"
-    >
-
-
-    <label>
-        EXDRA3
-    </label>
-
-    <input
-        type="number"
-        id="exdra3RateInput"
-        value="3.34"
-        step="0.01"
-    >
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:10px 0;
+        border-bottom:1px solid #ddd;
+    ">
+        <strong>EXDRA1</strong>
+        <strong id="adminExdra1Rate">--</strong>
+    </div>
 
 
-    <label>
-        EXDRA4
-    </label>
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:10px 0;
+        border-bottom:1px solid #ddd;
+    ">
+        <strong>EXDRA2</strong>
+        <strong id="adminExdra2Rate">--</strong>
+    </div>
 
-    <input
-        type="number"
-        id="exdra4RateInput"
-        value="3.91"
-        step="0.01"
-    >
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:10px 0;
+        border-bottom:1px solid #ddd;
+    ">
+        <strong>EXDRA3</strong>
+        <strong id="adminExdra3Rate">--</strong>
+    </div>
+
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:10px 0;
+    ">
+        <strong>EXDRA4</strong>
+        <strong id="adminExdra4Rate">--</strong>
+    </div>
+
+</div>
+
+
+<div
+    id="liveRateStatus"
+    style="
+        font-weight:bold;
+        margin-top:10px;
+    "
+>
+    ● LOADING...
+</div>
+
+
+<div
+    id="rateUpdated"
+    style="
+        color:#777;
+        font-size:14px;
+        margin-top:5px;
+    "
+>
+    Loading live rates...
+</div>
 
 
     <br>
@@ -970,17 +993,23 @@ let settings = {
 
     cryptoRates: {
 
-        WEMIX: 12.02,
+        WEMIX: 0,
 
-        EXDRA1: 15.04,
+        EXDRA1: 0,
 
-        EXDRA2: 4.51,
+        EXDRA2: 0,
 
-        EXDRA3: 3.34,
+        EXDRA3: 0,
 
-        EXDRA4: 3.91
+        EXDRA4: 0
 
-    }
+    },
+
+    usdtPHP: 0,
+
+    wemixUSDT: 0,
+
+    ratesLoaded: false
 
 };
 
@@ -1004,15 +1033,127 @@ const goldAmounts = [
 /* =====================================================
    INITIALIZE
 ===================================================== */
-
-function initialize() {
-
+async function initialize() {
     updateGoldTable();
-
     updateGoldDisplay();
+    await loadLiveRates();
+}
+
+
+async function loadLiveRates() {
+
+    try {
+
+        const response = await fetch(
+            "./rates.json?time=" + Date.now()
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load rates.json");
+        }
+
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error("Live rate update failed");
+        }
+
+        settings.cryptoRates.WEMIX =
+            Number(data.rates.WEMIX);
+
+        settings.cryptoRates.EXDRA1 =
+            Number(data.rates.EXDRA1);
+
+        settings.cryptoRates.EXDRA2 =
+            Number(data.rates.EXDRA2);
+
+        settings.cryptoRates.EXDRA3 =
+            Number(data.rates.EXDRA3);
+
+        settings.cryptoRates.EXDRA4 =
+            Number(data.rates.EXDRA4);
+
+
+        settings.usdtPHP =
+            Number(data.usdtPHP);
+
+
+        settings.wemixUSDT =
+            Number(data.wemixUSDT);
+
+
+        settings.ratesLoaded = true;
+
+
+        updateLiveRateDisplay();
+
+
+        console.log(
+            "Live crypto rates loaded:",
+            data
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Live rate error:",
+            error
+        );
+
+        settings.ratesLoaded = false;
+
+        updateLiveRateDisplay();
+
+    }
+
+}    
+
+
+
+function updateLiveRateDisplay() {
+    updateAdminRates();
+
+    const status =
+        document.getElementById("liveRateStatus");
+
+    if (!status) return;
+
+
+    if (settings.ratesLoaded) {
+
+        status.textContent =
+            "● LIVE RATES";
+
+        status.style.color =
+            "#198754";
+
+    } else {
+
+        status.textContent =
+            "● RATE UPDATE ERROR";
+
+        status.style.color =
+            "#dc3545";
+
+    }
+
+
+    const updated =
+        document.getElementById("rateUpdated");
+
+    if (updated) {
+
+        updated.textContent =
+            settings.ratesLoaded
+                ? "Live rates loaded automatically"
+                : "Unable to load live rates";
+
+    }
 
 }
 
+    
 
 /* =====================================================
    SHOW SECTION
@@ -1724,7 +1865,52 @@ function generatePoster() {
 
 initialize();
 
+function updateAdminRates() {
+
+    const values = {
+
+        adminWemixRate:
+            settings.cryptoRates.WEMIX,
+
+        adminExdra1Rate:
+            settings.cryptoRates.EXDRA1,
+
+        adminExdra2Rate:
+            settings.cryptoRates.EXDRA2,
+
+        adminExdra3Rate:
+            settings.cryptoRates.EXDRA3,
+
+        adminExdra4Rate:
+            settings.cryptoRates.EXDRA4
+
+    };
+
+
+    Object.keys(values).forEach(function(id) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+
+            element.textContent =
+                "₱" +
+                Number(values[id]).toFixed(2);
+
+        }
+
+    });
+
+}
+    
+
 </script>
+
+
+
+
+    
 
 
 </body>
