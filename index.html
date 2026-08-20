@@ -2492,27 +2492,34 @@ function calculate() {
 
 function generatePoster() {
 
-    const canvas =
-        document.createElement("canvas");
-
-
-    const ctx =
-        canvas.getContext("2d");
-
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
     const width = 1200;
-
     const height = 1350;
 
-
     canvas.width = width;
-
     canvas.height = height;
 
+    /* =========================
+       COLORS
+    ========================= */
 
-    /* Background */
+    const NAVY = "#172554";
+    const GOLD = "#f4b400";
+    const GOLD_LIGHT = "#fff8dc";
+    const WHITE = "#ffffff";
+    const LIGHT = "#f8fafc";
+    const BORDER = "#dbe2ea";
+    const TEXT = "#172033";
+    const ORANGE = "#ea580c";
 
-    ctx.fillStyle = "#ffffff";
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    ctx.fillStyle = LIGHT;
 
     ctx.fillRect(
         0,
@@ -2522,323 +2529,465 @@ function generatePoster() {
     );
 
 
-    /* Title */
+    /* =========================
+       HEADER
+    ========================= */
 
-    ctx.fillStyle = "#b83e00";
-
-    ctx.fillRect(
-        20,
-        20,
-        1160,
-        80
-    );
-
-
-    ctx.strokeStyle = "#111";
-
-    ctx.lineWidth = 4;
-
-    ctx.strokeRect(
-        20,
-        20,
-        1160,
-        80
-    );
-
-
-    ctx.fillStyle = "#fff";
-
-    ctx.font =
-        "bold 42px Arial";
-
-    ctx.textAlign = "center";
-
-    ctx.fillText(
-        "MIR4 GOLD CONVERSION RATE SUMMARY",
-        width / 2,
-        73
-    );
-
-
-    /* Rate */
-
-    ctx.fillStyle = "#ff650d";
+    ctx.fillStyle = NAVY;
 
     ctx.fillRect(
-        20,
-        100,
-        580,
-        85
+        0,
+        0,
+        width,
+        190
     );
 
 
-    ctx.fillStyle = "#fff";
+    /* GOLD LINE */
 
-    ctx.font =
-        "bold 46px Arial";
-
-    ctx.fillText(
-        "RATE",
-        310,
-        158
-    );
-
-
-    ctx.fillStyle = "#fff0df";
+    ctx.fillStyle = GOLD;
 
     ctx.fillRect(
-        600,
-        100,
-        580,
-        85
+        0,
+        185,
+        width,
+        5
     );
 
 
-    ctx.fillStyle = "#111";
+    /* =========================
+       LOGO
+    ========================= */
 
-    ctx.font =
-        "bold 60px Arial";
+    const logo = new Image();
 
-    ctx.fillText(
-        settings.goldRate.toFixed(2),
-        890,
-        160
-    );
+    logo.onload = function () {
 
+        const logoWidth = 180;
 
-    ctx.strokeStyle = "#111";
+        const logoHeight =
+            logo.height *
+            (logoWidth / logo.width);
 
-    ctx.lineWidth = 4;
-
-    ctx.strokeRect(
-        20,
-        100,
-        1160,
-        85
-    );
-
-
-    /* Table */
-
-    let y = 230;
-
-    const rowHeight = 82;
+        ctx.drawImage(
+            logo,
+            60,
+            35,
+            logoWidth,
+            logoHeight
+        );
 
 
-    ctx.fillStyle = "#b83e00";
+        drawPosterContent();
 
-    ctx.fillRect(
-        20,
-        y,
-        1160,
-        rowHeight
-    );
+    };
 
+    logo.onerror = function () {
 
-    ctx.fillStyle = "#fff";
+        drawPosterContent();
 
-    ctx.font =
-        "bold 38px Arial";
+    };
 
 
-    ctx.fillText(
-        "GCASH",
-        310,
-        y + 52
-    );
+    logo.src =
+        "./GAMETOPUPZONE LOGO.png";
 
 
-    ctx.fillText(
-        "GOLD",
-        890,
-        y + 52
-    );
+    /* =========================
+       POSTER CONTENT
+    ========================= */
+
+    function drawPosterContent() {
+
+        /* TITLE */
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 42px Arial";
+
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            "MIR4 GOLD RATE SYSTEM",
+            780,
+            82
+        );
 
 
-    y += rowHeight;
+        ctx.font =
+            "bold 27px Arial";
+
+        ctx.fillText(
+            "GOLD CONVERSION RATE",
+            780,
+            122
+        );
 
 
-    goldAmounts.forEach(
-        function(amount, index) {
+        ctx.font =
+            "20px Arial";
 
-            if (index % 2 === 1) {
+        ctx.fillStyle = "#cbd5e1";
+
+        ctx.fillText(
+            "Game Top-Up Zone",
+            780,
+            155
+        );
+
+
+        /* =========================
+           RATE BOX
+        ========================= */
+
+        const rateY = 225;
+
+        const rateHeight = 110;
+
+
+        /* RATE LABEL */
+
+        ctx.fillStyle = NAVY;
+
+        ctx.fillRect(
+            40,
+            rateY,
+            560,
+            rateHeight
+        );
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 42px Arial";
+
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            "RATE",
+            320,
+            rateY + 70
+        );
+
+
+        /* RATE VALUE */
+
+        ctx.fillStyle = GOLD_LIGHT;
+
+        ctx.fillRect(
+            600,
+            rateY,
+            560,
+            rateHeight
+        );
+
+
+        ctx.fillStyle = NAVY;
+
+        ctx.font =
+            "bold 60px Arial";
+
+        ctx.fillText(
+            settings.goldRate.toFixed(2),
+            880,
+            rateY + 72
+        );
+
+
+        /* BORDER */
+
+        ctx.strokeStyle = NAVY;
+
+        ctx.lineWidth = 3;
+
+        ctx.strokeRect(
+            40,
+            rateY,
+            1120,
+            rateHeight
+        );
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        let y = 375;
+
+        const rowHeight = 75;
+
+
+        /* HEADER */
+
+        ctx.fillStyle = NAVY;
+
+        ctx.fillRect(
+            40,
+            y,
+            1120,
+            rowHeight
+        );
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 32px Arial";
+
+        ctx.textAlign = "center";
+
+
+        ctx.fillText(
+            "GCASH",
+            320,
+            y + 48
+        );
+
+
+        ctx.fillText(
+            "GOLD",
+            880,
+            y + 48
+        );
+
+
+        y += rowHeight;
+
+
+        /* TABLE ROWS */
+
+        goldAmounts.forEach(
+            function(amount, index) {
 
                 ctx.fillStyle =
-                    "#ffad7a";
-
-            } else {
-
-                ctx.fillStyle =
-                    "#ffffff";
-
-            }
+                    index % 2 === 0
+                        ? WHITE
+                        : LIGHT;
 
 
-            ctx.fillRect(
-                20,
-                y,
-                1160,
-                rowHeight
-            );
-
-
-            const gold =
-                Math.round(
-                    amount *
-                    settings.goldRate
+                ctx.fillRect(
+                    40,
+                    y,
+                    1120,
+                    rowHeight
                 );
 
 
-            ctx.fillStyle = "#111";
-
-            ctx.font =
-                "bold 36px Arial";
-
-
-            ctx.fillText(
-                amount.toLocaleString(),
-                310,
-                y + 52
-            );
+                const gold =
+                    Math.round(
+                        amount *
+                        settings.goldRate
+                    );
 
 
-            ctx.fillText(
-                gold.toLocaleString(),
-                890,
-                y + 52
-            );
+                ctx.fillStyle = TEXT;
+
+                ctx.font =
+                    "bold 30px Arial";
 
 
-            ctx.strokeStyle = "#111";
-
-            ctx.lineWidth = 2;
-
-            ctx.strokeRect(
-                20,
-                y,
-                1160,
-                rowHeight
-            );
+                ctx.fillText(
+                    amount.toLocaleString(),
+                    320,
+                    y + 48
+                );
 
 
-            y += rowHeight;
-
-        }
-    );
-
-
-    /* Vertical center */
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        600,
-        230
-    );
-
-    ctx.lineTo(
-        600,
-        y
-    );
-
-    ctx.stroke();
+                ctx.fillText(
+                    gold.toLocaleString(),
+                    880,
+                    y + 48
+                );
 
 
-    /* Payment text */
+                /* ROW BORDER */
 
-    y += 45;
+                ctx.strokeStyle = BORDER;
 
+                ctx.lineWidth = 2;
 
-    ctx.fillStyle = "#111";
-
-    ctx.font =
-        "italic 28px Arial";
-
-
-    ctx.fillText(
-        "All transactions must send to: GCASH",
-        width / 2,
-        y
-    );
+                ctx.strokeRect(
+                    40,
+                    y,
+                    1120,
+                    rowHeight
+                );
 
 
-    y += 35;
+                y += rowHeight;
+
+            }
+        );
 
 
-    /* GCash number */
+        /* CENTER LINE */
 
-    ctx.fillStyle = "#c94b00";
+        ctx.strokeStyle = BORDER;
 
-    ctx.fillRect(
-        20,
-        y,
-        1160,
-        70
-    );
+        ctx.lineWidth = 2;
 
+        ctx.beginPath();
 
-    ctx.fillStyle = "#111";
+        ctx.moveTo(
+            600,
+            375
+        );
 
-    ctx.font =
-        "bold 42px Arial";
+        ctx.lineTo(
+            600,
+            y
+        );
 
-
-    ctx.fillText(
-        "#" + settings.gcashNumber,
-        width / 2,
-        y + 48
-    );
+        ctx.stroke();
 
 
-    y += 70;
+        /* OUTER TABLE BORDER */
+
+        ctx.strokeStyle = NAVY;
+
+        ctx.lineWidth = 3;
+
+        ctx.strokeRect(
+            40,
+            375,
+            1120,
+            y - 375
+        );
 
 
-    /* GCash name */
+        /* =========================
+           PAYMENT NOTE
+        ========================= */
 
-    ctx.fillStyle = "#ffad7a";
-
-    ctx.fillRect(
-        20,
-        y,
-        1160,
-        65
-    );
+        y += 35;
 
 
-    ctx.fillStyle = "#111";
+        ctx.fillStyle = "#64748b";
 
-    ctx.font =
-        "bold 30px Arial";
+        ctx.font =
+            "italic 23px Arial";
 
+        ctx.textAlign = "center";
 
-    ctx.fillText(
-        settings.gcashName,
-        width / 2,
-        y + 43
-    );
-
-
-    /* Download */
-
-    const link =
-        document.createElement("a");
+        ctx.fillText(
+            "All transactions must send to: GCASH",
+            width / 2,
+            y
+        );
 
 
-    link.download =
-        "MIR4-GOLD-RATE-" +
-        settings.goldRate.toFixed(2) +
-        ".png";
+        /* =========================
+           GCASH NUMBER
+        ========================= */
+
+        y += 30;
 
 
-    link.href =
-        canvas.toDataURL("image/png");
+        ctx.fillStyle = ORANGE;
+
+        ctx.fillRect(
+            40,
+            y,
+            1120,
+            75
+        );
 
 
-    link.click();
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 38px Arial";
+
+        ctx.fillText(
+            "#" + settings.gcashNumber,
+            width / 2,
+            y + 50
+        );
+
+
+        /* =========================
+           GCASH NAME
+        ========================= */
+
+        y += 75;
+
+
+        ctx.fillStyle = "#fed7aa";
+
+        ctx.fillRect(
+            40,
+            y,
+            1120,
+            65
+        );
+
+
+        ctx.fillStyle = "#7c2d12";
+
+        ctx.font =
+            "bold 27px Arial";
+
+        ctx.fillText(
+            settings.gcashName,
+            width / 2,
+            y + 42
+        );
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        y += 100;
+
+
+        ctx.fillStyle = NAVY;
+
+        ctx.fillRect(
+            40,
+            y,
+            1120,
+            55
+        );
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 20px Arial";
+
+        ctx.fillText(
+            "GAME TOP-UP ZONE",
+            width / 2,
+            y + 36
+        );
+
+
+        /* =========================
+           DOWNLOAD
+        ========================= */
+
+        const link =
+            document.createElement("a");
+
+
+        link.download =
+            "MIR4-GOLD-RATE-" +
+            settings.goldRate.toFixed(2) +
+            ".png";
+
+
+        link.href =
+            canvas.toDataURL("image/png");
+
+
+        link.click();
+
+    }
 
 }
-
-
 /* =====================================================
    START
 ===================================================== */
