@@ -1451,45 +1451,88 @@ footer {
 
 
 
-/* ================================
-   MOBILE HEADER FIX
-================================ */
+/* =========================================
+   MOBILE HEADER - FINAL FIX
+========================================= */
 
 @media (max-width: 600px) {
 
     header {
-        position: relative;
-        min-height: 150px;
-        padding: 18px 15px;
-        display: flex;
+        display: grid !important;
+        grid-template-columns: 90px minmax(0, 1fr) !important;
+        align-items: center !important;
+
+        min-height: 125px !important;
+        height: auto !important;
+
+        padding: 14px 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* LOGO */
+    header img {
+        position: static !important;
+
+        width: 78px !important;
+        max-width: 78px !important;
+        height: auto !important;
+
+        margin: 0 auto !important;
+        display: block !important;
+
+        grid-column: 1 !important;
+        grid-row: 1 / span 2 !important;
+    }
+
+    /* TITLE */
+    header h1 {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+
+        font-size: 21px !important;
+        line-height: 1.15 !important;
+
+        overflow-wrap: normal !important;
+    }
+
+    /* SUBTITLE */
+    header p {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+
+        width: 100% !important;
+
+        margin: 5px 0 0 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+
+        font-size: 11px !important;
+        line-height: 1.2 !important;
+    }
+
+    .back-button {
+        display: inline-flex !important;
         align-items: center;
         justify-content: center;
-    }
 
-    header img {
-        position: absolute;
-         width: 75px;
-          left: 15px;
-          top: 18px;
-        height: auto;
-        z-index: 2;
-    }
+        width: auto !important;
+        min-width: 70px;
 
-    header h1 {
-        margin: 0;
-        padding: 0 10px;
-        text-align: center;
-        font-size: 25px;
-        line-height: 1.15;
-        max-width: 100%;
-    }
+        padding: 8px 14px !important;
+        margin-bottom: 15px;
 
-    header p {
-        text-align: center;
-        margin-top: 8px;
-        font-size: 14px;
+        font-size: 13px;
     }
-}   
+}
    
 
 </style>
