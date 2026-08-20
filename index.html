@@ -1192,10 +1192,8 @@ footer {
 
     <button
         class="btn btn-orange"
-        onclick="saveSettings()">
-
+        onclick="openGitHubSettings()">
         SAVE SETTINGS
-
     </button>
 
 </div>
@@ -2165,6 +2163,14 @@ function updateAdminRates() {
     });
 
 }
+
+
+function openGitHubSettings() {
+    window.open(
+        "https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-settings.yml",
+        "_blank"
+    );
+}    
     
 
 </script>
