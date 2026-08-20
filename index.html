@@ -1190,10 +1190,10 @@ footer {
     >
 
 
-    <button
+   <button
         class="btn btn-orange"
         onclick="openGitHubSettings()">
-        SAVE SETTINGS
+        UPDATE GITHUB SETTINGS
     </button>
 
 </div>
@@ -1291,6 +1291,9 @@ async function loadSettings() {
         }
 
         console.log("Settings loaded:", data);
+        document.getElementById("goldRateInput").value = settings.goldRate;
+        document.getElementById("gcashNumberInput").value = settings.gcashNumber;
+        document.getElementById("gcashNameInput").value = settings.gcashName;
 
     } catch (error) {
 
