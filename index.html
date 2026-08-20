@@ -2545,9 +2545,17 @@ function saveSettings() {
              10% OF WEMIX NEEDED
           ================================================= */
       
-          const fee =
-              wemixNeeded * 0.10;
-      
+          let fee = 0;
+
+            if (
+                token === "EXDRA1" ||
+                token === "EXDRA2" ||
+                token === "EXDRA3" ||
+                token === "EXDRA4"
+            ) {
+                fee = wemixNeeded * 0.10;
+            }
+                  
       
           /* =================================================
              FINAL SELLING PRICE
