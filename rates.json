@@ -1,13 +1,13 @@
 {
   "success": true,
-  "updatedAt": "2026-08-25T21:56:29.900Z",
+  "updatedAt": "2026-08-25T22:22:44.465Z",
   "usdtPHP": 61.75,
-  "wemixUSDT": 0.1966,
+  "wemixUSDT": 0.1957,
   "rates": {
-    "WEMIX": 12.14,
-    "EXDRA1": 15.19,
-    "EXDRA2": 4.58,
-    "EXDRA3": 3.29,
-    "EXDRA4": 4.21
+    "WEMIX": 12.09,
+    "EXDRA1": 15.12,
+    "EXDRA2": 4.56,
+    "EXDRA3": 3.28,
+    "EXDRA4": 4.18
   }
 }
