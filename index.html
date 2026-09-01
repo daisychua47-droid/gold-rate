@@ -1509,6 +1509,82 @@ footer {
     }
 }
 
+
+   /* =====================================================
+   ANNOUNCEMENT
+===================================================== */
+
+.announcement-box {
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+}
+
+.announcement-title {
+    padding: 10px 14px;
+    text-align: center;
+    color: white;
+    background: var(--navy);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.announcement-message {
+    padding: 13px 15px;
+    text-align: center;
+    background: #fff;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.announcement-box.promo .announcement-title {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+.announcement-box.server .announcement-title {
+    background: var(--orange);
+}
+
+.announcement-box.close .announcement-title {
+    background: var(--red);
+}
+
+.announcement-box.maintenance .announcement-title {
+    background: #475569;
+}
+
+.announcement-box.general .announcement-title,
+.announcement-box.notice .announcement-title,
+.announcement-box.update .announcement-title,
+.announcement-box.event .announcement-title,
+.announcement-box.other .announcement-title {
+    background: var(--navy);
+}
+
+
+@media (max-width: 700px) {
+
+    .announcement-box {
+        margin-bottom: 14px;
+    }
+
+    .announcement-title {
+        font-size: 14px;
+        padding: 9px 10px;
+    }
+
+    .announcement-message {
+        font-size: 13px;
+        padding: 11px;
+    }
+
+}
+
 </style>
 
     
@@ -1575,12 +1651,31 @@ footer {
     </div>
 
 
-    <!-- CENTER -->
-    <div class="dashboard-center">
+  <!-- CENTER -->
+<div class="dashboard-center">
 
-        <div class="gold-center-title">
-            MIR4 GOLD CONVERSION RATE SUMMARY
+    <!-- ANNOUNCEMENT -->
+    <div
+        id="announcementBox"
+        class="announcement-box"
+        style="display:none;">
+
+        <div
+            id="announcementTitle"
+            class="announcement-title">
         </div>
+
+        <div
+            id="announcementMessage"
+            class="announcement-message">
+        </div>
+
+    </div>
+
+
+    <div class="gold-center-title">
+        MIR4 GOLD CONVERSION RATE SUMMARY
+    </div>
 
 
         <div class="gold-center-rate">
