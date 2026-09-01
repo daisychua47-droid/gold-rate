@@ -1,13 +1,12 @@
-
 {
     "announcements": [
         {
             "enabled": true,
             "type": "PROMO",
-            "title": "WEEKEND PROMO",
-            "message": "3,000 GOLD = ₱500",
+            "title": "BERMONTHS PROMO",
+            "message": "2250 GOLD FOR 500 PHP",
             "start": "2026-09-01T00:00",
-            "end": "2026-09-05T23:59"
+            "end": "2026-09-01T23:59"
         }
     ]
 }
