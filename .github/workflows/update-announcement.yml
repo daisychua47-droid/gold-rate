@@ -1,0 +1,101 @@
+name: Update Announcement
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      enabled:
+        description: "Enable announcement? true / false"
+        required: true
+        default: "false"
+
+      type:
+        description: "Announcement type"
+        required: true
+        default: "PROMO"
+
+      title:
+        description: "Announcement title"
+        required: true
+        default: "PROMO"
+
+      message:
+        description: "Announcement message"
+        required: true
+        default: ""
+
+      start:
+        description: "Start date/time"
+        required: true
+        default: "2026-09-01T00:00"
+
+      end:
+        description: "End date/time"
+        required: true
+        default: "2026-12-31T23:59"
+
+jobs:
+
+  update-announcement:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create announcement.json
+        env:
+          ENABLED: ${{ inputs.enabled }}
+          TYPE: ${{ inputs.type }}
+          TITLE: ${{ inputs.title }}
+          MESSAGE: ${{ inputs.message }}
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+
+        run: |
+
+          python3 - <<'PY'
+
+          import json
+          import os
+
+          data = {
+              "announcements": [
+                  {
+                      "enabled": os.environ["ENABLED"].lower() == "true",
+                      "type": os.environ["TYPE"],
+                      "title": os.environ["TITLE"],
+                      "message": os.environ["MESSAGE"],
+                      "start": os.environ["START"],
+                      "end": os.environ["END"]
+                  }
+              ]
+          }
+
+          with open("announcement.json", "w", encoding="utf-8") as f:
+              json.dump(
+                  data,
+                  f,
+                  indent=4,
+                  ensure_ascii=False
+              )
+
+          PY
+
+      - name: Commit announcement
+        run: |
+
+          git config user.name "github-actions[bot]"
+
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add announcement.json
+
+          git diff --cached --quiet || git commit -m "Update announcement"
+
+          git push
