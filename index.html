@@ -2096,6 +2096,142 @@ footer {
     >
 
 
+   <!-- =====================================================
+     ANNOUNCEMENT
+===================================================== -->
+
+<h3>
+    ANNOUNCEMENT
+</h3>
+
+<br>
+
+<label>
+    Enable Announcement
+</label>
+
+<select id="announcementEnabled">
+
+    <option value="false">
+        OFF
+    </option>
+
+    <option value="true">
+        ON
+    </option>
+
+</select>
+
+
+<label>
+    Announcement Type
+</label>
+
+<select id="announcementType">
+
+    <option value="PROMO">
+        🔥 PROMO
+    </option>
+
+    <option value="OTHER SERVER SPECIAL RATE">
+        ⚠️ OTHER SERVER SPECIAL RATE
+    </option>
+
+    <option value="CLOSE">
+        🔴 CLOSE
+    </option>
+
+    <option value="MAINTENANCE">
+        🛠️ MAINTENANCE
+    </option>
+
+    <option value="GENERAL ANNOUNCEMENT">
+        📢 GENERAL ANNOUNCEMENT
+    </option>
+
+    <option value="IMPORTANT NOTICE">
+        ❗ IMPORTANT NOTICE
+    </option>
+
+    <option value="SYSTEM UPDATE">
+        🔄 SYSTEM UPDATE
+    </option>
+
+    <option value="EVENT">
+        🎉 EVENT
+    </option>
+
+    <option value="OTHER">
+        📢 OTHER
+    </option>
+
+</select>
+
+
+<label>
+    Announcement Title
+</label>
+
+<input
+    type="text"
+    id="announcementTitleInput"
+    placeholder="Example: WEEKEND PROMO"
+>
+
+
+<label>
+    Announcement Message
+</label>
+
+<input
+    type="text"
+    id="announcementMessageInput"
+    placeholder="Example: 3,000 GOLD = ₱500"
+>
+
+
+<label>
+    Start Date & Time
+</label>
+
+<input
+    type="datetime-local"
+    id="announcementStartInput"
+>
+
+
+<label>
+    End Date & Time
+</label>
+
+<input
+    type="datetime-local"
+    id="announcementEndInput"
+>
+
+
+<button
+    class="btn btn-orange"
+    onclick="openGitHubAnnouncement()">
+
+    OPEN GITHUB ANNOUNCEMENT
+
+</button>
+
+<div style="
+    margin-top:10px;
+    font-size:12px;
+    color:#777;
+    line-height:1.5;
+">
+
+    Enter these values in GitHub Actions,
+    then click <strong>Run workflow</strong>.
+
+</div>
+
+   
+
    <button
         class="btn btn-orange"
         onclick="openGitHubSettings()">
@@ -3639,7 +3775,16 @@ function openGitHubSettings() {
         "_blank"
     );
 }
-    
+
+function openGitHubAnnouncement() {
+
+    window.open(
+        "https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-announcement.yml",
+        "_blank"
+    );
+
+}
+   
 
 </script>
 
