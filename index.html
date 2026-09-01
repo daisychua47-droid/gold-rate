@@ -2183,6 +2183,251 @@ const goldAmounts = [
     3000
 ];
 
+
+/* =====================================================
+   ANNOUNCEMENTS
+===================================================== */
+
+async function loadAnnouncements() {
+
+    const box =
+        document.getElementById("announcementBox");
+
+    const title =
+        document.getElementById("announcementTitle");
+
+    const message =
+        document.getElementById("announcementMessage");
+
+
+    // Make sure announcement is hidden first
+    box.style.display = "none";
+
+
+    try {
+
+        const response = await fetch(
+            "./announcement.json?time=" + Date.now()
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load announcement.json"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const announcements =
+            Array.isArray(data.announcements)
+                ? data.announcements
+                : [];
+
+
+        const now =
+            new Date();
+
+
+        /*
+         * Find all currently active announcements
+         */
+
+        const activeAnnouncements =
+            announcements.filter(function(item) {
+
+                if (item.enabled !== true) {
+                    return false;
+                }
+
+
+                // Start date
+                if (item.start) {
+
+                    const start =
+                        new Date(item.start);
+
+                    if (
+                        !isNaN(start.getTime()) &&
+                        now < start
+                    ) {
+                        return false;
+                    }
+
+                }
+
+
+                // End date
+                if (item.end) {
+
+                    const end =
+                        new Date(item.end);
+
+                    if (
+                        !isNaN(end.getTime()) &&
+                        now > end
+                    ) {
+                        return false;
+                    }
+
+                }
+
+
+                return true;
+
+            });
+
+
+        /*
+         * No active announcement
+         */
+
+        if (activeAnnouncements.length === 0) {
+
+            box.style.display = "none";
+
+            return;
+
+        }
+
+
+        /*
+         * Show first active announcement
+         */
+
+        const announcement =
+            activeAnnouncements[0];
+
+
+        title.textContent =
+            getAnnouncementIcon(announcement.type) +
+            " " +
+            (announcement.title || announcement.type || "ANNOUNCEMENT");
+
+
+        message.textContent =
+            announcement.message || "";
+
+
+        /*
+         * Change announcement color
+         */
+
+        box.className =
+            "announcement-box " +
+            getAnnouncementClass(announcement.type);
+
+
+        box.style.display = "block";
+
+
+    } catch (error) {
+
+        console.error(
+            "Announcement loading error:",
+            error
+        );
+
+
+        // If announcement file cannot be loaded,
+        // keep announcement hidden.
+
+        box.style.display = "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   ANNOUNCEMENT ICON
+===================================================== */
+
+function getAnnouncementIcon(type) {
+
+    switch (
+        String(type || "").toUpperCase()
+    ) {
+
+        case "PROMO":
+            return "🔥";
+
+        case "OTHER SERVER SPECIAL RATE":
+            return "⚠️";
+
+        case "CLOSE":
+            return "🔴";
+
+        case "MAINTENANCE":
+            return "🛠️";
+
+        case "GENERAL ANNOUNCEMENT":
+            return "📢";
+
+        case "IMPORTANT NOTICE":
+            return "❗";
+
+        case "SYSTEM UPDATE":
+            return "🔄";
+
+        case "EVENT":
+            return "🎉";
+
+        default:
+            return "📢";
+
+    }
+
+}
+
+
+/* =====================================================
+   ANNOUNCEMENT COLOR CLASS
+===================================================== */
+
+function getAnnouncementClass(type) {
+
+    switch (
+        String(type || "").toUpperCase()
+    ) {
+
+        case "PROMO":
+            return "promo";
+
+        case "OTHER SERVER SPECIAL RATE":
+            return "server";
+
+        case "CLOSE":
+            return "close";
+
+        case "MAINTENANCE":
+            return "maintenance";
+
+        case "GENERAL ANNOUNCEMENT":
+            return "general";
+
+        case "IMPORTANT NOTICE":
+            return "notice";
+
+        case "SYSTEM UPDATE":
+            return "update";
+
+        case "EVENT":
+            return "event";
+
+        default:
+            return "other";
+
+    }
+
+}
+
+   
 /* =====================================================
    settings
 ===================================================== */
@@ -2234,6 +2479,7 @@ async function initialize() {
     await loadSettings();
     updateGoldTable();
     updateGoldDisplay();
+    await loadAnnouncements();
     await loadLiveRates();
 }
 
