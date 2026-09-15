@@ -2719,8 +2719,8 @@ async function initialize() {
     updateGoldDisplay();
     await loadAnnouncements();
     await loadLiveRates();
+    updatePackageTable();
 }
-
 
 async function loadLiveRates() {
 
@@ -2821,8 +2821,12 @@ function updateSellerLiveRate() {
    
 
 function updateLiveRateDisplay() {
+
     updateAdminRates();
+
     updateSellerLiveRate();
+
+    updatePackageTable();
 
     const status =
         document.getElementById("liveRateStatus");
@@ -2863,7 +2867,238 @@ function updateLiveRateDisplay() {
 
 }
 
-    
+
+/* =====================================================
+   DISCOUNTED PACKAGE
+===================================================== */
+
+const packageAmounts = [
+    5,
+    10,
+    30,
+    100
+];
+
+const packageDiscount = 0.73;
+
+const packageFee = 0.06;
+
+
+/* =====================================================
+   ROUND UP TO PRICE ENDING IN 5
+===================================================== */
+
+function roundPackagePrice(value) {
+
+    if (!isFinite(value) || value <= 0) {
+        return 0;
+    }
+
+
+    const whole =
+        Math.ceil(value);
+
+
+    /*
+       Already ends in 5
+       Example: 225 → 225
+    */
+
+    if (whole % 10 === 5) {
+        return whole;
+    }
+
+
+    /*
+       Otherwise go UP to the next
+       whole number ending in 5.
+
+       221 → 225
+       224 → 225
+       226 → 235
+       229 → 235
+    */
+
+    return Math.ceil(
+        (whole - 5) / 10
+    ) * 10 + 5;
+
+}
+
+
+/* =====================================================
+   UPDATE PACKAGE TABLE
+===================================================== */
+
+function updatePackageTable() {
+
+    const table =
+        document.getElementById(
+            "packageTableBody"
+        );
+
+
+    const usdtDisplay =
+        document.getElementById(
+            "packageUsdtPHP"
+        );
+
+
+    if (!table) {
+        return;
+    }
+
+
+    /*
+       Show current USDT/PHP
+    */
+
+    if (
+        settings.ratesLoaded &&
+        Number(settings.usdtPHP) > 0
+    ) {
+
+        if (usdtDisplay) {
+
+            usdtDisplay.textContent =
+                "₱" +
+                Number(settings.usdtPHP)
+                    .toFixed(2);
+
+        }
+
+    } else {
+
+        if (usdtDisplay) {
+
+            usdtDisplay.textContent =
+                "₱0.00";
+
+        }
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="3">
+
+                    Live USDT/PHP rate unavailable.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML = "";
+
+
+    const usdtPHP =
+        Number(settings.usdtPHP);
+
+
+    packageAmounts.forEach(
+        function(packageUSD) {
+
+
+            /*
+             * ACTUAL PRICE
+             *
+             * $5 × current USDT/PHP
+             */
+
+            const actualPrice =
+                packageUSD *
+                usdtPHP;
+
+
+            /*
+             * DISCOUNTED PRICE
+             *
+             * Actual price
+             * × 0.73
+             * × 1.06
+             */
+
+            const discountedPrice =
+                actualPrice *
+                packageDiscount *
+                (1 + packageFee);
+
+
+            /*
+             * FINAL PRICE
+             *
+             * Whole number
+             * ending in 5
+             */
+
+            const finalPrice =
+                roundPackagePrice(
+                    discountedPrice
+                );
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <span class="package-amount">
+
+                        $${packageUSD}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="package-actual">
+
+                        ₱${Math.round(actualPrice)
+                            .toLocaleString()}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="package-final-box">
+
+                        <span class="package-final">
+
+                            ₱${finalPrice
+                                .toLocaleString()}
+
+                        </span>
+
+                    </span>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+}
+   
 
 /* =====================================================
    SHOW SECTION
