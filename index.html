@@ -1585,6 +1585,229 @@ footer {
 
 }
 
+/* =====================================================
+   DISCOUNTED PACKAGE PAGE
+===================================================== */
+
+#packageRate {
+    width: 100%;
+}
+
+
+/* USDT LIVE RATE */
+
+.package-usdt-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+
+.package-usdt-label {
+    background: var(--navy);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.package-usdt-label small {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: #cbd5e1;
+}
+
+
+.package-usdt-value {
+    background: var(--gold-light);
+    color: var(--navy);
+    padding: 10px;
+    text-align: center;
+}
+
+
+.package-usdt-value strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 900;
+}
+
+
+.package-usdt-value span {
+    display: block;
+    margin-top: 2px;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   PACKAGE TABLE
+===================================================== */
+
+.package-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 1px solid var(--border);
+}
+
+
+.package-table th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 800;
+    border: 1px solid var(--border);
+}
+
+
+.package-table td {
+    padding: 14px 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 700;
+    border: 1px solid var(--border);
+}
+
+
+.package-table tr:nth-child(even) td {
+    background: #f8fafc;
+}
+
+
+.package-table tr:nth-child(odd) td {
+    background: white;
+}
+
+
+/* PACKAGE */
+
+.package-amount {
+    color: var(--navy);
+    font-size: 19px;
+    font-weight: 900;
+}
+
+
+/* ACTUAL PRICE */
+
+.package-actual {
+    position: relative;
+    display: inline-block;
+    color: #64748b;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.package-actual::after {
+    content: "";
+    position: absolute;
+
+    left: -5px;
+    right: -5px;
+
+    top: 50%;
+
+    height: 2px;
+
+    background: #dc2626;
+
+    transform: rotate(-4deg);
+}
+
+
+/* PAY ONLY */
+
+.package-final-box {
+    display: inline-block;
+    min-width: 110px;
+
+    padding: 7px 14px;
+
+    background: #fff1df;
+
+    border-radius: 6px;
+}
+
+
+.package-final {
+    color: #ea580c;
+    font-size: 21px;
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   GENERATE BUTTON
+===================================================== */
+
+#packageRate .dashboard-poster-btn {
+    width: 100%;
+    display: block;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .package-usdt-label {
+        font-size: 16px;
+        padding: 12px 6px;
+    }
+
+    .package-usdt-value {
+        padding: 8px 5px;
+    }
+
+    .package-usdt-value strong {
+        font-size: 22px;
+    }
+
+    .package-table th {
+        font-size: 11px;
+        padding: 9px 3px;
+    }
+
+    .package-table td {
+        font-size: 13px;
+        padding: 11px 3px;
+    }
+
+    .package-amount {
+        font-size: 16px;
+    }
+
+    .package-actual {
+        font-size: 13px;
+    }
+
+    .package-final-box {
+        min-width: 75px;
+        padding: 5px 7px;
+    }
+
+    .package-final {
+        font-size: 17px;
+    }
+
+}   
+
 </style>
 
     
