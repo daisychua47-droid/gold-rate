@@ -1891,42 +1891,239 @@ footer {
     color: #6b7280;
 }
 
-/* Desktop: package + procedure side by side */
-@media (min-width: 900px) {
+/* =====================================================
+   PACKAGE 2-COLUMN LAYOUT
+===================================================== */
 
-    #packageRate {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
+.package-layout {
+    display: grid;
 
-    #packageRate .package-table {
-        width: 65%;
-    }
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(360px, 0.85fr);
 
-    #packageRate .package-procedure {
-        width: 65%;
-        margin-left: auto;
-        margin-right: 0;
-    }
+    gap: 22px;
+
+    align-items: start;
 }
 
-/* Mobile */
-@media (max-width: 899px) {
+
+/* =====================================================
+   LEFT PACKAGE PANEL
+===================================================== */
+
+.package-rate-panel {
+    min-width: 0;
+}
+
+
+/* =====================================================
+   RIGHT HOW TO BUY
+===================================================== */
+
+.package-procedure {
+    margin-top: 0;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.06);
+
+    min-width: 0;
+}
+
+
+/* PROCEDURE HEADER */
+
+.procedure-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+
+.procedure-header > span {
+    width: 44px;
+    height: 44px;
+
+    flex: 0 0 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f1f5f9;
+
+    border-radius: 12px;
+
+    font-size: 21px;
+}
+
+
+.procedure-header h3 {
+    margin: 0;
+
+    padding: 0;
+
+    border: none;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    color: #111827;
+}
+
+
+.procedure-header p {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+
+    color: #6b7280;
+}
+
+
+/* PROCEDURE STEP */
+
+.procedure-step {
+    display: flex;
+
+    gap: 13px;
+
+    padding: 17px 0;
+
+    border-top:
+        1px solid #eef0f2;
+}
+
+
+.procedure-number {
+    flex: 0 0 35px;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--navy);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.procedure-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.procedure-content h4 {
+    margin: 0 0 5px;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    color: #111827;
+}
+
+
+.procedure-content p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .package-layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(300px, 0.85fr);
+
+        gap: 15px;
+    }
 
     .package-procedure {
-        margin-top: 20px;
+        padding: 17px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .package-layout {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+
+    .package-rate-panel,
+    .package-procedure {
+        width: 100%;
+    }
+
+
+    .package-procedure {
+        margin-top: 0;
+
         padding: 18px;
     }
 
+
     .procedure-step {
         gap: 11px;
+
+        padding: 15px 0;
     }
+
 
     .procedure-content p {
         font-size: 12px;
     }
-}     
 
+}
 </style>
 
     
@@ -2340,137 +2537,223 @@ footer {
 <!-- =====================================================
      DISCOUNTED PACKAGE
 ===================================================== -->
-
 <div id="packageRate" class="section">
 
     <button class="back" onclick="goHome()">
         ← Back
     </button>
 
+    <div class="package-layout">
 
-    <h2>
-        DISCOUNTED PACKAGE RATE
-    </h2>
+        <!-- =================================================
+             LEFT — PACKAGE RATE
+        ================================================= -->
 
-    <br>
+        <div class="package-rate-panel">
+
+            <h2>
+                DISCOUNTED PACKAGE RATE
+            </h2>
+
+            <br>
 
 
-    <!-- USDT LIVE RATE -->
+            <!-- USDT LIVE RATE -->
 
-    <div class="package-usdt-box">
+            <div class="package-usdt-box">
 
-        <div class="package-usdt-label">
+                <div class="package-usdt-label">
 
-            USDT / PHP
-            <small>
-                KUCOIN BASE
-            </small>
+                    USDT / PHP
+
+                    <small>
+                        KUCOIN BASE
+                    </small>
+
+                </div>
+
+
+                <div class="package-usdt-value">
+
+                    <strong id="packageUsdtPHP">
+                        ₱0.00
+                    </strong>
+
+                    <span>
+                        ● LIVE RATE
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PACKAGE TABLE -->
+
+            <table class="package-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            PACKAGE
+                        </th>
+
+                        <th>
+                            ACTUAL PRICE
+                        </th>
+
+                        <th>
+                            PAY ONLY
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="packageTableBody">
+                </tbody>
+
+            </table>
+
+
+            <button
+                class="dashboard-poster-btn"
+                onclick="generatePackagePoster()">
+
+                GENERATE PNG POSTER
+
+            </button>
 
         </div>
 
 
-        <div class="package-usdt-value">
+        <!-- =================================================
+             RIGHT — HOW TO BUY
+        ================================================= -->
 
-            <strong id="packageUsdtPHP">
-                ₱0.00
-            </strong>
+        <div class="package-procedure">
 
-            <span>
-                ● LIVE RATE
-            </span>
+            <div class="procedure-header">
+
+                <span>🛒</span>
+
+                <div>
+
+                    <h3>
+                        HOW TO BUY
+                    </h3>
+
+                    <p>
+                        Follow these simple steps
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 1 -->
+
+            <div class="procedure-step">
+
+                <div class="procedure-number">
+                    1
+                </div>
+
+                <div class="procedure-content">
+
+                    <h4>
+                        SCREENSHOT PACKAGE
+                    </h4>
+
+                    <p>
+                        Screenshot the package you want
+                        and wait for admin to reply.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="procedure-step">
+
+                <div class="procedure-number">
+                    2
+                </div>
+
+                <div class="procedure-content">
+
+                    <h4>
+                        SEND PAYMENT
+                    </h4>
+
+                    <p>
+                        Send the payment after admin
+                        confirms the price.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="procedure-step">
+
+                <div class="procedure-number">
+                    3
+                </div>
+
+                <div class="procedure-content">
+
+                    <h4>
+                        SEND ACCOUNT DETAILS
+                    </h4>
+
+                    <p>
+                        Send your account details after
+                        payment is confirmed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="procedure-step">
+
+                <div class="procedure-number">
+                    4
+                </div>
+
+                <div class="procedure-content">
+
+                    <h4>
+                        WAIT FOR ADMIN SIGNAL
+                    </h4>
+
+                    <p>
+                        Wait for admin's signal before
+                        opening your account once the
+                        package purchase is done.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
-
-
-    <!-- PACKAGE TABLE -->
-
-    <table class="package-table">
-
-        <thead>
-
-            <tr>
-
-                <th>
-                    PACKAGE
-                </th>
-
-                <th>
-                    ACTUAL PRICE
-                </th>
-
-                <th>
-                    PAY ONLY
-                </th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody id="packageTableBody">
-        </tbody>
-
-    </table>
-
-
-    <br>
-
-
-    <button
-        class="dashboard-poster-btn"
-        onclick="generatePackagePoster()">
-        GENERATE PNG POSTER
-    </button>
-
-   <div class="package-procedure">
-      
-          <div class="procedure-header">
-              <span>🛒</span>
-              <div>
-                  <h3>HOW TO BUY</h3>
-                  <p>Follow these simple steps</p>
-              </div>
-          </div>
-      
-          <div class="procedure-step">
-              <div class="procedure-number">1</div>
-              <div class="procedure-content">
-                  <h4>SCREENSHOT PACKAGE</h4>
-                  <p>Screenshot the package you want and wait for admin to reply.</p>
-              </div>
-          </div>
-      
-          <div class="procedure-step">
-              <div class="procedure-number">2</div>
-              <div class="procedure-content">
-                  <h4>SEND PAYMENT</h4>
-                  <p>Send the payment after admin confirms the price.</p>
-              </div>
-          </div>
-      
-          <div class="procedure-step">
-              <div class="procedure-number">3</div>
-              <div class="procedure-content">
-                  <h4>SEND ACCOUNT DETAILS</h4>
-                  <p>Send your account details after payment is confirmed.</p>
-              </div>
-          </div>
-      
-          <div class="procedure-step">
-              <div class="procedure-number">4</div>
-              <div class="procedure-content">
-                  <h4>WAIT FOR ADMIN SIGNAL</h4>
-                  <p>
-                      Wait for admin's signal before opening your account
-                      once the package purchase is done.
-                  </p>
-              </div>
-          </div>
-      
-      </div>
-   
 
 </div>
 
