@@ -3448,7 +3448,727 @@ function updateGoldDisplay() {
 
 }
 
+/* =====================================================
+   DISCOUNTED PACKAGE PNG POSTER
+===================================================== */
 
+function generatePackagePoster() {
+
+    if (
+        !settings.ratesLoaded ||
+        !Number(settings.usdtPHP) ||
+        Number(settings.usdtPHP) <= 0
+    ) {
+
+        alert("Live USDT/PHP rate is not available yet.");
+
+        return;
+    }
+
+
+    const canvas =
+        document.createElement("canvas");
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    const W = 1200;
+    const H = 1280;
+
+
+    canvas.width = W;
+    canvas.height = H;
+
+
+    /* =================================================
+       COLORS
+    ================================================= */
+
+    const NAVY = "#172554";
+    const GOLD = "#f4b400";
+    const GOLD_LIGHT = "#fff8dc";
+    const WHITE = "#ffffff";
+    const LIGHT = "#f8fafc";
+    const BORDER = "#cbd5e1";
+    const TEXT = "#172033";
+    const GRAY = "#64748b";
+    const ORANGE = "#ea580c";
+    const RED = "#dc2626";
+    const GREEN = "#16a34a";
+
+
+    /* =================================================
+       BACKGROUND
+    ================================================= */
+
+    ctx.fillStyle = LIGHT;
+
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        H
+    );
+
+
+    /* =================================================
+       HEADER
+    ================================================= */
+
+    ctx.fillStyle = NAVY;
+
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        190
+    );
+
+
+    ctx.fillStyle = GOLD;
+
+    ctx.fillRect(
+        0,
+        185,
+        W,
+        5
+    );
+
+
+    /* =================================================
+       LOGO
+    ================================================= */
+
+    const logo =
+        new Image();
+
+    logo.onload = function () {
+
+        const logoW = 180;
+
+        const logoH =
+            logo.height *
+            (logoW / logo.width);
+
+
+        ctx.drawImage(
+            logo,
+            55,
+            30,
+            logoW,
+            logoH
+        );
+
+
+        drawPackagePoster();
+
+    };
+
+
+    logo.onerror = function () {
+
+        drawPackagePoster();
+
+    };
+
+
+    logo.src =
+        "./GAMETOPUPZONE LOGO.png";
+
+
+    /* =================================================
+       DRAW POSTER
+    ================================================= */
+
+    function drawPackagePoster() {
+
+        /*
+         * HEADER TEXT
+         */
+
+        ctx.textAlign = "center";
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 42px Arial";
+
+        ctx.fillText(
+            "MIR4 GOLD RATE SYSTEM",
+            790,
+            70
+        );
+
+
+        ctx.font =
+            "bold 30px Arial";
+
+        ctx.fillText(
+            "DISCOUNTED PACKAGE RATE",
+            790,
+            112
+        );
+
+
+        ctx.font =
+            "20px Arial";
+
+        ctx.fillStyle =
+            "#cbd5e1";
+
+        ctx.fillText(
+            "Game Top-Up Zone",
+            790,
+            150
+        );
+
+
+        /* =================================================
+           USDT / PHP
+        ================================================= */
+
+        const rateY = 220;
+        const rateH = 110;
+
+
+        ctx.fillStyle = NAVY;
+
+        ctx.fillRect(
+            40,
+            rateY,
+            560,
+            rateH
+        );
+
+
+        ctx.fillStyle = GOLD_LIGHT;
+
+        ctx.fillRect(
+            600,
+            rateY,
+            560,
+            rateH
+        );
+
+
+        ctx.strokeStyle = NAVY;
+
+        ctx.lineWidth = 3;
+
+        ctx.strokeRect(
+            40,
+            rateY,
+            1120,
+            rateH
+        );
+
+
+        ctx.textAlign = "center";
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 34px Arial";
+
+        ctx.fillText(
+            "USDT / PHP",
+            320,
+            rateY + 48
+        );
+
+
+        ctx.font =
+            "bold 17px Arial";
+
+        ctx.fillStyle =
+            "#cbd5e1";
+
+        ctx.fillText(
+            "KUCOIN BASE",
+            320,
+            rateY + 78
+        );
+
+
+        ctx.fillStyle = NAVY;
+
+        ctx.font =
+            "bold 45px Arial";
+
+        ctx.fillText(
+            "₱" +
+            Number(settings.usdtPHP)
+                .toFixed(2),
+            880,
+            rateY + 55
+        );
+
+
+        ctx.fillStyle = GREEN;
+
+        ctx.font =
+            "bold 17px Arial";
+
+        ctx.fillText(
+            "● LIVE RATE",
+            880,
+            rateY + 82
+        );
+
+
+        /* =================================================
+           TABLE
+        ================================================= */
+
+        const tableX = 40;
+        const tableY = 370;
+        const tableW = 1120;
+
+        const headerH = 75;
+        const rowH = 135;
+
+
+        const col1 = 300;
+        const col2 = 410;
+        const col3 = 410;
+
+
+        /* TABLE HEADER */
+
+        ctx.fillStyle = NAVY;
+
+        ctx.fillRect(
+            tableX,
+            tableY,
+            tableW,
+            headerH
+        );
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 25px Arial";
+
+
+        ctx.textAlign = "center";
+
+
+        ctx.fillText(
+            "PACKAGE",
+            tableX + col1 / 2,
+            tableY + 48
+        );
+
+
+        ctx.fillText(
+            "ACTUAL PRICE",
+            tableX + col1 + col2 / 2,
+            tableY + 48
+        );
+
+
+        ctx.fillText(
+            "PAY ONLY",
+            tableX + col1 + col2 + col3 / 2,
+            tableY + 48
+        );
+
+
+        /* =================================================
+           PACKAGE ROWS
+        ================================================= */
+
+        packageAmounts.forEach(
+            function(packageUSD, index) {
+
+                const y =
+                    tableY +
+                    headerH +
+                    (index * rowH);
+
+
+                /*
+                 * ROW BACKGROUND
+                 */
+
+                ctx.fillStyle =
+                    index % 2 === 0
+                        ? WHITE
+                        : LIGHT;
+
+
+                ctx.fillRect(
+                    tableX,
+                    y,
+                    tableW,
+                    rowH
+                );
+
+
+                /*
+                 * ACTUAL PRICE
+                 */
+
+                const actualPrice =
+                    packageUSD *
+                    Number(settings.usdtPHP);
+
+
+                /*
+                 * DISCOUNTED PRICE
+                 */
+
+                const discountedPrice =
+                    actualPrice *
+                    packageDiscount *
+                    (1 + packageFee);
+
+
+                /*
+                 * FINAL PRICE
+                 */
+
+                const finalPrice =
+                    roundPackagePrice(
+                        discountedPrice
+                    );
+
+
+                /* -----------------------------------------
+                   PACKAGE
+                ----------------------------------------- */
+
+                ctx.fillStyle = NAVY;
+
+                ctx.font =
+                    "bold 32px Arial";
+
+                ctx.fillText(
+                    "$" + packageUSD,
+                    tableX +
+                    col1 / 2,
+                    y + 80
+                );
+
+
+                /* -----------------------------------------
+                   ACTUAL PRICE
+                ----------------------------------------- */
+
+                const actualText =
+                    "₱" +
+                    Math.round(actualPrice)
+                        .toLocaleString();
+
+
+                ctx.fillStyle = GRAY;
+
+                ctx.font =
+                    "bold 27px Arial";
+
+
+                const actualX =
+                    tableX +
+                    col1 +
+                    col2 / 2;
+
+
+                ctx.fillText(
+                    actualText,
+                    actualX,
+                    y + 80
+                );
+
+
+                /*
+                 * RED STRIKE-THROUGH
+                 */
+
+                const textWidth =
+                    ctx.measureText(
+                        actualText
+                    ).width;
+
+
+                ctx.strokeStyle = RED;
+
+                ctx.lineWidth = 4;
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    actualX -
+                    (textWidth / 2) -
+                    8,
+                    y + 75
+                );
+
+                ctx.lineTo(
+                    actualX +
+                    (textWidth / 2) +
+                    8,
+                    y + 75
+                );
+
+                ctx.stroke();
+
+
+                /* -----------------------------------------
+                   PAY ONLY BOX
+                ----------------------------------------- */
+
+                const finalX =
+                    tableX +
+                    col1 +
+                    col2 +
+                    col3 / 2;
+
+
+                ctx.fillStyle =
+                    "#fff1df";
+
+
+                ctx.fillRect(
+                    finalX - 145,
+                    y + 25,
+                    290,
+                    85
+                );
+
+
+                ctx.fillStyle = ORANGE;
+
+                ctx.font =
+                    "bold 38px Arial";
+
+
+                ctx.fillText(
+                    "₱" +
+                    finalPrice
+                        .toLocaleString(),
+                    finalX,
+                    y + 80
+                );
+
+
+                /*
+                 * ROW BORDER
+                 */
+
+                ctx.strokeStyle =
+                    BORDER;
+
+                ctx.lineWidth = 2;
+
+                ctx.strokeRect(
+                    tableX,
+                    y,
+                    tableW,
+                    rowH
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           VERTICAL LINES
+        ================================================= */
+
+        ctx.strokeStyle = BORDER;
+
+        ctx.lineWidth = 2;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            tableX + col1,
+            tableY
+        );
+
+        ctx.lineTo(
+            tableX + col1,
+            tableY +
+            headerH +
+            (packageAmounts.length * rowH)
+        );
+
+        ctx.stroke();
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            tableX +
+            col1 +
+            col2,
+            tableY
+        );
+
+        ctx.lineTo(
+            tableX +
+            col1 +
+            col2,
+            tableY +
+            headerH +
+            (packageAmounts.length * rowH)
+        );
+
+        ctx.stroke();
+
+
+        /* =================================================
+           OUTER TABLE BORDER
+        ================================================= */
+
+        ctx.strokeStyle = NAVY;
+
+        ctx.lineWidth = 3;
+
+        ctx.strokeRect(
+            tableX,
+            tableY,
+            tableW,
+            headerH +
+            (packageAmounts.length * rowH)
+        );
+
+
+        /* =================================================
+           GCASH
+        ================================================= */
+
+        const gcashY =
+            tableY +
+            headerH +
+            (packageAmounts.length * rowH) +
+            35;
+
+
+        /*
+         * NUMBER
+         */
+
+        ctx.fillStyle = ORANGE;
+
+        ctx.fillRect(
+            40,
+            gcashY,
+            1120,
+            75
+        );
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 36px Arial";
+
+
+        ctx.textAlign = "center";
+
+
+        ctx.fillText(
+            "#" +
+            settings.gcashNumber,
+            W / 2,
+            gcashY + 50
+        );
+
+
+        /*
+         * NAME
+         */
+
+        ctx.fillStyle =
+            "#fed7aa";
+
+
+        ctx.fillRect(
+            40,
+            gcashY + 75,
+            1120,
+            65
+        );
+
+
+        ctx.fillStyle =
+            "#7c2d12";
+
+
+        ctx.font =
+            "bold 26px Arial";
+
+
+        ctx.fillText(
+            settings.gcashName,
+            W / 2,
+            gcashY + 117
+        );
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        const footerY =
+            gcashY + 165;
+
+
+        ctx.fillStyle = NAVY;
+
+        ctx.fillRect(
+            40,
+            footerY,
+            1120,
+            55
+        );
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 20px Arial";
+
+
+        ctx.fillText(
+            "GAME TOP-UP ZONE",
+            W / 2,
+            footerY + 36
+        );
+
+
+        /* =================================================
+           DOWNLOAD
+        ================================================= */
+
+        const link =
+            document.createElement("a");
+
+
+        link.download =
+            "MIR4-DISCOUNTED-PACKAGE-" +
+            Number(settings.usdtPHP)
+                .toFixed(2) +
+            ".png";
+
+
+        link.href =
+            canvas.toDataURL(
+                "image/png"
+            );
+
+
+        link.click();
+
+    }
+
+}
 /* =====================================================
    ADMIN LOGIN
 ===================================================== */
