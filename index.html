@@ -1632,6 +1632,14 @@ footer {
 
         </button>
 
+       <button
+          class="dashboard-btn"
+          onclick="showSection('packageRate')">
+      
+          DISCOUNTED PACKAGE
+      
+      </button>
+
         <button
             class="dashboard-btn"
             onclick="showSection('seller')">
@@ -1758,6 +1766,11 @@ footer {
 
 
         <div class="live-rate-box">
+
+           <div class="live-rate-row">
+              <span>USDT</span>
+              <strong id="adminUsdtRate">--</strong>
+          </div>
 
             <div class="live-rate-row">
                 <span>WEMIX</span>
@@ -1982,7 +1995,96 @@ footer {
 
 </div>
 
+<!-- =====================================================
+     DISCOUNTED PACKAGE
+===================================================== -->
 
+<div id="packageRate" class="section">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+
+    <h2>
+        DISCOUNTED PACKAGE RATE
+    </h2>
+
+    <br>
+
+
+    <!-- USDT LIVE RATE -->
+
+    <div class="package-usdt-box">
+
+        <div class="package-usdt-label">
+
+            USDT / PHP
+            <small>
+                KUCOIN BASE
+            </small>
+
+        </div>
+
+
+        <div class="package-usdt-value">
+
+            <strong id="packageUsdtPHP">
+                ₱0.00
+            </strong>
+
+            <span>
+                ● LIVE RATE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- PACKAGE TABLE -->
+
+    <table class="package-table">
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    PACKAGE
+                </th>
+
+                <th>
+                    ACTUAL PRICE
+                </th>
+
+                <th>
+                    PAY ONLY
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody id="packageTableBody">
+        </tbody>
+
+    </table>
+
+
+    <br>
+
+
+    <button
+        class="dashboard-poster-btn"
+        onclick="generatePackagePoster()">
+
+        GENERATE PNG POSTER
+
+    </button>
+
+</div>
 
 <!-- =====================================================
      ADMIN LOGIN
@@ -3732,6 +3834,9 @@ document
 function updateAdminRates() {
 
     const values = {
+
+        adminUsdtRate:
+            settings.usdtPHP,
 
         adminWemixRate:
             settings.cryptoRates.WEMIX,
