@@ -3614,36 +3614,19 @@ function updateGoldDisplay() {
 }
 
 /* =====================================================
-   DISCOUNTED PACKAGE PNG POSTER
+   GENERATE DISCOUNTED PACKAGE POSTER
 ===================================================== */
 
 function generatePackagePoster() {
 
-    if (
-        !settings.ratesLoaded ||
-        !Number(settings.usdtPHP) ||
-        Number(settings.usdtPHP) <= 0
-    ) {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
-        alert("Live USDT/PHP rate is not available yet.");
+    const width = 1400;
+    const height = 1100;
 
-        return;
-    }
-
-
-    const canvas =
-        document.createElement("canvas");
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    const W = 1200;
-    const H = 1280;
-
-
-    canvas.width = W;
-    canvas.height = H;
+    canvas.width = width;
+    canvas.height = height;
 
 
     /* =================================================
@@ -3651,13 +3634,15 @@ function generatePackagePoster() {
     ================================================= */
 
     const NAVY = "#172554";
+    const NAVY_DARK = "#0f172a";
+    const BLUE = "#1d4ed8";
     const GOLD = "#f4b400";
     const GOLD_LIGHT = "#fff8dc";
     const WHITE = "#ffffff";
     const LIGHT = "#f8fafc";
-    const BORDER = "#cbd5e1";
+    const BORDER = "#dbe2ea";
     const TEXT = "#172033";
-    const GRAY = "#64748b";
+    const MUTED = "#64748b";
     const ORANGE = "#ea580c";
     const RED = "#dc2626";
     const GREEN = "#16a34a";
@@ -3672,8 +3657,8 @@ function generatePackagePoster() {
     ctx.fillRect(
         0,
         0,
-        W,
-        H
+        width,
+        height
     );
 
 
@@ -3686,17 +3671,19 @@ function generatePackagePoster() {
     ctx.fillRect(
         0,
         0,
-        W,
-        190
+        width,
+        180
     );
 
+
+    /* GOLD LINE */
 
     ctx.fillStyle = GOLD;
 
     ctx.fillRect(
         0,
-        185,
-        W,
+        175,
+        width,
         5
     );
 
@@ -3705,24 +3692,22 @@ function generatePackagePoster() {
        LOGO
     ================================================= */
 
-    const logo =
-        new Image();
+    const logo = new Image();
 
     logo.onload = function () {
 
-        const logoW = 180;
+        const logoWidth = 190;
 
-        const logoH =
+        const logoHeight =
             logo.height *
-            (logoW / logo.width);
-
+            (logoWidth / logo.width);
 
         ctx.drawImage(
             logo,
-            55,
-            30,
-            logoW,
-            logoH
+            40,
+            18,
+            logoWidth,
+            logoHeight
         );
 
 
@@ -3738,19 +3723,27 @@ function generatePackagePoster() {
     };
 
 
+    /*
+       IMPORTANT:
+       Keep your logo file in GitHub as:
+
+       GAMETOPUPZONE LOGO.png
+    */
+
     logo.src =
         "./GAMETOPUPZONE LOGO.png";
 
 
     /* =================================================
-       DRAW POSTER
+       MAIN POSTER
     ================================================= */
 
     function drawPackagePoster() {
 
-        /*
-         * HEADER TEXT
-         */
+
+        /* =================================================
+           HEADER TITLE
+        ================================================= */
 
         ctx.textAlign = "center";
 
@@ -3762,143 +3755,155 @@ function generatePackagePoster() {
 
         ctx.fillText(
             "MIR4 GOLD RATE SYSTEM",
-            790,
-            70
+            800,
+            65
         );
 
+
+        ctx.fillStyle = GOLD;
 
         ctx.font =
             "bold 30px Arial";
 
         ctx.fillText(
             "DISCOUNTED PACKAGE RATE",
-            790,
-            112
+            800,
+            108
         );
 
 
-        ctx.font =
-            "20px Arial";
+        ctx.fillStyle = "#cbd5e1";
 
-        ctx.fillStyle =
-            "#cbd5e1";
+        ctx.font =
+            "bold 19px Arial";
 
         ctx.fillText(
-            "Game Top-Up Zone",
-            790,
-            150
+            "FAST  •  SAFE  •  RELIABLE",
+            800,
+            145
         );
 
 
         /* =================================================
-           USDT / PHP
+           LEFT / RIGHT COLUMN
         ================================================= */
 
-        const rateY = 220;
-        const rateH = 110;
+        const leftX = 40;
+        const leftW = 650;
 
+        const rightX = 720;
+        const rightW = 640;
+
+
+        /* =================================================
+           USDT RATE BOX
+        ================================================= */
+
+        const rateY = 205;
+        const rateH = 105;
+
+
+        /* LEFT RATE LABEL */
 
         ctx.fillStyle = NAVY;
 
         ctx.fillRect(
-            40,
+            leftX,
             rateY,
-            560,
+            leftW / 2,
             rateH
         );
-
-
-        ctx.fillStyle = GOLD_LIGHT;
-
-        ctx.fillRect(
-            600,
-            rateY,
-            560,
-            rateH
-        );
-
-
-        ctx.strokeStyle = NAVY;
-
-        ctx.lineWidth = 3;
-
-        ctx.strokeRect(
-            40,
-            rateY,
-            1120,
-            rateH
-        );
-
-
-        ctx.textAlign = "center";
 
 
         ctx.fillStyle = WHITE;
 
         ctx.font =
-            "bold 34px Arial";
+            "bold 31px Arial";
 
         ctx.fillText(
             "USDT / PHP",
-            320,
-            rateY + 48
+            leftX + leftW / 4,
+            rateY + 47
         );
 
 
         ctx.font =
-            "bold 17px Arial";
+            "bold 15px Arial";
 
-        ctx.fillStyle =
-            "#cbd5e1";
+        ctx.fillStyle = "#cbd5e1";
 
         ctx.fillText(
             "KUCOIN BASE",
-            320,
-            rateY + 78
+            leftX + leftW / 4,
+            rateY + 76
         );
+
+
+        /* RIGHT RATE VALUE */
+
+        ctx.fillStyle = GOLD_LIGHT;
+
+        ctx.fillRect(
+            leftX + leftW / 2,
+            rateY,
+            leftW / 2,
+            rateH
+        );
+
+
+        const usdtPHP =
+            Number(settings.usdtPHP) || 0;
 
 
         ctx.fillStyle = NAVY;
 
         ctx.font =
-            "bold 45px Arial";
+            "bold 39px Arial";
 
         ctx.fillText(
-            "₱" +
-            Number(settings.usdtPHP)
-                .toFixed(2),
-            880,
-            rateY + 55
+            "₱" + usdtPHP.toFixed(2),
+            leftX + leftW * 0.75,
+            rateY + 52
         );
 
 
         ctx.fillStyle = GREEN;
 
         ctx.font =
-            "bold 17px Arial";
+            "bold 15px Arial";
 
         ctx.fillText(
             "● LIVE RATE",
-            880,
-            rateY + 82
+            leftX + leftW * 0.75,
+            rateY + 80
+        );
+
+
+        /* RATE BORDER */
+
+        ctx.strokeStyle = NAVY;
+
+        ctx.lineWidth = 3;
+
+        ctx.strokeRect(
+            leftX,
+            rateY,
+            leftW,
+            rateH
         );
 
 
         /* =================================================
-           TABLE
+           PACKAGE TABLE
         ================================================= */
 
-        const tableX = 40;
-        const tableY = 370;
-        const tableW = 1120;
+        const tableY = 335;
+        const headerH = 55;
+        const rowH = 70;
 
-        const headerH = 75;
-        const rowH = 135;
-
-
-        const col1 = 300;
-        const col2 = 410;
-        const col3 = 410;
+        const col1 = 190;
+        const col2 = 220;
+        const col3 = 240;
 
 
         /* TABLE HEADER */
@@ -3906,9 +3911,9 @@ function generatePackagePoster() {
         ctx.fillStyle = NAVY;
 
         ctx.fillRect(
-            tableX,
+            leftX,
             tableY,
-            tableW,
+            leftW,
             headerH
         );
 
@@ -3916,30 +3921,29 @@ function generatePackagePoster() {
         ctx.fillStyle = WHITE;
 
         ctx.font =
-            "bold 25px Arial";
-
+            "bold 18px Arial";
 
         ctx.textAlign = "center";
 
 
         ctx.fillText(
             "PACKAGE",
-            tableX + col1 / 2,
-            tableY + 48
+            leftX + col1 / 2,
+            tableY + 36
         );
 
 
         ctx.fillText(
             "ACTUAL PRICE",
-            tableX + col1 + col2 / 2,
-            tableY + 48
+            leftX + col1 + col2 / 2,
+            tableY + 36
         );
 
 
         ctx.fillText(
             "PAY ONLY",
-            tableX + col1 + col2 + col3 / 2,
-            tableY + 48
+            leftX + col1 + col2 + col3 / 2,
+            tableY + 36
         );
 
 
@@ -3947,97 +3951,140 @@ function generatePackagePoster() {
            PACKAGE ROWS
         ================================================= */
 
-        packageAmounts.forEach(
+        const amounts =
+            Array.isArray(packageAmounts)
+                ? packageAmounts
+                : [5, 10, 30, 100];
+
+
+        amounts.forEach(
             function(packageUSD, index) {
+
 
                 const y =
                     tableY +
                     headerH +
-                    (index * rowH);
+                    index * rowH;
 
 
-                /*
-                 * ROW BACKGROUND
-                 */
+                /* ROW BACKGROUND */
 
                 ctx.fillStyle =
                     index % 2 === 0
                         ? WHITE
-                        : LIGHT;
+                        : "#f1f5f9";
 
 
                 ctx.fillRect(
-                    tableX,
+                    leftX,
                     y,
-                    tableW,
+                    leftW,
                     rowH
                 );
 
 
-                /*
-                 * ACTUAL PRICE
-                 */
+                /* ACTUAL PRICE */
 
                 const actualPrice =
                     packageUSD *
-                    Number(settings.usdtPHP);
+                    usdtPHP;
 
 
-                /*
-                 * DISCOUNTED PRICE
-                 */
+                /* DISCOUNT */
+
+                const discount =
+                    typeof packageDiscount !== "undefined"
+                        ? packageDiscount
+                        : 0.73;
+
+
+                /* FEE */
+
+                const fee =
+                    typeof packageFee !== "undefined"
+                        ? packageFee
+                        : 0.10;
+
 
                 const discountedPrice =
                     actualPrice *
-                    packageDiscount *
-                    (1 + packageFee);
+                    discount *
+                    (1 + fee);
 
 
-                /*
-                 * FINAL PRICE
-                 */
+                /* FINAL PRICE */
 
-                const finalPrice =
-                    roundPackagePrice(
-                        discountedPrice
-                    );
+                let finalPrice;
 
 
-                /* -----------------------------------------
-                   PACKAGE
-                ----------------------------------------- */
+                if (
+                    typeof roundPackagePrice === "function"
+                ) {
+
+                    finalPrice =
+                        roundPackagePrice(
+                            discountedPrice
+                        );
+
+                } else {
+
+                    const whole =
+                        Math.ceil(
+                            discountedPrice
+                        );
+
+
+                    if (
+                        whole % 10 === 5
+                    ) {
+
+                        finalPrice = whole;
+
+                    } else {
+
+                        finalPrice =
+                            Math.ceil(
+                                (whole - 5) / 10
+                            ) * 10 + 5;
+
+                    }
+
+                }
+
+
+                /* PACKAGE */
 
                 ctx.fillStyle = NAVY;
 
                 ctx.font =
-                    "bold 32px Arial";
+                    "bold 23px Arial";
+
+                ctx.textAlign = "center";
 
                 ctx.fillText(
                     "$" + packageUSD,
-                    tableX +
-                    col1 / 2,
-                    y + 80
+                    leftX + col1 / 2,
+                    y + 43
                 );
 
 
-                /* -----------------------------------------
-                   ACTUAL PRICE
-                ----------------------------------------- */
+                /* ACTUAL PRICE */
 
                 const actualText =
                     "₱" +
-                    Math.round(actualPrice)
-                        .toLocaleString();
+                    Math.round(
+                        actualPrice
+                    ).toLocaleString();
 
 
-                ctx.fillStyle = GRAY;
+                ctx.fillStyle = "#475569";
 
                 ctx.font =
-                    "bold 27px Arial";
+                    "bold 19px Arial";
 
 
                 const actualX =
-                    tableX +
+                    leftX +
                     col1 +
                     col2 / 2;
 
@@ -4045,13 +4092,11 @@ function generatePackagePoster() {
                 ctx.fillText(
                     actualText,
                     actualX,
-                    y + 80
+                    y + 43
                 );
 
 
-                /*
-                 * RED STRIKE-THROUGH
-                 */
+                /* RED STRIKE THROUGH */
 
                 const textWidth =
                     ctx.measureText(
@@ -4066,73 +4111,76 @@ function generatePackagePoster() {
                 ctx.beginPath();
 
                 ctx.moveTo(
-                    actualX -
-                    (textWidth / 2) -
-                    8,
-                    y + 75
+                    actualX - textWidth / 2 - 4,
+                    y + 37
                 );
 
                 ctx.lineTo(
-                    actualX +
-                    (textWidth / 2) +
-                    8,
-                    y + 75
+                    actualX + textWidth / 2 + 4,
+                    y + 37
                 );
 
                 ctx.stroke();
 
 
-                /* -----------------------------------------
-                   PAY ONLY BOX
-                ----------------------------------------- */
+                /* PAY ONLY BOX */
 
-                const finalX =
-                    tableX +
+                const finalBoxX =
+                    leftX +
                     col1 +
                     col2 +
-                    col3 / 2;
+                    15;
+
+
+                const finalBoxW =
+                    col3 - 30;
 
 
                 ctx.fillStyle =
                     "#fff1df";
 
 
-                ctx.fillRect(
-                    finalX - 145,
-                    y + 25,
-                    290,
-                    85
+                ctx.beginPath();
+
+                ctx.roundRect(
+                    finalBoxX,
+                    y + 11,
+                    finalBoxW,
+                    48,
+                    8
                 );
 
+                ctx.fill();
+
+
+                /* FINAL PRICE */
 
                 ctx.fillStyle = ORANGE;
 
                 ctx.font =
-                    "bold 38px Arial";
-
+                    "bold 25px Arial";
 
                 ctx.fillText(
                     "₱" +
-                    finalPrice
-                        .toLocaleString(),
-                    finalX,
-                    y + 80
+                    finalPrice.toLocaleString(),
+                    leftX +
+                    col1 +
+                    col2 +
+                    col3 / 2,
+                    y + 43
                 );
 
 
-                /*
-                 * ROW BORDER
-                 */
+                /* ROW BORDER */
 
-                ctx.strokeStyle =
-                    BORDER;
+                ctx.strokeStyle = BORDER;
 
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 1;
 
                 ctx.strokeRect(
-                    tableX,
+                    leftX,
                     y,
-                    tableW,
+                    leftW,
                     rowH
                 );
 
@@ -4141,26 +4189,26 @@ function generatePackagePoster() {
 
 
         /* =================================================
-           VERTICAL LINES
+           TABLE VERTICAL LINES
         ================================================= */
 
         ctx.strokeStyle = BORDER;
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
 
 
         ctx.beginPath();
 
         ctx.moveTo(
-            tableX + col1,
+            leftX + col1,
             tableY
         );
 
         ctx.lineTo(
-            tableX + col1,
+            leftX + col1,
             tableY +
             headerH +
-            (packageAmounts.length * rowH)
+            amounts.length * rowH
         );
 
         ctx.stroke();
@@ -4169,111 +4217,434 @@ function generatePackagePoster() {
         ctx.beginPath();
 
         ctx.moveTo(
-            tableX +
-            col1 +
-            col2,
+            leftX + col1 + col2,
             tableY
         );
 
         ctx.lineTo(
-            tableX +
-            col1 +
-            col2,
+            leftX + col1 + col2,
             tableY +
             headerH +
-            (packageAmounts.length * rowH)
+            amounts.length * rowH
         );
 
         ctx.stroke();
 
 
-        /* =================================================
-           OUTER TABLE BORDER
-        ================================================= */
+        /* OUTER BORDER */
 
         ctx.strokeStyle = NAVY;
 
         ctx.lineWidth = 3;
 
         ctx.strokeRect(
-            tableX,
+            leftX,
             tableY,
-            tableW,
+            leftW,
             headerH +
-            (packageAmounts.length * rowH)
+            amounts.length * rowH
         );
 
 
         /* =================================================
-           GCASH
+           HOW TO BUY
         ================================================= */
 
-        const gcashY =
-            tableY +
-            headerH +
-            (packageAmounts.length * rowH) +
-            35;
+        const procedureY = 205;
+        const procedureH = 535;
 
 
-        /*
-         * NUMBER
-         */
+        /* PROCEDURE BOX */
 
-        ctx.fillStyle = ORANGE;
+        ctx.fillStyle = WHITE;
+
+        ctx.beginPath();
+
+        ctx.roundRect(
+            rightX,
+            procedureY,
+            rightW,
+            procedureH,
+            14
+        );
+
+        ctx.fill();
+
+
+        ctx.strokeStyle = NAVY;
+
+        ctx.lineWidth = 3;
+
+        ctx.stroke();
+
+
+        /* HEADER */
+
+        ctx.fillStyle = NAVY;
+
+        ctx.beginPath();
+
+        ctx.roundRect(
+            rightX,
+            procedureY,
+            rightW,
+            105,
+            14
+        );
+
+        ctx.fill();
+
+
+        /* Hide bottom rounded corners */
 
         ctx.fillRect(
-            40,
-            gcashY,
-            1120,
-            75
+            rightX,
+            procedureY + 80,
+            rightW,
+            25
         );
+
+
+        ctx.textAlign = "left";
 
 
         ctx.fillStyle = WHITE;
 
         ctx.font =
-            "bold 36px Arial";
+            "bold 34px Arial";
 
+        ctx.fillText(
+            "🛒  HOW TO BUY",
+            rightX + 28,
+            procedureY + 47
+        );
+
+
+        ctx.fillStyle = GOLD;
+
+        ctx.font =
+            "bold 16px Arial";
+
+        ctx.fillText(
+            "FOLLOW THESE SIMPLE STEPS",
+            rightX + 30,
+            procedureY + 78
+        );
+
+
+        /* =================================================
+           PROCEDURE DATA
+        ================================================= */
+
+        const steps = [
+
+            {
+                title:
+                    "SCREENSHOT PACKAGE",
+
+                text:
+                    "Screenshot the package you want and wait for admin to reply."
+            },
+
+            {
+                title:
+                    "SEND PAYMENT",
+
+                text:
+                    "Send the payment after admin confirms the price."
+            },
+
+            {
+                title:
+                    "SEND ACCOUNT DETAILS",
+
+                text:
+                    "Send your account details after payment is confirmed."
+            },
+
+            {
+                title:
+                    "WAIT FOR ADMIN SIGNAL",
+
+                text:
+                    "Wait for admin's signal before opening your account once the package purchase is done."
+            }
+
+        ];
+
+
+        const stepStartY =
+            procedureY + 125;
+
+
+        const stepH = 96;
+
+
+        steps.forEach(
+            function(step, index) {
+
+
+                const y =
+                    stepStartY +
+                    index * stepH;
+
+
+                /* STEP LINE */
+
+                if (index > 0) {
+
+                    ctx.strokeStyle =
+                        "#e2e8f0";
+
+                    ctx.lineWidth = 1;
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        rightX + 25,
+                        y
+                    );
+
+                    ctx.lineTo(
+                        rightX +
+                        rightW -
+                        25,
+                        y
+                    );
+
+                    ctx.stroke();
+
+                }
+
+
+                /* NUMBER CIRCLE */
+
+                const circleX =
+                    rightX + 48;
+
+                const circleY =
+                    y + 42;
+
+
+                ctx.fillStyle = NAVY;
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    circleX,
+                    circleY,
+                    22,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+
+
+                ctx.fillStyle = WHITE;
+
+                ctx.font =
+                    "bold 17px Arial";
+
+                ctx.textAlign = "center";
+
+                ctx.fillText(
+                    String(index + 1),
+                    circleX,
+                    circleY + 6
+                );
+
+
+                /* STEP TEXT */
+
+                ctx.textAlign = "left";
+
+
+                ctx.fillStyle = NAVY;
+
+                ctx.font =
+                    "bold 17px Arial";
+
+                ctx.fillText(
+                    step.title,
+                    rightX + 85,
+                    y + 33
+                );
+
+
+                ctx.fillStyle = MUTED;
+
+                ctx.font =
+                    "15px Arial";
+
+
+                /* WORD WRAP */
+
+                const maxWidth =
+                    rightW - 125;
+
+
+                const words =
+                    step.text.split(" ");
+
+
+                let line = "";
+
+                let lineY =
+                    y + 57;
+
+
+                words.forEach(
+                    function(word) {
+
+                        const testLine =
+                            line +
+                            word +
+                            " ";
+
+
+                        const testWidth =
+                            ctx.measureText(
+                                testLine
+                            ).width;
+
+
+                        if (
+                            testWidth >
+                            maxWidth &&
+                            line !== ""
+                        ) {
+
+                            ctx.fillText(
+                                line.trim(),
+                                rightX + 85,
+                                lineY
+                            );
+
+
+                            line =
+                                word +
+                                " ";
+
+
+                            lineY += 19;
+
+                        } else {
+
+                            line =
+                                testLine;
+
+                        }
+
+                    }
+                );
+
+
+                if (line.trim() !== "") {
+
+                    ctx.fillText(
+                        line.trim(),
+                        rightX + 85,
+                        lineY
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           GCASH PAYMENT AREA
+        ================================================= */
+
+        const gcashY = 770;
+        const gcashH = 125;
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.beginPath();
+
+        ctx.roundRect(
+            40,
+            gcashY,
+            width - 80,
+            gcashH,
+            12
+        );
+
+        ctx.fill();
+
+
+        ctx.strokeStyle = GOLD;
+
+        ctx.lineWidth = 3;
+
+        ctx.stroke();
+
+
+        /* GCASH LABEL */
+
+        ctx.fillStyle = "#2563eb";
+
+        ctx.beginPath();
+
+        ctx.roundRect(
+            55,
+            gcashY + 15,
+            280,
+            95,
+            10
+        );
+
+        ctx.fill();
+
+
+        ctx.fillStyle = WHITE;
+
+        ctx.font =
+            "bold 32px Arial";
 
         ctx.textAlign = "center";
 
+        ctx.fillText(
+            "GCash",
+            195,
+            gcashY + 72
+        );
+
+
+        /* GCASH NUMBER */
+
+        ctx.fillStyle = ORANGE;
+
+        ctx.font =
+            "bold 31px Arial";
 
         ctx.fillText(
             "#" +
-            settings.gcashNumber,
-            W / 2,
-            gcashY + 50
+            (
+                settings.gcashNumber ||
+                ""
+            ),
+            760,
+            gcashY + 58
         );
 
 
-        /*
-         * NAME
-         */
+        /* GCASH NAME */
 
-        ctx.fillStyle =
-            "#fed7aa";
-
-
-        ctx.fillRect(
-            40,
-            gcashY + 75,
-            1120,
-            65
-        );
-
-
-        ctx.fillStyle =
-            "#7c2d12";
-
+        ctx.fillStyle = "#7c2d12";
 
         ctx.font =
-            "bold 26px Arial";
-
+            "bold 19px Arial";
 
         ctx.fillText(
-            settings.gcashName,
-            W / 2,
-            gcashY + 117
+            settings.gcashName ||
+            "",
+            760,
+            gcashY + 88
         );
 
 
@@ -4281,30 +4652,64 @@ function generatePackagePoster() {
            FOOTER
         ================================================= */
 
-        const footerY =
-            gcashY + 165;
-
-
         ctx.fillStyle = NAVY;
 
         ctx.fillRect(
-            40,
-            footerY,
-            1120,
-            55
+            0,
+            925,
+            width,
+            175
         );
+
+
+        /* GOLD TOP LINE */
+
+        ctx.fillStyle = GOLD;
+
+        ctx.fillRect(
+            0,
+            925,
+            width,
+            5
+        );
+
+
+        ctx.textAlign = "center";
 
 
         ctx.fillStyle = WHITE;
 
         ctx.font =
-            "bold 20px Arial";
-
+            "bold 28px Arial";
 
         ctx.fillText(
             "GAME TOP-UP ZONE",
-            W / 2,
-            footerY + 36
+            width / 2,
+            980
+        );
+
+
+        ctx.fillStyle = "#cbd5e1";
+
+        ctx.font =
+            "bold 17px Arial";
+
+        ctx.fillText(
+            "FAST  •  SAFE  •  RELIABLE",
+            width / 2,
+            1015
+        );
+
+
+        ctx.fillStyle = GOLD;
+
+        ctx.font =
+            "bold 16px Arial";
+
+        ctx.fillText(
+            "PLAY MORE  •  PAY LESS",
+            width / 2,
+            1050
         );
 
 
@@ -4318,8 +4723,11 @@ function generatePackagePoster() {
 
         link.download =
             "MIR4-DISCOUNTED-PACKAGE-" +
-            Number(settings.usdtPHP)
-                .toFixed(2) +
+            (
+                usdtPHP > 0
+                    ? usdtPHP.toFixed(2)
+                    : "RATE"
+            ) +
             ".png";
 
 
@@ -4334,6 +4742,9 @@ function generatePackagePoster() {
     }
 
 }
+
+
+   
 /* =====================================================
    ADMIN LOGIN
 ===================================================== */
