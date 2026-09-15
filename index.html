@@ -2302,12 +2302,177 @@ footer {
     <button
         class="dashboard-poster-btn"
         onclick="generatePackagePoster()">
-
         GENERATE PNG POSTER
-
     </button>
 
+   <div class="package-procedure">
+      
+          <div class="procedure-header">
+              <span>🛒</span>
+              <div>
+                  <h3>HOW TO BUY</h3>
+                  <p>Follow these simple steps</p>
+              </div>
+          </div>
+      
+          <div class="procedure-step">
+              <div class="procedure-number">1</div>
+              <div class="procedure-content">
+                  <h4>SCREENSHOT PACKAGE</h4>
+                  <p>Screenshot the package you want and wait for admin to reply.</p>
+              </div>
+          </div>
+      
+          <div class="procedure-step">
+              <div class="procedure-number">2</div>
+              <div class="procedure-content">
+                  <h4>SEND PAYMENT</h4>
+                  <p>Send the payment after admin confirms the price.</p>
+              </div>
+          </div>
+      
+          <div class="procedure-step">
+              <div class="procedure-number">3</div>
+              <div class="procedure-content">
+                  <h4>SEND ACCOUNT DETAILS</h4>
+                  <p>Send your account details after payment is confirmed.</p>
+              </div>
+          </div>
+      
+          <div class="procedure-step">
+              <div class="procedure-number">4</div>
+              <div class="procedure-content">
+                  <h4>WAIT FOR ADMIN SIGNAL</h4>
+                  <p>
+                      Wait for admin's signal before opening your account
+                      once the package purchase is done.
+                  </p>
+              </div>
+          </div>
+      
+      </div>
+   
+
 </div>
+
+ /* =========================
+   HOW TO BUY
+========================= */
+
+.package-procedure {
+    margin-top: 25px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.procedure-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.procedure-header > span {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border-radius: 12px;
+    font-size: 21px;
+}
+
+.procedure-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.procedure-header p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.procedure-step {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid #eef0f2;
+}
+
+.procedure-number {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #111827;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.procedure-content {
+    flex: 1;
+}
+
+.procedure-content h4 {
+    margin: 0 0 5px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.procedure-content p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #6b7280;
+}
+
+/* Desktop: package + procedure side by side */
+@media (min-width: 900px) {
+
+    #packageRate {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    #packageRate .package-table {
+        width: 65%;
+    }
+
+    #packageRate .package-procedure {
+        width: 65%;
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 899px) {
+
+    .package-procedure {
+        margin-top: 20px;
+        padding: 18px;
+    }
+
+    .procedure-step {
+        gap: 11px;
+    }
+
+    .procedure-content p {
+        font-size: 12px;
+    }
+}  
 
 <!-- =====================================================
      ADMIN LOGIN
@@ -3104,7 +3269,7 @@ const packageAmounts = [
 
 const packageDiscount = 0.73;
 
-const packageFee = 0.06;
+const packageFee = 0.10;
 
 
 /* =====================================================
