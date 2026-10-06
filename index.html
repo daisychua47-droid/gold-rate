@@ -2907,7 +2907,7 @@ footer {
     </option>
 
     <option value="OTHER SERVER SPECIAL RATE">
-        ⚠️ OTHER SERVER SPECIAL RATE
+        ⚠️️ OTHER SERVER SPECIAL RATE
     </option>
 
     <option value="CLOSE">
@@ -3540,13 +3540,14 @@ function updateLiveRateDisplay() {
 
 
 /* =====================================================
-   DISCOUNTED PACKAGE
+   DISCOUNTED PACKAGE (5 PACKAGES: $5, $10, $30, $50, $100)
 ===================================================== */
 
 const packageAmounts = [
     5,
     10,
     30,
+    50,
     100
 ];
 
@@ -3583,11 +3584,6 @@ function roundPackagePrice(value) {
     /*
        Otherwise go UP to the next
        whole number ending in 5.
-
-       221 → 225
-       224 → 225
-       226 → 235
-       229 → 235
     */
 
     return Math.ceil(
@@ -3681,7 +3677,7 @@ function updatePackageTable() {
             /*
              * ACTUAL PRICE
              *
-             * $5 × current USDT/PHP
+             * $USD × current USDT/PHP rate from rates.json
              */
 
             const actualPrice =
@@ -3691,10 +3687,6 @@ function updatePackageTable() {
 
             /*
              * DISCOUNTED PRICE
-             *
-             * Actual price
-             * × 0.73
-             * × 1.06
              */
 
             const discountedPrice =
@@ -3704,10 +3696,7 @@ function updatePackageTable() {
 
 
             /*
-             * FINAL PRICE
-             *
-             * Whole number
-             * ending in 5
+             * FINAL PRICE (Rounded ending in 5)
              */
 
             const finalPrice =
@@ -4006,13 +3995,6 @@ function generatePackagePoster() {
     };
 
 
-    /*
-       IMPORTANT:
-       Keep your logo file in GitHub as:
-
-       GAMETOPUPZONE LOGO.png
-    */
-
     logo.src =
         "./GAMETOPUPZONE LOGO.png";
 
@@ -4181,12 +4163,12 @@ function generatePackagePoster() {
         ================================================= */
 
         const tableY = 335;
-        const headerH = 55;
-        const rowH = 70;
+        const headerH = 45;
+        const rowH = 55;
 
-        const col1 = 190;
-        const col2 = 220;
-        const col3 = 240;
+        const col1 = 150;
+        const col2 = 230;
+        const col3 = 270;
 
 
         /* TABLE HEADER */
@@ -4204,7 +4186,7 @@ function generatePackagePoster() {
         ctx.fillStyle = WHITE;
 
         ctx.font =
-            "bold 18px Arial";
+            "bold 16px Arial";
 
         ctx.textAlign = "center";
 
@@ -4212,21 +4194,21 @@ function generatePackagePoster() {
         ctx.fillText(
             "PACKAGE",
             leftX + col1 / 2,
-            tableY + 36
+            tableY + 28
         );
 
 
         ctx.fillText(
             "ACTUAL PRICE",
             leftX + col1 + col2 / 2,
-            tableY + 36
+            tableY + 28
         );
 
 
         ctx.fillText(
             "PAY ONLY",
             leftX + col1 + col2 + col3 / 2,
-            tableY + 36
+            tableY + 28
         );
 
 
@@ -4237,7 +4219,7 @@ function generatePackagePoster() {
         const amounts =
             Array.isArray(packageAmounts)
                 ? packageAmounts
-                : [5, 10, 30, 100];
+                : [5, 10, 30, 50, 100];
 
 
         amounts.forEach(
@@ -4273,15 +4255,11 @@ function generatePackagePoster() {
                     usdtPHP;
 
 
-                /* DISCOUNT */
-
                 const discount =
                     typeof packageDiscount !== "undefined"
                         ? packageDiscount
                         : 0.73;
 
-
-                /* FEE */
 
                 const fee =
                     typeof packageFee !== "undefined"
@@ -4316,7 +4294,6 @@ function generatePackagePoster() {
                             discountedPrice
                         );
 
-
                     if (
                         whole % 10 === 5
                     ) {
@@ -4340,14 +4317,14 @@ function generatePackagePoster() {
                 ctx.fillStyle = NAVY;
 
                 ctx.font =
-                    "bold 23px Arial";
+                    "bold 20px Arial";
 
                 ctx.textAlign = "center";
 
                 ctx.fillText(
                     "$" + packageUSD,
                     leftX + col1 / 2,
-                    y + 43
+                    y + 34
                 );
 
 
@@ -4363,7 +4340,7 @@ function generatePackagePoster() {
                 ctx.fillStyle = "#475569";
 
                 ctx.font =
-                    "bold 19px Arial";
+                    "bold 17px Arial";
 
 
                 const actualX =
@@ -4375,7 +4352,7 @@ function generatePackagePoster() {
                 ctx.fillText(
                     actualText,
                     actualX,
-                    y + 43
+                    y + 34
                 );
 
 
@@ -4389,18 +4366,18 @@ function generatePackagePoster() {
 
                 ctx.strokeStyle = RED;
 
-                ctx.lineWidth = 4;
+                ctx.lineWidth = 3;
 
                 ctx.beginPath();
 
                 ctx.moveTo(
                     actualX - textWidth / 2 - 4,
-                    y + 37
+                    y + 28
                 );
 
                 ctx.lineTo(
                     actualX + textWidth / 2 + 4,
-                    y + 37
+                    y + 28
                 );
 
                 ctx.stroke();
@@ -4427,10 +4404,10 @@ function generatePackagePoster() {
 
                 ctx.roundRect(
                     finalBoxX,
-                    y + 11,
+                    y + 8,
                     finalBoxW,
-                    48,
-                    8
+                    39,
+                    6
                 );
 
                 ctx.fill();
@@ -4441,7 +4418,7 @@ function generatePackagePoster() {
                 ctx.fillStyle = ORANGE;
 
                 ctx.font =
-                    "bold 25px Arial";
+                    "bold 21px Arial";
 
                 ctx.fillText(
                     "₱" +
@@ -4450,7 +4427,7 @@ function generatePackagePoster() {
                     col1 +
                     col2 +
                     col3 / 2,
-                    y + 43
+                    y + 34
                 );
 
 
@@ -4578,8 +4555,6 @@ function generatePackagePoster() {
         ctx.fill();
 
 
-        /* Hide bottom rounded corners */
-
         ctx.fillRect(
             rightX,
             procedureY + 80,
@@ -4672,8 +4647,6 @@ function generatePackagePoster() {
                     index * stepH;
 
 
-                /* STEP LINE */
-
                 if (index > 0) {
 
                     ctx.strokeStyle =
@@ -4699,8 +4672,6 @@ function generatePackagePoster() {
 
                 }
 
-
-                /* NUMBER CIRCLE */
 
                 const circleX =
                     rightX + 48;
@@ -4738,8 +4709,6 @@ function generatePackagePoster() {
                 );
 
 
-                /* STEP TEXT */
-
                 ctx.textAlign = "left";
 
 
@@ -4760,8 +4729,6 @@ function generatePackagePoster() {
                 ctx.font =
                     "15px Arial";
 
-
-                /* WORD WRAP */
 
                 const maxWidth =
                     rightW - 125;
@@ -4867,8 +4834,6 @@ function generatePackagePoster() {
         ctx.stroke();
 
 
-        /* GCASH LABEL */
-
         ctx.fillStyle = "#2563eb";
 
         ctx.beginPath();
@@ -4898,8 +4863,6 @@ function generatePackagePoster() {
         );
 
 
-        /* GCASH NUMBER */
-
         ctx.fillStyle = ORANGE;
 
         ctx.font =
@@ -4915,8 +4878,6 @@ function generatePackagePoster() {
             gcashY + 58
         );
 
-
-        /* GCASH NAME */
 
         ctx.fillStyle = "#7c2d12";
 
@@ -4944,8 +4905,6 @@ function generatePackagePoster() {
             175
         );
 
-
-        /* GOLD TOP LINE */
 
         ctx.fillStyle = GOLD;
 
@@ -5025,916 +4984,7 @@ function generatePackagePoster() {
     }
 
 }
-
-
-   
-/* =====================================================
-   ADMIN LOGIN
-===================================================== */
-
-const ADMIN_PASSWORD = "123456";
-
-
-function loginAdmin() {
-
-    const password =
-        document
-        .getElementById("adminPassword")
-        .value;
-
-
-    if (password === ADMIN_PASSWORD) {
-
-        document
-            .getElementById("loginError")
-            .style.display = "none";
-
-
-        document
-            .getElementById("adminPassword")
-            .value = "";
-
-
-        showSection("adminPanel");
-
-
-    } else {
-
-        document
-            .getElementById("loginError")
-            .style.display = "block";
-
-    }
-
-}
-
-
-/* =====================================================
-   SAVE SETTINGS
-===================================================== */
-
-function saveSettings() {
-
-    settings.goldRate =
-        parseFloat(
-            document
-            .getElementById("goldRateInput")
-            .value
-        );
-
-
-    settings.gcashNumber =
-        document
-        .getElementById("gcashNumberInput")
-        .value;
-
-
-    settings.gcashName =
-        document
-        .getElementById("gcashNameInput")
-        .value;
-
-
-    settings.cryptoRates.WEMIX =
-        parseFloat(
-            document
-            .getElementById("wemixRateInput")
-            .value
-        );
-
-
-    settings.cryptoRates.EXDRA1 =
-        parseFloat(
-            document
-            .getElementById("exdra1RateInput")
-            .value
-        );
-
-
-    settings.cryptoRates.EXDRA2 =
-        parseFloat(
-            document
-            .getElementById("exdra2RateInput")
-            .value
-        );
-
-
-    settings.cryptoRates.EXDRA3 =
-        parseFloat(
-            document
-            .getElementById("exdra3RateInput")
-            .value
-        );
-
-
-    settings.cryptoRates.EXDRA4 =
-        parseFloat(
-            document
-            .getElementById("exdra4RateInput")
-            .value
-        );
-
-
-    updateGoldDisplay();
-
-
-    alert("Settings updated successfully.");
-
-}
-
-
-/* =====================================================
-   SELLER CALCULATOR
-===================================================== */
-
-      function calculate() {
-      
-          const token =
-              document
-              .getElementById("token")
-              .value;
-      
-      
-          const quantity =
-              parseFloat(
-                  document
-                  .getElementById("quantity")
-                  .value
-              );
-      
-      
-          if (!quantity || quantity <= 0) {
-      
-              alert("Please enter a valid quantity.");
-      
-              return;
-      
-          }
-      
-      
-          /* =================================================
-             RATES
-          ================================================= */
-      
-          const tokenRate =
-              settings.cryptoRates[token];
-      
-          const wemixRate =
-              settings.cryptoRates.WEMIX;
-      
-      
-          if (
-              !tokenRate ||
-              !wemixRate ||
-              tokenRate <= 0 ||
-              wemixRate <= 0
-          ) {
-      
-              alert("Live rates are not available yet.");
-      
-              return;
-      
-          }
-      
-      
-          /* =================================================
-             WEMIX NEEDED
-          ================================================= */
-      
-          const wemixNeeded =
-              quantity *
-              (tokenRate / wemixRate);
-      
-      
-          /* =================================================
-             MARKUP
-             BASED ON WEMIX NEEDED
-          ================================================= */
-      
-          let markup;
-      
-      
-          if (wemixNeeded <= 30) {
-      
-              markup = 3;
-      
-          }
-      
-          else if (wemixNeeded <= 100) {
-      
-              markup = 2;
-      
-          }
-      
-          else if (wemixNeeded > 500) {
-      
-              markup = 0.60;
-      
-          }
-      
-          else {
-      
-              markup = 1;
-      
-          }
-      
-      
-          /* =================================================
-             FEE
-             10% OF WEMIX NEEDED
-          ================================================= */
-      
-          let fee = 0;
-
-            if (
-                token === "EXDRA1" ||
-                token === "EXDRA2" ||
-                token === "EXDRA3" ||
-                token === "EXDRA4"
-            ) {
-                fee = wemixNeeded * 0.10;
-            }
-                  
-      
-          /* =================================================
-             FINAL SELLING PRICE
-          ================================================= */
-      
-          const finalPrice =
-              tokenRate +
-              markup +
-              fee;
-      
-      
-          /* =================================================
-             TOTAL PHP
-      
-             WEMIX NEEDED × FINAL PRICE
-          ================================================= */
-      
-          const totalPHP =
-              wemixNeeded *
-              finalPrice;
-      
-      
-          /* =================================================
-             TOTAL USDT
-          ================================================= */
-      
-          const totalUSDT =
-              totalPHP /
-              settings.usdtPHP;
-      
-      
-          /* =================================================
-             DISPLAY RESULTS
-          ================================================= */
-      
-          document
-              .getElementById("resultToken")
-              .textContent =
-                  token;
-      
-      
-          document
-              .getElementById("resultQuantity")
-              .textContent =
-                  quantity.toLocaleString();
-      
-      
-          document
-              .getElementById("resultBase")
-              .textContent =
-                  "₱" +
-                  tokenRate.toFixed(2);
-      
-      
-          document
-              .getElementById("resultWemixNeeded")
-              .textContent =
-                  wemixNeeded.toFixed(2);
-      
-      
-          document
-              .getElementById("resultMarkup")
-              .textContent =
-                  "₱" +
-                  markup.toFixed(2);
-      
-      
-          document
-              .getElementById("resultFee")
-              .textContent =
-                  "₱" +
-                  fee.toFixed(3);
-      
-      
-          document
-              .getElementById("resultFinal")
-              .textContent =
-                  "₱" +
-                  finalPrice.toFixed(3);
-      
-      
-          document
-              .getElementById("resultPHP")
-              .textContent =
-                  "₱" +
-                  totalPHP.toFixed(2);
-      
-      
-          document
-              .getElementById("resultUSDT")
-              .textContent =
-                  "$" +
-                  totalUSDT.toFixed(2);
-      
-      
-          document
-              .getElementById("sellerResult")
-              .classList.add("show");
-      
-      }
-
-/* =====================================================
-   GENERATE GOLD POSTER
-===================================================== */
-
-function generatePoster() {
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    const width = 1200;
-    const height = 1350;
-
-    canvas.width = width;
-    canvas.height = height;
-
-    /* =========================
-       COLORS
-    ========================= */
-
-    const NAVY = "#172554";
-    const GOLD = "#f4b400";
-    const GOLD_LIGHT = "#fff8dc";
-    const WHITE = "#ffffff";
-    const LIGHT = "#f8fafc";
-    const BORDER = "#dbe2ea";
-    const TEXT = "#172033";
-    const ORANGE = "#ea580c";
-
-
-    /* =========================
-       BACKGROUND
-    ========================= */
-
-    ctx.fillStyle = LIGHT;
-
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    ctx.fillStyle = NAVY;
-
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        190
-    );
-
-
-    /* GOLD LINE */
-
-    ctx.fillStyle = GOLD;
-
-    ctx.fillRect(
-        0,
-        185,
-        width,
-        5
-    );
-
-
-    /* =========================
-       LOGO
-    ========================= */
-
-    const logo = new Image();
-
-    logo.onload = function () {
-
-        const logoWidth = 180;
-
-        const logoHeight =
-            logo.height *
-            (logoWidth / logo.width);
-
-        ctx.drawImage(
-            logo,
-            60,
-            35,
-            logoWidth,
-            logoHeight
-        );
-
-
-        drawPosterContent();
-
-    };
-
-    logo.onerror = function () {
-
-        drawPosterContent();
-
-    };
-
-
-    logo.src =
-        "./GAMETOPUPZONE LOGO.png";
-
-
-    /* =========================
-       POSTER CONTENT
-    ========================= */
-
-    function drawPosterContent() {
-
-        /* TITLE */
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 42px Arial";
-
-        ctx.textAlign = "center";
-
-        ctx.fillText(
-            "MIR4 GOLD RATE SYSTEM",
-            780,
-            82
-        );
-
-
-        ctx.font =
-            "bold 27px Arial";
-
-        ctx.fillText(
-            "GOLD CONVERSION RATE",
-            780,
-            122
-        );
-
-
-        ctx.font =
-            "20px Arial";
-
-        ctx.fillStyle = "#cbd5e1";
-
-        ctx.fillText(
-            "Game Top-Up Zone",
-            780,
-            155
-        );
-
-
-        /* =========================
-           RATE BOX
-        ========================= */
-
-        const rateY = 225;
-
-        const rateHeight = 110;
-
-
-        /* RATE LABEL */
-
-        ctx.fillStyle = NAVY;
-
-        ctx.fillRect(
-            40,
-            rateY,
-            560,
-            rateHeight
-        );
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 42px Arial";
-
-        ctx.textAlign = "center";
-
-        ctx.fillText(
-            "RATE",
-            320,
-            rateY + 70
-        );
-
-
-        /* RATE VALUE */
-
-        ctx.fillStyle = GOLD_LIGHT;
-
-        ctx.fillRect(
-            600,
-            rateY,
-            560,
-            rateHeight
-        );
-
-
-        ctx.fillStyle = NAVY;
-
-        ctx.font =
-            "bold 60px Arial";
-
-        ctx.fillText(
-            settings.goldRate.toFixed(2),
-            880,
-            rateY + 72
-        );
-
-
-        /* BORDER */
-
-        ctx.strokeStyle = NAVY;
-
-        ctx.lineWidth = 3;
-
-        ctx.strokeRect(
-            40,
-            rateY,
-            1120,
-            rateHeight
-        );
-
-
-        /* =========================
-           TABLE
-        ========================= */
-
-        let y = 375;
-
-        const rowHeight = 75;
-
-
-        /* HEADER */
-
-        ctx.fillStyle = NAVY;
-
-        ctx.fillRect(
-            40,
-            y,
-            1120,
-            rowHeight
-        );
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 32px Arial";
-
-        ctx.textAlign = "center";
-
-
-        ctx.fillText(
-            "GCASH",
-            320,
-            y + 48
-        );
-
-
-        ctx.fillText(
-            "GOLD",
-            880,
-            y + 48
-        );
-
-
-        y += rowHeight;
-
-
-        /* TABLE ROWS */
-
-        goldAmounts.forEach(
-            function(amount, index) {
-
-                ctx.fillStyle =
-                    index % 2 === 0
-                        ? WHITE
-                        : LIGHT;
-
-
-                ctx.fillRect(
-                    40,
-                    y,
-                    1120,
-                    rowHeight
-                );
-
-
-                const gold =
-                    Math.round(
-                        amount *
-                        settings.goldRate
-                    );
-
-
-                ctx.fillStyle = TEXT;
-
-                ctx.font =
-                    "bold 30px Arial";
-
-
-                ctx.fillText(
-                    amount.toLocaleString(),
-                    320,
-                    y + 48
-                );
-
-
-                ctx.fillText(
-                    gold.toLocaleString(),
-                    880,
-                    y + 48
-                );
-
-
-                /* ROW BORDER */
-
-                ctx.strokeStyle = BORDER;
-
-                ctx.lineWidth = 2;
-
-                ctx.strokeRect(
-                    40,
-                    y,
-                    1120,
-                    rowHeight
-                );
-
-
-                y += rowHeight;
-
-            }
-        );
-
-
-        /* CENTER LINE */
-
-        ctx.strokeStyle = BORDER;
-
-        ctx.lineWidth = 2;
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            600,
-            375
-        );
-
-        ctx.lineTo(
-            600,
-            y
-        );
-
-        ctx.stroke();
-
-
-        /* OUTER TABLE BORDER */
-
-        ctx.strokeStyle = NAVY;
-
-        ctx.lineWidth = 3;
-
-        ctx.strokeRect(
-            40,
-            375,
-            1120,
-            y - 375
-        );
-
-
-        /* =========================
-           PAYMENT NOTE
-        ========================= */
-
-        y += 35;
-
-
-        ctx.fillStyle = "#64748b";
-
-        ctx.font =
-            "italic 23px Arial";
-
-        ctx.textAlign = "center";
-
-        ctx.fillText(
-            "All transactions must send to: GCASH",
-            width / 2,
-            y
-        );
-
-
-        /* =========================
-           GCASH NUMBER
-        ========================= */
-
-        y += 30;
-
-
-        ctx.fillStyle = ORANGE;
-
-        ctx.fillRect(
-            40,
-            y,
-            1120,
-            75
-        );
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 38px Arial";
-
-        ctx.fillText(
-            "#" + settings.gcashNumber,
-            width / 2,
-            y + 50
-        );
-
-
-        /* =========================
-           GCASH NAME
-        ========================= */
-
-        y += 75;
-
-
-        ctx.fillStyle = "#fed7aa";
-
-        ctx.fillRect(
-            40,
-            y,
-            1120,
-            65
-        );
-
-
-        ctx.fillStyle = "#7c2d12";
-
-        ctx.font =
-            "bold 27px Arial";
-
-        ctx.fillText(
-            settings.gcashName,
-            width / 2,
-            y + 42
-        );
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        y += 100;
-
-
-        ctx.fillStyle = NAVY;
-
-        ctx.fillRect(
-            40,
-            y,
-            1120,
-            55
-        );
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 20px Arial";
-
-        ctx.fillText(
-            "GAME TOP-UP ZONE",
-            width / 2,
-            y + 36
-        );
-
-
-        /* =========================
-           DOWNLOAD
-        ========================= */
-
-        const link =
-            document.createElement("a");
-
-
-        link.download =
-            "MIR4-GOLD-RATE-" +
-            settings.goldRate.toFixed(2) +
-            ".png";
-
-
-        link.href =
-            canvas.toDataURL("image/png");
-
-
-        link.click();
-
-    }
-
-}
-/* =====================================================
-   START
-===================================================== */
-
-initialize();
-
-document
-    .getElementById("token")
-    .addEventListener("change", updateSellerLiveRate);   
-
-function updateAdminRates() {
-
-    const values = {
-
-        adminUsdtRate:
-            settings.usdtPHP,
-
-        adminWemixRate:
-            settings.cryptoRates.WEMIX,
-
-        adminExdra1Rate:
-            settings.cryptoRates.EXDRA1,
-
-        adminExdra2Rate:
-            settings.cryptoRates.EXDRA2,
-
-        adminExdra3Rate:
-            settings.cryptoRates.EXDRA3,
-
-        adminExdra4Rate:
-            settings.cryptoRates.EXDRA4
-
-    };
-
-
-    Object.keys(values).forEach(function(id) {
-
-        const element =
-            document.getElementById(id);
-
-        if (element) {
-
-            element.textContent =
-                "₱" +
-                Number(values[id]).toFixed(2);
-
-        }
-
-    });
-
-}
-
-
-function openGitHubSettings() {
-    window.open(
-        "https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-settings.yml",
-        "_blank"
-    );
-}
-
-function openGitHubAnnouncement() {
-
-    window.open(
-        "https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-announcement.yml",
-        "_blank"
-    );
-
-}
-   
-
 </script>
-
-
-
-
-    
-
 
 </body>
 </html>
