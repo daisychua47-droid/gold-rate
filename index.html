@@ -636,7 +636,7 @@ function updateAdminRates() {
 }
 
 // ==========================================
-// PNG POSTER GENERATORS (EXACT FORMAT MATCH)
+// FIXED POSTER GENERATORS (EXACT LAYOUT MATCH)
 // ==========================================
 function generatePoster() {
     const canvas = document.createElement("canvas");
@@ -644,9 +644,11 @@ function generatePoster() {
     canvas.height = 1000;
     const ctx = canvas.getContext("2d");
 
+    // Background
     ctx.fillStyle = "#172554";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Top gold stripe
     ctx.fillStyle = "#f4b400";
     ctx.fillRect(0, 0, canvas.width, 12);
 
@@ -655,14 +657,15 @@ function generatePoster() {
     logoImg.src = "./GAMETOPUPZONE LOGO.png";
     logoImg.onload = function() {
         ctx.drawImage(logoImg, 40, 25, 75, 75);
-        drawPosterContent(ctx, canvas);
+        renderGoldPoster(ctx, canvas);
     };
     logoImg.onerror = function() {
-        drawPosterContent(ctx, canvas);
+        renderGoldPoster(ctx, canvas);
     };
 }
 
-function drawPosterContent(ctx, canvas) {
+function renderGoldPoster(ctx, canvas) {
+    // Header Text
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 26px Arial";
     ctx.textAlign = "center";
@@ -678,13 +681,14 @@ function drawPosterContent(ctx, canvas) {
 
     // Rate Box
     ctx.fillStyle = "#ffffff";
-    ctx.roundRect(50, 115, 700, 90, 8);
-    ctx.fill();
+    ctx.fillRect(50, 115, 700, 90);
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.strokeRect(50, 115, 700, 90);
 
     ctx.fillStyle = "#172554";
     ctx.font = "bold 22px Arial";
     ctx.textAlign = "left";
-    ctx.fillText("RATE", 80, 172);
+    ctx.fillText("RATE", 80, 170);
 
     ctx.fillStyle = "#fff8dc";
     ctx.fillRect(400, 115, 350, 90);
@@ -696,8 +700,7 @@ function drawPosterContent(ctx, canvas) {
 
     // Table Header
     ctx.fillStyle = "#172554";
-    ctx.roundRect(50, 225, 700, 42, [8, 8, 0, 0]);
-    ctx.fill();
+    ctx.fillRect(50, 225, 700, 42);
 
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 16px Arial";
@@ -725,31 +728,30 @@ function drawPosterContent(ctx, canvas) {
     });
 
     startY += 12;
-    ctx.fillStyle = "#64748b";
+    ctx.fillStyle = "#cbd5e1";
     ctx.font = "italic 13px Arial";
     ctx.textAlign = "center";
     ctx.fillText("All transactions must send to: GCASH", canvas.width / 2, startY + 15);
 
+    // GCash Box Orange
     startY += 28;
     ctx.fillStyle = "#ea580c";
-    ctx.roundRect(50, startY, 700, 48, [8, 8, 0, 0]);
-    ctx.fill();
+    ctx.fillRect(50, startY, 700, 48);
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 19px Arial";
     ctx.fillText("#" + settings.gcashNumber, canvas.width / 2, startY + 31);
 
     startY += 48;
     ctx.fillStyle = "#fed7aa";
-    ctx.roundRect(50, startY, 700, 42, [0, 0, 8, 8]);
-    ctx.fill();
+    ctx.fillRect(50, startY, 700, 42);
     ctx.fillStyle = "#7c2d12";
     ctx.font = "bold 15px Arial";
     ctx.fillText(settings.gcashName, canvas.width / 2, startY + 27);
 
+    // Footer
     startY += 55;
     ctx.fillStyle = "#172554";
-    ctx.roundRect(50, startY, 700, 38, 6);
-    ctx.fill();
+    ctx.fillRect(50, startY, 700, 38);
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 13px Arial";
     ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, startY + 24);
@@ -774,14 +776,14 @@ function generatePackagePoster() {
     logoImg.src = "./GAMETOPUPZONE LOGO.png";
     logoImg.onload = function() {
         ctx.drawImage(logoImg, 40, 25, 75, 75);
-        drawPackagePosterContent(ctx, canvas);
+        renderPackagePoster(ctx, canvas);
     };
     logoImg.onerror = function() {
-        drawPackagePosterContent(ctx, canvas);
+        renderPackagePoster(ctx, canvas);
     };
 }
 
-function drawPackagePosterContent(ctx, canvas) {
+function renderPackagePoster(ctx, canvas) {
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 25px Arial";
     ctx.textAlign = "center";
@@ -797,8 +799,9 @@ function drawPackagePosterContent(ctx, canvas) {
 
     // USDT Box
     ctx.fillStyle = "#ffffff";
-    ctx.roundRect(50, 115, 390, 65, 8);
-    ctx.fill();
+    ctx.fillRect(50, 115, 390, 65);
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.strokeRect(50, 115, 390, 65);
 
     ctx.fillStyle = "#172554";
     ctx.font = "bold 15px Arial";
@@ -815,8 +818,9 @@ function drawPackagePosterContent(ctx, canvas) {
 
     // HOW TO BUY BOX (Right Side)
     ctx.fillStyle = "#ffffff";
-    ctx.roundRect(455, 115, 295, 410, 8);
-    ctx.fill();
+    ctx.fillRect(455, 115, 295, 410);
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.strokeRect(455, 115, 295, 410);
 
     ctx.fillStyle = "#172554";
     ctx.font = "bold 16px Arial";
@@ -833,18 +837,18 @@ function drawPackagePosterContent(ctx, canvas) {
         "4. Wait for admin's signal before opening your account."
     ];
 
-    let stepY = 195;
+    let stepY = 205;
     steps.forEach((s) => {
         ctx.fillStyle = "#172554";
         ctx.font = "bold 11px Arial";
-        ctx.fillText(s, 475, stepY);
+        // Simple text wrap handling for steps
+        wrapText(ctx, s, 475, stepY, 260, 15);
         stepY += 75;
     });
 
     // Package Table Header
     ctx.fillStyle = "#172554";
-    ctx.roundRect(50, 195, 390, 38, [8, 8, 0, 0]);
-    ctx.fill();
+    ctx.fillRect(50, 195, 390, 38);
 
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 13px Arial";
@@ -885,15 +889,14 @@ function drawPackagePosterContent(ctx, canvas) {
     // GCash Box Footer
     startY = 545;
     ctx.fillStyle = "#ffffff";
-    ctx.roundRect(50, startY, 700, 80, 8);
+    ctx.fillRect(50, startY, 700, 80);
     ctx.strokeStyle = "#f4b400";
     ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.fill();
+    ctx.strokeData = true;
+    ctx.strokeRect(50, startY, 700, 80);
 
     ctx.fillStyle = "#2563eb";
-    ctx.roundRect(75, startY + 15, 160, 50, 6);
-    ctx.fill();
+    ctx.fillRect(75, startY + 15, 160, 50);
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 20px Arial";
     ctx.textAlign = "center";
@@ -910,8 +913,7 @@ function drawPackagePosterContent(ctx, canvas) {
     // Bottom Footer Bar
     startY = 645;
     ctx.fillStyle = "#172554";
-    ctx.roundRect(50, startY, 700, 65, 8);
-    ctx.fill();
+    ctx.fillRect(50, startY, 700, 65);
 
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 15px Arial";
@@ -926,6 +928,24 @@ function drawPackagePosterContent(ctx, canvas) {
     ctx.fillText("PLAY MORE • PAY LESS", canvas.width / 2, startY + 56);
 
     triggerDownload(canvas, "MIR4_Discounted_Package_Poster.png");
+}
+
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+    for(let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = context.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    context.fillText(line, x, y);
 }
 
 function triggerDownload(canvas, filename) {
