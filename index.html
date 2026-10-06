@@ -442,7 +442,7 @@ let settings = {
 };
 
 const goldAmounts = [100, 200, 300, 400, 500, 1000, 2000, 3000];
-const packageAmounts = [5, 10, 30, 50, 100]; // Dagdag na $50 package
+const packageAmounts = [5, 10, 30, 50, 100];
 const packageDiscount = 0.73;
 const packageFee = 0.05;
 
@@ -653,6 +653,200 @@ function updateAdminRates() {
         const element = document.getElementById(id);
         if (element) element.textContent = "₱" + Number(values[id]).toFixed(2);
     });
+}
+
+// ==========================================
+// PNG POSTER GENERATORS (HTML Canvas)
+// ==========================================
+function generatePoster() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 1000;
+    const ctx = canvas.getContext("2d");
+
+    // Background
+    ctx.fillStyle = "#172554";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Header border gold
+    ctx.fillStyle = "#f4b400";
+    ctx.fillRect(0, 0, canvas.width, 12);
+
+    // Title
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 32px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, 70);
+
+    ctx.fillStyle = "#cbd5e1";
+    ctx.font = "18px Arial";
+    ctx.fillText("MIR4 GOLD CONVERSION RATE SYSTEM", canvas.width / 2, 105);
+
+    // Rate Box
+    ctx.fillStyle = "#ffffff";
+    ctx.roundRect(50, 140, 700, 110, 10);
+    ctx.fill();
+
+    ctx.fillStyle = "#172554";
+    ctx.font = "bold 22px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("CONVERSION RATE", 80, 205);
+
+    ctx.fillStyle = "#f4b400";
+    ctx.font = "bold 44px Arial";
+    ctx.textAlign = "right";
+    ctx.fillText(settings.goldRate.toFixed(2), 720, 212);
+
+    // Table Header
+    ctx.fillStyle = "#172554";
+    ctx.roundRect(50, 280, 700, 50, [10, 10, 0, 0]);
+    ctx.fill();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GCASH (PHP)", 225, 312);
+    ctx.fillText("GOLD", 575, 312);
+
+    // Table Rows
+    let startY = 330;
+    goldAmounts.forEach((amount, index) => {
+        const gold = Math.round(amount * settings.goldRate);
+        ctx.fillStyle = (index % 2 === 0) ? "#f8fafc" : "#ffffff";
+        ctx.fillRect(50, startY, 700, 48);
+
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.strokeRect(50, startY, 700, 48);
+
+        ctx.fillStyle = "#172554";
+        ctx.font = "bold 18px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("₱" + amount.toLocaleString(), 225, startY + 30);
+        ctx.fillText(gold.toLocaleString(), 575, startY + 30);
+
+        startY += 48;
+    });
+
+    // GCash Box Footer
+    startY += 20;
+    ctx.fillStyle = "#ea580c";
+    ctx.roundRect(50, startY, 700, 55, [10, 10, 0, 0]);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 22px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GCASH: #" + settings.gcashNumber, canvas.width / 2, startY + 36);
+
+    startY += 55;
+    ctx.fillStyle = "#fed7aa";
+    ctx.roundRect(50, startY, 700, 45, [0, 0, 10, 10]);
+    ctx.fill();
+    ctx.fillStyle = "#7c2d12";
+    ctx.font = "bold 18px Arial";
+    ctx.fillText("Name: " + settings.gcashName, canvas.width / 2, startY + 28);
+
+    // Download action
+    const link = document.createElement("a");
+    link.download = "MIR4_Gold_Rate_Poster.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+}
+
+function generatePackagePoster() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 1000;
+    const ctx = canvas.getContext("2d");
+
+    // Background
+    ctx.fillStyle = "#172554";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Header border gold
+    ctx.fillStyle = "#f4b400";
+    ctx.fillRect(0, 0, canvas.width, 12);
+
+    // Title
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 32px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, 70);
+
+    ctx.fillStyle = "#cbd5e1";
+    ctx.font = "18px Arial";
+    ctx.fillText("MIR4 DISCOUNTED PACKAGE RATE", canvas.width / 2, 105);
+
+    // USDT Box
+    ctx.fillStyle = "#ffffff";
+    ctx.roundRect(50, 140, 700, 80, 10);
+    ctx.fill();
+
+    ctx.fillStyle = "#172554";
+    ctx.font = "bold 18px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("USDT / PHP (KUCOIN BASE)", 80, 186);
+
+    ctx.fillStyle = "#ea580c";
+    ctx.font = "bold 28px Arial";
+    ctx.textAlign = "right";
+    ctx.fillText("₱" + Number(settings.usdtPHP).toFixed(2), 720, 190);
+
+    // Table Header
+    ctx.fillStyle = "#172554";
+    ctx.roundRect(50, 245, 700, 50, [10, 10, 0, 0]);
+    ctx.fill();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 18px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("PACKAGE", 200, 277);
+    ctx.fillText("ACTUAL PRICE", 400, 277);
+    ctx.fillText("PAY ONLY", 600, 277);
+
+    // Table Rows
+    let startY = 295;
+    const usdtPHP = Number(settings.usdtPHP);
+    packageAmounts.forEach((packageUSD, index) => {
+        const actualPrice = packageUSD * usdtPHP;
+        const discountedPrice = actualPrice * packageDiscount * (1 + packageFee);
+        const finalPrice = roundPackagePrice(discountedPrice);
+
+        ctx.fillStyle = (index % 2 === 0) ? "#f8fafc" : "#ffffff";
+        ctx.fillRect(50, startY, 700, 65);
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.strokeRect(50, startY, 700, 65);
+
+        ctx.fillStyle = "#172554";
+        ctx.font = "bold 22px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("$" + packageUSD, 200, startY + 40);
+
+        ctx.fillStyle = "#64748b";
+        ctx.font = "bold 18px Arial";
+        ctx.fillText("₱" + Math.round(actualPrice).toLocaleString(), 400, startY + 40);
+
+        ctx.fillStyle = "#ea580c";
+        ctx.font = "bold 24px Arial";
+        ctx.fillText("₱" + finalPrice.toLocaleString(), 600, startY + 42);
+
+        startY += 65;
+    });
+
+    // GCash Box Footer
+    startY += 25;
+    ctx.fillStyle = "#ea580c";
+    ctx.roundRect(50, startY, 700, 50, [10, 10, 0, 0]);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GCASH: #" + settings.gcashNumber + " (" + settings.gcashName + ")", canvas.width / 2, startY + 32);
+
+    // Download action
+    const link = document.createElement("a");
+    link.download = "MIR4_Discounted_Package_Poster.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
 }
 
 function openGitHubSettings() {
