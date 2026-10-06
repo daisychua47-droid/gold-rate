@@ -1008,60 +1008,30 @@ function generatePackagePoster() {
 
     const canvas = document.createElement("canvas");
 
-    // Taller because procedure is included
-    canvas.width = 900;
-    canvas.height = 1250;
+    canvas.width = 1200;
+    canvas.height = 900;
 
     const ctx = canvas.getContext("2d");
 
     // WHITE BACKGROUND
     ctx.fillStyle = "#ffffff";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // GOLD TOP LINE
     ctx.fillStyle = "#f4b400";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        8
-    );
+    ctx.fillRect(0, 0, canvas.width, 8);
 
     const logoImg = new Image();
-
     logoImg.crossOrigin = "anonymous";
     logoImg.src = "./GAMETOPUPZONE LOGO.png";
 
     logoImg.onload = function () {
-
-        drawImageProp(
-            ctx,
-            logoImg,
-            45,
-            25,
-            135,
-            135
-        );
-
-        renderPackagePoster(
-            ctx,
-            canvas
-        );
+        drawImageProp(ctx, logoImg, 45, 25, 135, 135);
+        renderPackagePoster(ctx, canvas);
     };
 
     logoImg.onerror = function () {
-
-        renderPackagePoster(
-            ctx,
-            canvas
-        );
+        renderPackagePoster(ctx, canvas);
     };
 }
 
@@ -1082,21 +1052,20 @@ function renderPackagePoster(ctx, canvas) {
     ctx.textAlign = "center";
 
     ctx.fillStyle = "#172554";
-    ctx.font = "900 37px Arial";
+    ctx.font = "900 42px Arial";
 
     ctx.fillText(
         "MIR4 GOLD RATE SYSTEM",
-        W / 2 + 45,
+        600,
         58
     );
 
-    ctx.fillStyle = "#172554";
-    ctx.font = "900 25px Arial";
+    ctx.font = "900 28px Arial";
 
     ctx.fillText(
         "DISCOUNTED PACKAGE RATE",
-        W / 2 + 45,
-        94
+        600,
+        98
     );
 
     ctx.fillStyle = "#64748b";
@@ -1104,124 +1073,130 @@ function renderPackagePoster(ctx, canvas) {
 
     ctx.fillText(
         "FAST • SAFE • RELIABLE",
-        W / 2 + 45,
-        124
+        600,
+        126
     );
 
 
     // ==========================================
-    // USDT RATE
+    // MAIN COLUMNS
     // ==========================================
 
-    const usdtX = 30;
+    const leftX = 30;
+    const leftW = 700;
+
+    const rightX = 755;
+    const rightW = 415;
+
+
+    // ==========================================
+    // USDT RATE - LEFT
+    // ==========================================
+
     const usdtY = 160;
-    const usdtW = 840;
-    const usdtH = 85;
+    const usdtH = 78;
 
     ctx.strokeStyle = "#dbe2ea";
     ctx.lineWidth = 2;
 
     ctx.strokeRect(
-        usdtX,
+        leftX,
         usdtY,
-        usdtW,
+        leftW,
         usdtH
     );
 
-    // Left
+    // Navy side
     ctx.fillStyle = "#172554";
 
     ctx.fillRect(
-        usdtX,
+        leftX,
         usdtY,
-        390,
+        300,
         usdtH
     );
 
     ctx.textAlign = "left";
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 21px Arial";
+    ctx.font = "900 20px Arial";
 
     ctx.fillText(
         "USDT / PHP",
-        usdtX + 25,
-        usdtY + 36
+        leftX + 20,
+        usdtY + 33
     );
 
     ctx.fillStyle = "#cbd5e1";
-    ctx.font = "600 11px Arial";
+    ctx.font = "600 10px Arial";
 
     ctx.fillText(
         "KUCOIN BASE LIVE RATE",
-        usdtX + 25,
-        usdtY + 59
+        leftX + 20,
+        usdtY + 55
     );
 
-    // Right
+    // Value
     ctx.fillStyle = "#f8fff8";
 
     ctx.fillRect(
-        usdtX + 390,
+        leftX + 300,
         usdtY,
-        450,
+        leftW - 300,
         usdtH
     );
 
     ctx.textAlign = "center";
 
     ctx.fillStyle = "#16a34a";
-    ctx.font = "900 32px Arial";
+    ctx.font = "900 30px Arial";
 
     ctx.fillText(
         "₱" +
         Number(settings.usdtPHP).toFixed(2),
-        usdtX + 615,
-        usdtY + 53
+        leftX + 500,
+        usdtY + 48
     );
 
 
     // ==========================================
-    // PACKAGE TABLE
+    // PACKAGE TABLE - LEFT
     // ==========================================
 
-    const tableX = 30;
-    const tableY = 280;
-    const tableW = 840;
-    const headerH = 60;
-    const rowH = 78;
+    const tableY = 265;
+    const headerH = 55;
+    const rowH = 62;
 
-    // Header
     ctx.fillStyle = "#172554";
 
     ctx.fillRect(
-        tableX,
+        leftX,
         tableY,
-        tableW,
+        leftW,
         headerH
     );
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 22px Arial";
+    ctx.font = "900 18px Arial";
 
     ctx.textAlign = "center";
 
     ctx.fillText(
         "PACKAGE",
-        tableX + 130,
-        tableY + 39
+        leftX + 100,
+        tableY + 35
     );
 
     ctx.fillText(
-        "ACTUAL PRICE",
-        tableX + 400,
-        tableY + 39
+        "ACTUAL",
+        leftX + 330,
+        tableY + 35
     );
 
     ctx.fillText(
         "PAY ONLY",
-        tableX + 700,
-        tableY + 39
+        leftX + 590,
+        tableY + 35
     );
 
 
@@ -1254,16 +1229,16 @@ function renderPackagePoster(ctx, canvas) {
                 index * rowH;
 
 
-            // Row
+            // Row background
             ctx.fillStyle =
                 index % 2 === 0
                     ? "#ffffff"
                     : "#f8fafc";
 
             ctx.fillRect(
-                tableX,
+                leftX,
                 y,
-                tableW,
+                leftW,
                 rowH
             );
 
@@ -1271,9 +1246,9 @@ function renderPackagePoster(ctx, canvas) {
             ctx.lineWidth = 1;
 
             ctx.strokeRect(
-                tableX,
+                leftX,
                 y,
-                tableW,
+                leftW,
                 rowH
             );
 
@@ -1282,12 +1257,12 @@ function renderPackagePoster(ctx, canvas) {
             ctx.textAlign = "center";
 
             ctx.fillStyle = "#172554";
-            ctx.font = "900 25px Arial";
+            ctx.font = "900 21px Arial";
 
             ctx.fillText(
                 "$" + packageUSD,
-                tableX + 130,
-                y + 48
+                leftX + 100,
+                y + 39
             );
 
 
@@ -1299,12 +1274,12 @@ function renderPackagePoster(ctx, canvas) {
                 ).toLocaleString();
 
             ctx.fillStyle = "#94a3b8";
-            ctx.font = "700 20px Arial";
+            ctx.font = "700 16px Arial";
 
             ctx.fillText(
                 actualText,
-                tableX + 400,
-                y + 48
+                leftX + 330,
+                y + 38
             );
 
 
@@ -1315,38 +1290,38 @@ function renderPackagePoster(ctx, canvas) {
                 ).width;
 
             ctx.strokeStyle = "#dc2626";
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 2;
 
             ctx.beginPath();
 
             ctx.moveTo(
-                tableX +
-                    400 -
-                    textWidth / 2 -
-                    5,
-                y + 43
+                leftX +
+                330 -
+                textWidth / 2 -
+                4,
+                y + 34
             );
 
             ctx.lineTo(
-                tableX +
-                    400 +
-                    textWidth / 2 +
-                    5,
-                y + 43
+                leftX +
+                330 +
+                textWidth / 2 +
+                4,
+                y + 34
             );
 
             ctx.stroke();
 
 
-            // PAY ONLY BOX
+            // Pay only
             const payX =
-                tableX + 565;
+                leftX + 455;
 
             const payY =
-                y + 10;
+                y + 7;
 
-            const payW = 250;
-            const payH = 58;
+            const payW = 225;
+            const payH = 48;
 
             ctx.fillStyle = "#fff1df";
 
@@ -1360,50 +1335,49 @@ function renderPackagePoster(ctx, canvas) {
             ctx.textAlign = "left";
 
             ctx.fillStyle = "#a16207";
-            ctx.font = "800 11px Arial";
+            ctx.font = "800 9px Arial";
 
             ctx.fillText(
                 "PAY ONLY",
-                payX + 15,
-                payY + 20
+                payX + 10,
+                payY + 17
             );
 
             ctx.textAlign = "right";
 
             ctx.fillStyle = "#ea580c";
-            ctx.font = "900 27px Arial";
+            ctx.font = "900 21px Arial";
 
             ctx.fillText(
                 "₱" +
                 finalPrice.toLocaleString(),
-                payX + payW - 15,
-                payY + 44
+                payX + payW - 10,
+                payY + 36
             );
         }
     );
 
 
     // ==========================================
-    // GCASH
+    // GCASH - LEFT
     // ==========================================
 
     const gcashY =
         tableY +
         headerH +
         packageAmounts.length *
-            rowH +
-        30;
+        rowH +
+        20;
 
 
-    // Payment note
     ctx.textAlign = "center";
 
     ctx.fillStyle = "#64748b";
-    ctx.font = "italic 16px Arial";
+    ctx.font = "italic 13px Arial";
 
     ctx.fillText(
         "All transactions must send to: GCASH",
-        W / 2,
+        leftX + leftW / 2,
         gcashY
     );
 
@@ -1412,20 +1386,20 @@ function renderPackagePoster(ctx, canvas) {
     ctx.fillStyle = "#ff5a00";
 
     ctx.fillRect(
-        30,
-        gcashY + 25,
-        840,
-        70
+        leftX,
+        gcashY + 15,
+        leftW,
+        58
     );
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 34px Arial";
+    ctx.font = "900 28px Arial";
 
     ctx.fillText(
         "#" +
         settings.gcashNumber,
-        W / 2,
-        gcashY + 72
+        leftX + leftW / 2,
+        gcashY + 53
     );
 
 
@@ -1433,45 +1407,78 @@ function renderPackagePoster(ctx, canvas) {
     ctx.fillStyle = "#ffdbad";
 
     ctx.fillRect(
-        30,
-        gcashY + 95,
-        840,
-        60
+        leftX,
+        gcashY + 73,
+        leftW,
+        48
     );
 
     ctx.fillStyle = "#7c2d12";
-    ctx.font = "900 22px Arial";
+    ctx.font = "900 18px Arial";
 
     ctx.fillText(
         settings.gcashName,
-        W / 2,
-        gcashY + 134
+        leftX + leftW / 2,
+        gcashY + 104
     );
 
 
     // ==========================================
-    // HOW TO BUY HEADER
+    // HOW TO BUY - RIGHT SIDE
     // ==========================================
 
-    const procedureY =
-        gcashY + 185;
+    const procedureY = 160;
 
+    // Main procedure card
+    ctx.fillStyle = "#ffffff";
+
+    ctx.fillRect(
+        rightX,
+        procedureY,
+        rightW,
+        690
+    );
+
+    ctx.strokeStyle = "#dbe2ea";
+    ctx.lineWidth = 2;
+
+    ctx.strokeRect(
+        rightX,
+        procedureY,
+        rightW,
+        690
+    );
+
+
+    // Header
     ctx.fillStyle = "#172554";
 
     ctx.fillRect(
-        30,
+        rightX,
         procedureY,
-        840,
-        65
+        rightW,
+        70
     );
 
+    ctx.textAlign = "center";
+
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 22px Arial";
+    ctx.font = "900 23px Arial";
 
     ctx.fillText(
         "HOW TO BUY",
-        W / 2,
-        procedureY + 41
+        rightX + rightW / 2,
+        procedureY + 44
+    );
+
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "600 11px Arial";
+
+    ctx.fillText(
+        "FOLLOW THESE SIMPLE STEPS",
+        rightX + rightW / 2,
+        procedureY + 95
     );
 
 
@@ -1503,21 +1510,20 @@ function renderPackagePoster(ctx, canvas) {
     ];
 
 
-    let stepY =
-        procedureY + 85;
+    let stepY = procedureY + 130;
 
 
-    steps.forEach((step) => {
+    steps.forEach((step, index) => {
 
-        // Circle
+        // Number circle
         ctx.fillStyle = "#172554";
 
         ctx.beginPath();
 
         ctx.arc(
-            75,
-            stepY + 25,
-            25,
+            rightX + 48,
+            stepY + 20,
+            22,
             0,
             Math.PI * 2
         );
@@ -1525,16 +1531,15 @@ function renderPackagePoster(ctx, canvas) {
         ctx.fill();
 
 
-        // Number
         ctx.textAlign = "center";
 
         ctx.fillStyle = "#ffffff";
-        ctx.font = "900 17px Arial";
+        ctx.font = "900 15px Arial";
 
         ctx.fillText(
             step.number,
-            75,
-            stepY + 31
+            rightX + 48,
+            stepY + 26
         );
 
 
@@ -1542,41 +1547,44 @@ function renderPackagePoster(ctx, canvas) {
         ctx.textAlign = "left";
 
         ctx.fillStyle = "#172554";
-        ctx.font = "900 16px Arial";
+        ctx.font = "900 14px Arial";
 
         ctx.fillText(
             step.title,
-            120,
-            stepY + 18
+            rightX + 85,
+            stepY + 14
         );
 
 
         // Description
         ctx.fillStyle = "#64748b";
-        ctx.font = "600 13px Arial";
+        ctx.font = "600 11px Arial";
 
         wrapText(
             ctx,
             step.text,
-            120,
-            stepY + 41,
-            700,
-            19
+            rightX + 85,
+            stepY + 36,
+            290,
+            16
         );
 
 
         // Separator
-        ctx.fillStyle = "#e2e8f0";
+        if (index < steps.length - 1) {
 
-        ctx.fillRect(
-            50,
-            stepY + 76,
-            800,
-            1
-        );
+            ctx.fillStyle = "#e2e8f0";
+
+            ctx.fillRect(
+                rightX + 25,
+                stepY + 82,
+                rightW - 50,
+                1
+            );
+        }
 
 
-        stepY += 90;
+        stepY += 125;
     });
 
 
@@ -1584,36 +1592,24 @@ function renderPackagePoster(ctx, canvas) {
     // FOOTER
     // ==========================================
 
-    const footerY =
-        stepY + 5;
-
     ctx.fillStyle = "#f4b400";
 
     ctx.fillRect(
         30,
-        footerY,
-        840,
+        850,
+        1140,
         3
     );
 
     ctx.textAlign = "center";
 
     ctx.fillStyle = "#172554";
-    ctx.font = "900 17px Arial";
+    ctx.font = "900 16px Arial";
 
     ctx.fillText(
-        "GAME TOP-UP ZONE",
+        "GAME TOP-UP ZONE • FAST • SAFE • RELIABLE",
         W / 2,
-        footerY + 32
-    );
-
-    ctx.fillStyle = "#64748b";
-    ctx.font = "600 12px Arial";
-
-    ctx.fillText(
-        "FAST • SAFE • RELIABLE",
-        W / 2,
-        footerY + 52
+        880
     );
 
 
@@ -1626,7 +1622,6 @@ function renderPackagePoster(ctx, canvas) {
         "MIR4_Discounted_Package_Poster.png"
     );
 }
-
 
 // ==========================================
 // TEXT WRAPPER
