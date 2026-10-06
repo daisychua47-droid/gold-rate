@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MIR4 Gold Rate System</title>
 <style>
-/* =====================================================
-   PROFESSIONAL GAME TOP-UP THEME
-===================================================== */
 :root {
     --navy: #172554;
     --navy-dark: #0f172a;
@@ -52,7 +49,6 @@ header p { margin-top: 6px; font-size: 13px; color: #cbd5e1; }
 
 .container { max-width: 1150px; margin: 30px auto; padding: 0 20px; }
 
-/* SECTIONS & DASHBOARD */
 .section { display: none; background: var(--white); padding: 28px; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); }
 .section.active { display: block; }
 .section h2 { color: var(--navy); font-size: 23px; font-weight: 800; }
@@ -92,7 +88,6 @@ header p { margin-top: 6px; font-size: 13px; color: #cbd5e1; }
 .dashboard-poster-btn { width: 100%; margin-top: 12px; padding: 11px; border: 1px solid var(--navy); border-radius: 6px; background: var(--navy); color: white; font-weight: 700; cursor: pointer; transition: .15s; }
 .dashboard-poster-btn:hover { background: var(--blue); border-color: var(--blue); }
 
-/* LIVE RATES & SELLER */
 .live-rate-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
 .live-rate-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
 .live-rate-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border); font-size: 13px; }
@@ -126,22 +121,15 @@ footer { text-align: center; padding: 30px; color: var(--muted); font-size: 13px
 
 .site-logo { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); width: 100px; height: auto; }
 
-/* SOCIAL BAR */
 .social-bar { position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px; padding: 10px 15px; background: #172554; border-top: 2px solid #f4b400; box-shadow: 0 -3px 12px rgba(15, 23, 42, 0.12); z-index: 9999; }
 .social-bar a { display: inline-block; padding: 8px 16px; color: white; text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 6px; background: rgba(255,255,255,0.08); transition: .15s; }
 .social-bar a:hover { background: #2563eb; }
 .social-bar a b { color: #f4b400; }
 
-/* ANNOUNCEMENTS */
 .announcement-box { margin-bottom: 18px; border: 1px solid var(--border); border-radius: 9px; overflow: hidden; box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06); }
 .announcement-title { padding: 10px 14px; text-align: center; color: white; background: var(--navy); font-size: 15px; font-weight: 800; }
 .announcement-message { padding: 13px 15px; text-align: center; background: #fff; color: var(--text); font-size: 14px; font-weight: 600; line-height: 1.6; }
-.announcement-box.promo .announcement-title { background: var(--gold); color: var(--navy); }
-.announcement-box.server .announcement-title { background: var(--orange); }
-.announcement-box.close .announcement-title { background: var(--red); }
-.announcement-box.maintenance .announcement-title { background: #475569; }
 
-/* DISCOUNTED PACKAGE & HOW TO BUY */
 .package-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr); gap: 22px; align-items: start; }
 .package-rate-panel { min-width: 0; }
 .package-usdt-box { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-bottom: 18px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
@@ -175,41 +163,33 @@ footer { text-align: center; padding: 30px; color: var(--muted); font-size: 13px
 .procedure-content h4 { margin: 0 0 5px; font-size: 13px; font-weight: 800; color: #111827; }
 .procedure-content p { margin: 0; font-size: 13px; line-height: 1.55; color: #6b7280; }
 
-/* RESPONSIVE STYLES */
 @media (max-width: 950px) {
     .dashboard { grid-template-columns: 155px minmax(350px, 1fr); }
     .dashboard-right { grid-column: 1 / -1; }
     .live-rate-box { display: grid; grid-template-columns: repeat(2, 1fr); }
-    .live-rate-row { border-right: 1px solid var(--border); }
     .package-layout { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr); gap: 15px; }
 }
 
 @media (max-width: 700px) {
     header { padding: 18px 12px; }
     header h1 { font-size: 21px; }
-    header p { font-size: 12px; }
-    .container { margin: 15px auto; padding: 0 10px; }
     .dashboard { display: flex; flex-direction: column; gap: 12px; }
     .dashboard-left { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 10px; }
-    .dashboard-menu-title { grid-column: 1 / -1; margin-bottom: 1px; }
-    .dashboard-btn { margin-bottom: 0; padding: 11px 5px; font-size: 12px; }
-    .social-bar { gap: 6px; padding: 8px 10px; }
-    .social-bar a { flex: 1; text-align: center; padding: 8px 5px; font-size: 11px; }
     .package-layout { display: flex; flex-direction: column; gap: 18px; }
 }
 
 @media (max-width: 600px) {
-    header { display: grid !important; grid-template-columns: 82px minmax(0, 1fr) !important; min-height: 110px !important; padding: 12px 10px !important; align-items: center !important; overflow: hidden !important; }
-    header .site-logo { position: static !important; display: block !important; width: 68px !important; max-width: 68px !important; height: auto !important; margin: 0 auto !important; transform: none !important; grid-column: 1 !important; grid-row: 1 / span 2 !important; }
-    header h1 { grid-column: 2 !important; grid-row: 1 !important; width: 100% !important; margin: 0 !important; font-size: 19px !important; line-height: 1.15 !important; text-align: center !important; }
-    header p { grid-column: 2 !important; grid-row: 2 !important; width: 100% !important; margin: 4px 0 0 !important; font-size: 10px !important; line-height: 1.2 !important; text-align: center !important; }
+    header { display: grid !important; grid-template-columns: 82px minmax(0, 1fr) !important; min-height: 110px !important; padding: 12px 10px !important; align-items: center !important; }
+    header .site-logo { position: static !important; display: block !important; width: 68px !important; margin: 0 auto !important; grid-column: 1 !important; grid-row: 1 / span 2 !important; }
+    header h1 { grid-column: 2 !important; font-size: 19px !important; text-align: center !important; }
+    header p { grid-column: 2 !important; font-size: 10px !important; text-align: center !important; }
 }
 </style>
 </head>
 <body>
 
 <header>
-    <img src="./GAMETOPUPZONE LOGO.png" alt="GAME TOP-UP ZONE" class="site-logo">
+    <img src="./GAMETOPUPZONE LOGO.png" alt="GAME TOP-UP ZONE" class="site-logo" id="headerLogoImg">
     <h1>MIR4 GOLD RATE SYSTEM</h1>
     <p>Gold Rate & Crypto Selling Calculator</p>
 </header>
@@ -656,7 +636,7 @@ function updateAdminRates() {
 }
 
 // ==========================================
-// PNG POSTER GENERATORS (HTML Canvas)
+// PNG POSTER GENERATORS (EXACT FORMAT MATCH)
 // ==========================================
 function generatePoster() {
     const canvas = document.createElement("canvas");
@@ -664,147 +644,217 @@ function generatePoster() {
     canvas.height = 1000;
     const ctx = canvas.getContext("2d");
 
-    // Background
     ctx.fillStyle = "#172554";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Header border gold
     ctx.fillStyle = "#f4b400";
     ctx.fillRect(0, 0, canvas.width, 12);
 
-    // Title
+    const logoImg = new Image();
+    logoImg.crossOrigin = "anonymous";
+    logoImg.src = "./GAMETOPUPZONE LOGO.png";
+    logoImg.onload = function() {
+        ctx.drawImage(logoImg, 40, 25, 75, 75);
+        drawPosterContent(ctx, canvas);
+    };
+    logoImg.onerror = function() {
+        drawPosterContent(ctx, canvas);
+    };
+}
+
+function drawPosterContent(ctx, canvas) {
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 32px Arial";
+    ctx.font = "bold 26px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, 70);
+    ctx.fillText("MIR4 GOLD RATE SYSTEM", canvas.width / 2 + 30, 50);
+
+    ctx.fillStyle = "#f4b400";
+    ctx.font = "bold 15px Arial";
+    ctx.fillText("GOLD CONVERSION RATE", canvas.width / 2 + 30, 74);
 
     ctx.fillStyle = "#cbd5e1";
-    ctx.font = "18px Arial";
-    ctx.fillText("MIR4 GOLD CONVERSION RATE SYSTEM", canvas.width / 2, 105);
+    ctx.font = "12px Arial";
+    ctx.fillText("Game Top-Up Zone", canvas.width / 2 + 30, 93);
 
     // Rate Box
     ctx.fillStyle = "#ffffff";
-    ctx.roundRect(50, 140, 700, 110, 10);
+    ctx.roundRect(50, 115, 700, 90, 8);
     ctx.fill();
 
     ctx.fillStyle = "#172554";
     ctx.font = "bold 22px Arial";
     ctx.textAlign = "left";
-    ctx.fillText("CONVERSION RATE", 80, 205);
+    ctx.fillText("RATE", 80, 172);
 
-    ctx.fillStyle = "#f4b400";
-    ctx.font = "bold 44px Arial";
-    ctx.textAlign = "right";
-    ctx.fillText(settings.goldRate.toFixed(2), 720, 212);
+    ctx.fillStyle = "#fff8dc";
+    ctx.fillRect(400, 115, 350, 90);
+
+    ctx.fillStyle = "#172554";
+    ctx.font = "bold 38px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(settings.goldRate.toFixed(2), 575, 174);
 
     // Table Header
     ctx.fillStyle = "#172554";
-    ctx.roundRect(50, 280, 700, 50, [10, 10, 0, 0]);
+    ctx.roundRect(50, 225, 700, 42, [8, 8, 0, 0]);
     ctx.fill();
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 20px Arial";
+    ctx.font = "bold 16px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("GCASH (PHP)", 225, 312);
-    ctx.fillText("GOLD", 575, 312);
+    ctx.fillText("GCASH", 225, 252);
+    ctx.fillText("GOLD", 575, 252);
 
     // Table Rows
-    let startY = 330;
+    let startY = 267;
     goldAmounts.forEach((amount, index) => {
         const gold = Math.round(amount * settings.goldRate);
         ctx.fillStyle = (index % 2 === 0) ? "#f8fafc" : "#ffffff";
-        ctx.fillRect(50, startY, 700, 48);
+        ctx.fillRect(50, startY, 700, 44);
 
         ctx.strokeStyle = "#e2e8f0";
-        ctx.strokeRect(50, startY, 700, 48);
+        ctx.strokeRect(50, startY, 700, 44);
 
         ctx.fillStyle = "#172554";
-        ctx.font = "bold 18px Arial";
+        ctx.font = "bold 16px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("₱" + amount.toLocaleString(), 225, startY + 30);
-        ctx.fillText(gold.toLocaleString(), 575, startY + 30);
+        ctx.fillText(amount.toLocaleString(), 225, startY + 28);
+        ctx.fillText(gold.toLocaleString(), 575, startY + 28);
 
-        startY += 48;
+        startY += 44;
     });
 
-    // GCash Box Footer
-    startY += 20;
+    startY += 12;
+    ctx.fillStyle = "#64748b";
+    ctx.font = "italic 13px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("All transactions must send to: GCASH", canvas.width / 2, startY + 15);
+
+    startY += 28;
     ctx.fillStyle = "#ea580c";
-    ctx.roundRect(50, startY, 700, 55, [10, 10, 0, 0]);
+    ctx.roundRect(50, startY, 700, 48, [8, 8, 0, 0]);
     ctx.fill();
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 22px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("GCASH: #" + settings.gcashNumber, canvas.width / 2, startY + 36);
+    ctx.font = "bold 19px Arial";
+    ctx.fillText("#" + settings.gcashNumber, canvas.width / 2, startY + 31);
 
-    startY += 55;
+    startY += 48;
     ctx.fillStyle = "#fed7aa";
-    ctx.roundRect(50, startY, 700, 45, [0, 0, 10, 10]);
+    ctx.roundRect(50, startY, 700, 42, [0, 0, 8, 8]);
     ctx.fill();
     ctx.fillStyle = "#7c2d12";
-    ctx.font = "bold 18px Arial";
-    ctx.fillText("Name: " + settings.gcashName, canvas.width / 2, startY + 28);
+    ctx.font = "bold 15px Arial";
+    ctx.fillText(settings.gcashName, canvas.width / 2, startY + 27);
 
-    // Download action
-    const link = document.createElement("a");
-    link.download = "MIR4_Gold_Rate_Poster.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    startY += 55;
+    ctx.fillStyle = "#172554";
+    ctx.roundRect(50, startY, 700, 38, 6);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 13px Arial";
+    ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, startY + 24);
+
+    triggerDownload(canvas, "MIR4-GOLD-RATE-" + settings.goldRate.toFixed(2) + ".png");
 }
 
 function generatePackagePoster() {
     const canvas = document.createElement("canvas");
     canvas.width = 800;
-    canvas.height = 1000;
+    canvas.height = 950;
     const ctx = canvas.getContext("2d");
 
-    // Background
     ctx.fillStyle = "#172554";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Header border gold
     ctx.fillStyle = "#f4b400";
     ctx.fillRect(0, 0, canvas.width, 12);
 
-    // Title
+    const logoImg = new Image();
+    logoImg.crossOrigin = "anonymous";
+    logoImg.src = "./GAMETOPUPZONE LOGO.png";
+    logoImg.onload = function() {
+        ctx.drawImage(logoImg, 40, 25, 75, 75);
+        drawPackagePosterContent(ctx, canvas);
+    };
+    logoImg.onerror = function() {
+        drawPackagePosterContent(ctx, canvas);
+    };
+}
+
+function drawPackagePosterContent(ctx, canvas) {
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 32px Arial";
+    ctx.font = "bold 25px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, 70);
+    ctx.fillText("MIR4 GOLD RATE SYSTEM", canvas.width / 2 + 30, 48);
+
+    ctx.fillStyle = "#f4b400";
+    ctx.font = "bold 15px Arial";
+    ctx.fillText("DISCOUNTED PACKAGE RATE", canvas.width / 2 + 30, 72);
 
     ctx.fillStyle = "#cbd5e1";
-    ctx.font = "18px Arial";
-    ctx.fillText("MIR4 DISCOUNTED PACKAGE RATE", canvas.width / 2, 105);
+    ctx.font = "12px Arial";
+    ctx.fillText("FAST • SAFE • RELIABLE", canvas.width / 2 + 30, 92);
 
     // USDT Box
     ctx.fillStyle = "#ffffff";
-    ctx.roundRect(50, 140, 700, 80, 10);
+    ctx.roundRect(50, 115, 390, 65, 8);
     ctx.fill();
 
     ctx.fillStyle = "#172554";
-    ctx.font = "bold 18px Arial";
+    ctx.font = "bold 15px Arial";
     ctx.textAlign = "left";
-    ctx.fillText("USDT / PHP (KUCOIN BASE)", 80, 186);
+    ctx.fillText("USDT / PHP", 70, 142);
+    ctx.fillStyle = "#64748b";
+    ctx.font = "11px Arial";
+    ctx.fillText("KUCOIN BASE", 70, 160);
 
-    ctx.fillStyle = "#ea580c";
-    ctx.font = "bold 28px Arial";
+    ctx.fillStyle = "#16a34a";
+    ctx.font = "bold 22px Arial";
     ctx.textAlign = "right";
-    ctx.fillText("₱" + Number(settings.usdtPHP).toFixed(2), 720, 190);
+    ctx.fillText("₱" + Number(settings.usdtPHP).toFixed(2), 420, 155);
 
-    // Table Header
+    // HOW TO BUY BOX (Right Side)
+    ctx.fillStyle = "#ffffff";
+    ctx.roundRect(455, 115, 295, 410, 8);
+    ctx.fill();
+
     ctx.fillStyle = "#172554";
-    ctx.roundRect(50, 245, 700, 50, [10, 10, 0, 0]);
+    ctx.font = "bold 16px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("🛒 HOW TO BUY", 475, 148);
+    ctx.fillStyle = "#64748b";
+    ctx.font = "11px Arial";
+    ctx.fillText("FOLLOW THESE SIMPLE STEPS", 475, 166);
+
+    const steps = [
+        "1. Screenshot the package you want and wait for admin to reply.",
+        "2. Send the payment after admin confirms the price.",
+        "3. Send your account details after payment is confirmed.",
+        "4. Wait for admin's signal before opening your account."
+    ];
+
+    let stepY = 195;
+    steps.forEach((s) => {
+        ctx.fillStyle = "#172554";
+        ctx.font = "bold 11px Arial";
+        ctx.fillText(s, 475, stepY);
+        stepY += 75;
+    });
+
+    // Package Table Header
+    ctx.fillStyle = "#172554";
+    ctx.roundRect(50, 195, 390, 38, [8, 8, 0, 0]);
     ctx.fill();
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 18px Arial";
+    ctx.font = "bold 13px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("PACKAGE", 200, 277);
-    ctx.fillText("ACTUAL PRICE", 400, 277);
-    ctx.fillText("PAY ONLY", 600, 277);
+    ctx.fillText("PACKAGE", 100, 219);
+    ctx.fillText("ACTUAL PRICE", 215, 219);
+    ctx.fillText("PAY ONLY", 355, 219);
 
-    // Table Rows
-    let startY = 295;
+    // Package Rows
+    let startY = 233;
     const usdtPHP = Number(settings.usdtPHP);
     packageAmounts.forEach((packageUSD, index) => {
         const actualPrice = packageUSD * usdtPHP;
@@ -812,39 +862,75 @@ function generatePackagePoster() {
         const finalPrice = roundPackagePrice(discountedPrice);
 
         ctx.fillStyle = (index % 2 === 0) ? "#f8fafc" : "#ffffff";
-        ctx.fillRect(50, startY, 700, 65);
+        ctx.fillRect(50, startY, 390, 48);
         ctx.strokeStyle = "#e2e8f0";
-        ctx.strokeRect(50, startY, 700, 65);
+        ctx.strokeRect(50, startY, 390, 48);
 
         ctx.fillStyle = "#172554";
-        ctx.font = "bold 22px Arial";
+        ctx.font = "bold 15px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("$" + packageUSD, 200, startY + 40);
+        ctx.fillText("$" + packageUSD, 100, startY + 30);
 
         ctx.fillStyle = "#64748b";
-        ctx.font = "bold 18px Arial";
-        ctx.fillText("₱" + Math.round(actualPrice).toLocaleString(), 400, startY + 40);
+        ctx.font = "bold 13px Arial";
+        ctx.fillText("₱" + Math.round(actualPrice).toLocaleString(), 215, startY + 30);
 
         ctx.fillStyle = "#ea580c";
-        ctx.font = "bold 24px Arial";
-        ctx.fillText("₱" + finalPrice.toLocaleString(), 600, startY + 42);
+        ctx.font = "bold 16px Arial";
+        ctx.fillText("₱" + finalPrice.toLocaleString(), 355, startY + 31);
 
-        startY += 65;
+        startY += 48;
     });
 
     // GCash Box Footer
-    startY += 25;
-    ctx.fillStyle = "#ea580c";
-    ctx.roundRect(50, startY, 700, 50, [10, 10, 0, 0]);
+    startY = 545;
+    ctx.fillStyle = "#ffffff";
+    ctx.roundRect(50, startY, 700, 80, 8);
+    ctx.strokeStyle = "#f4b400";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fill();
+
+    ctx.fillStyle = "#2563eb";
+    ctx.roundRect(75, startY + 15, 160, 50, 6);
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 20px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("GCASH: #" + settings.gcashNumber + " (" + settings.gcashName + ")", canvas.width / 2, startY + 32);
+    ctx.fillText("GCash", 155, startY + 48);
 
-    // Download action
+    ctx.fillStyle = "#ea580c";
+    ctx.font = "bold 22px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("#" + settings.gcashNumber, 260, startY + 40);
+    ctx.fillStyle = "#172554";
+    ctx.font = "bold 14px Arial";
+    ctx.fillText(settings.gcashName, 260, startY + 62);
+
+    // Bottom Footer Bar
+    startY = 645;
+    ctx.fillStyle = "#172554";
+    ctx.roundRect(50, startY, 700, 65, 8);
+    ctx.fill();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 15px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GAME TOP-UP ZONE", canvas.width / 2, startY + 23);
+
+    ctx.fillStyle = "#cbd5e1";
+    ctx.font = "11px Arial";
+    ctx.fillText("FAST • SAFE • RELIABLE", canvas.width / 2, startY + 41);
+    ctx.fillStyle = "#f4b400";
+    ctx.font = "bold 11px Arial";
+    ctx.fillText("PLAY MORE • PAY LESS", canvas.width / 2, startY + 56);
+
+    triggerDownload(canvas, "MIR4_Discounted_Package_Poster.png");
+}
+
+function triggerDownload(canvas, filename) {
     const link = document.createElement("a");
-    link.download = "MIR4_Discounted_Package_Poster.png";
+    link.download = filename;
     link.href = canvas.toDataURL("image/png");
     link.click();
 }
