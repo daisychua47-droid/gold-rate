@@ -649,14 +649,16 @@ function drawImageProp(ctx, img, x, y, maxW, maxH) {
     
 // ==========================================
 // POSTER GENERATORS
-// WHITE / CLEAN / LARGE TEXT VERSION
+// WHITE • CLEAN • LARGE • FULL DETAILS
 // ==========================================
 
 function generatePoster() {
+
     const canvas = document.createElement("canvas");
 
+    // Increased height so NOTHING gets cut
     canvas.width = 900;
-    canvas.height = 1050;
+    canvas.height = 1220;
 
     const ctx = canvas.getContext("2d");
 
@@ -683,6 +685,10 @@ function generatePoster() {
 }
 
 
+// ==========================================
+// GOLD POSTER
+// ==========================================
+
 function renderGoldPoster(ctx, canvas) {
 
     const W = canvas.width;
@@ -695,6 +701,7 @@ function renderGoldPoster(ctx, canvas) {
 
     ctx.fillStyle = "#172554";
     ctx.font = "900 38px Arial";
+
     ctx.fillText(
         "MIR4 GOLD RATE SYSTEM",
         W / 2 + 45,
@@ -703,18 +710,20 @@ function renderGoldPoster(ctx, canvas) {
 
     ctx.fillStyle = "#172554";
     ctx.font = "900 25px Arial";
+
     ctx.fillText(
         "GOLD CONVERSION RATE",
         W / 2 + 45,
-        92
+        94
     );
 
     ctx.fillStyle = "#64748b";
     ctx.font = "600 17px Arial";
+
     ctx.fillText(
         "Game Top-Up Zone",
         W / 2 + 45,
-        122
+        124
     );
 
 
@@ -727,13 +736,19 @@ function renderGoldPoster(ctx, canvas) {
     const rateW = 840;
     const rateH = 115;
 
-    // Border
     ctx.strokeStyle = "#172554";
     ctx.lineWidth = 3;
-    ctx.strokeRect(rateX, rateY, rateW, rateH);
+
+    ctx.strokeRect(
+        rateX,
+        rateY,
+        rateW,
+        rateH
+    );
 
     // Left
     ctx.fillStyle = "#172554";
+
     ctx.fillRect(
         rateX,
         rateY,
@@ -743,6 +758,7 @@ function renderGoldPoster(ctx, canvas) {
 
     // Right
     ctx.fillStyle = "#fff8dc";
+
     ctx.fillRect(
         rateX + 420,
         rateY,
@@ -751,19 +767,19 @@ function renderGoldPoster(ctx, canvas) {
     );
 
     // RATE
-    ctx.textAlign = "center";
-
     ctx.fillStyle = "#ffffff";
     ctx.font = "900 40px Arial";
+
     ctx.fillText(
         "RATE",
         rateX + 210,
         rateY + 72
     );
 
-    // Rate value
+    // VALUE
     ctx.fillStyle = "#172554";
     ctx.font = "900 56px Arial";
+
     ctx.fillText(
         settings.goldRate.toFixed(2),
         rateX + 630,
@@ -781,16 +797,15 @@ function renderGoldPoster(ctx, canvas) {
     const headerH = 60;
     const rowH = 67;
 
-    // Table header
+    // Header
     ctx.fillStyle = "#172554";
+
     ctx.fillRect(
         tableX,
         tableY,
         tableW,
         headerH
     );
-
-    ctx.textAlign = "center";
 
     ctx.fillStyle = "#ffffff";
     ctx.font = "900 27px Arial";
@@ -811,16 +826,16 @@ function renderGoldPoster(ctx, canvas) {
     // Rows
     goldAmounts.forEach((amount, index) => {
 
-        const gold = Math.round(
-            amount * settings.goldRate
-        );
+        const gold =
+            Math.round(
+                amount * settings.goldRate
+            );
 
         const y =
             tableY +
             headerH +
             index * rowH;
 
-        // Alternating white/light gray
         ctx.fillStyle =
             index % 2 === 0
                 ? "#ffffff"
@@ -833,7 +848,6 @@ function renderGoldPoster(ctx, canvas) {
             rowH
         );
 
-        // Row border
         ctx.strokeStyle = "#dbe2ea";
         ctx.lineWidth = 1;
 
@@ -887,48 +901,50 @@ function renderGoldPoster(ctx, canvas) {
 
 
     // ==========================================
-    // GCASH PAYMENT BOX
+    // GCASH NUMBER
     // ==========================================
 
     const gcashY = paymentY + 25;
 
-    // Number
     ctx.fillStyle = "#ff5a00";
 
     ctx.fillRect(
         30,
         gcashY,
         840,
-        65
+        70
     );
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 32px Arial";
+    ctx.font = "900 34px Arial";
 
     ctx.fillText(
         "#" + settings.gcashNumber,
         W / 2,
-        gcashY + 44
+        gcashY + 47
     );
 
 
-    // Name
+    // ==========================================
+    // GCASH NAME
+    // ==========================================
+
     ctx.fillStyle = "#ffdbad";
 
     ctx.fillRect(
         30,
-        gcashY + 65,
+        gcashY + 70,
         840,
-        55
+        60
     );
 
     ctx.fillStyle = "#7c2d12";
-    ctx.font = "900 21px Arial";
+    ctx.font = "900 22px Arial";
 
     ctx.fillText(
         settings.gcashName,
         W / 2,
-        gcashY + 100
+        gcashY + 108
     );
 
 
@@ -936,7 +952,7 @@ function renderGoldPoster(ctx, canvas) {
     // FOOTER
     // ==========================================
 
-    const footerY = gcashY + 145;
+    const footerY = gcashY + 165;
 
     ctx.fillStyle = "#172554";
 
@@ -944,16 +960,25 @@ function renderGoldPoster(ctx, canvas) {
         30,
         footerY,
         840,
-        58
+        60
     );
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 18px Arial";
+    ctx.font = "900 19px Arial";
 
     ctx.fillText(
         "GAME TOP-UP ZONE",
         W / 2,
-        footerY + 36
+        footerY + 38
+    );
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "600 12px Arial";
+
+    ctx.fillText(
+        "FAST • SAFE • RELIABLE",
+        W / 2,
+        footerY + 82
     );
 
 
@@ -972,20 +997,21 @@ function renderGoldPoster(ctx, canvas) {
 
 // ==========================================
 // DISCOUNTED PACKAGE POSTER
-// WHITE / CLEAN / LARGE TEXT VERSION
 // ==========================================
 
 function generatePackagePoster() {
 
     const canvas = document.createElement("canvas");
 
+    // Taller because procedure is included
     canvas.width = 900;
-    canvas.height = 1050;
+    canvas.height = 1250;
 
     const ctx = canvas.getContext("2d");
 
     // WHITE BACKGROUND
     ctx.fillStyle = "#ffffff";
+
     ctx.fillRect(
         0,
         0,
@@ -995,6 +1021,7 @@ function generatePackagePoster() {
 
     // GOLD TOP LINE
     ctx.fillStyle = "#f4b400";
+
     ctx.fillRect(
         0,
         0,
@@ -1003,6 +1030,7 @@ function generatePackagePoster() {
     );
 
     const logoImg = new Image();
+
     logoImg.crossOrigin = "anonymous";
     logoImg.src = "./GAMETOPUPZONE LOGO.png";
 
@@ -1033,9 +1061,14 @@ function generatePackagePoster() {
 }
 
 
+// ==========================================
+// PACKAGE POSTER RENDER
+// ==========================================
+
 function renderPackagePoster(ctx, canvas) {
 
     const W = canvas.width;
+
 
     // ==========================================
     // HEADER
@@ -1072,7 +1105,7 @@ function renderPackagePoster(ctx, canvas) {
 
 
     // ==========================================
-    // USDT RATE BOX
+    // USDT RATE
     // ==========================================
 
     const usdtX = 30;
@@ -1119,7 +1152,6 @@ function renderPackagePoster(ctx, canvas) {
         usdtX + 25,
         usdtY + 59
     );
-
 
     // Right
     ctx.fillStyle = "#f8fff8";
@@ -1230,7 +1262,6 @@ function renderPackagePoster(ctx, canvas) {
                 rowH
             );
 
-            // Border
             ctx.strokeStyle = "#dbe2ea";
             ctx.lineWidth = 1;
 
@@ -1242,7 +1273,7 @@ function renderPackagePoster(ctx, canvas) {
             );
 
 
-            // PACKAGE
+            // Package
             ctx.textAlign = "center";
 
             ctx.fillStyle = "#172554";
@@ -1255,7 +1286,7 @@ function renderPackagePoster(ctx, canvas) {
             );
 
 
-            // ACTUAL PRICE
+            // Actual price
             const actualText =
                 "₱" +
                 Math.round(
@@ -1272,7 +1303,7 @@ function renderPackagePoster(ctx, canvas) {
             );
 
 
-            // Strike through
+            // Strike-through
             const textWidth =
                 ctx.measureText(
                     actualText
@@ -1321,7 +1352,6 @@ function renderPackagePoster(ctx, canvas) {
                 payH
             );
 
-            // Label
             ctx.textAlign = "left";
 
             ctx.fillStyle = "#a16207";
@@ -1333,7 +1363,6 @@ function renderPackagePoster(ctx, canvas) {
                 payY + 20
             );
 
-            // Final price
             ctx.textAlign = "right";
 
             ctx.fillStyle = "#ea580c";
@@ -1360,6 +1389,7 @@ function renderPackagePoster(ctx, canvas) {
             rowH +
         30;
 
+
     // Payment note
     ctx.textAlign = "center";
 
@@ -1380,17 +1410,17 @@ function renderPackagePoster(ctx, canvas) {
         30,
         gcashY + 25,
         840,
-        65
+        70
     );
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 32px Arial";
+    ctx.font = "900 34px Arial";
 
     ctx.fillText(
         "#" +
         settings.gcashNumber,
         W / 2,
-        gcashY + 69
+        gcashY + 72
     );
 
 
@@ -1399,76 +1429,186 @@ function renderPackagePoster(ctx, canvas) {
 
     ctx.fillRect(
         30,
-        gcashY + 90,
+        gcashY + 95,
         840,
-        55
+        60
     );
 
     ctx.fillStyle = "#7c2d12";
-    ctx.font = "900 21px Arial";
+    ctx.font = "900 22px Arial";
 
     ctx.fillText(
         settings.gcashName,
         W / 2,
-        gcashY + 125
+        gcashY + 134
     );
 
 
     // ==========================================
-    // HOW TO BUY
+    // HOW TO BUY HEADER
     // ==========================================
 
-    const howY =
-        gcashY + 180;
+    const procedureY =
+        gcashY + 185;
 
     ctx.fillStyle = "#172554";
 
     ctx.fillRect(
         30,
-        howY,
+        procedureY,
         840,
         65
     );
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 21px Arial";
+    ctx.font = "900 22px Arial";
 
     ctx.fillText(
         "HOW TO BUY",
         W / 2,
-        howY + 40
+        procedureY + 41
     );
+
+
+    // ==========================================
+    // PROCEDURE STEPS
+    // ==========================================
+
+    const steps = [
+        {
+            number: "1",
+            title: "SCREENSHOT PACKAGE",
+            text: "Screenshot the package you want and wait for admin to reply."
+        },
+        {
+            number: "2",
+            title: "SEND PAYMENT",
+            text: "Send the payment after admin confirms the price."
+        },
+        {
+            number: "3",
+            title: "SEND ACCOUNT DETAILS",
+            text: "Send your account details after payment is confirmed."
+        },
+        {
+            number: "4",
+            title: "WAIT FOR ADMIN SIGNAL",
+            text: "Wait for admin's signal before opening your account once the package purchase is done."
+        }
+    ];
+
+
+    let stepY =
+        procedureY + 85;
+
+
+    steps.forEach((step) => {
+
+        // Circle
+        ctx.fillStyle = "#172554";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            75,
+            stepY + 25,
+            25,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+
+        // Number
+        ctx.textAlign = "center";
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "900 17px Arial";
+
+        ctx.fillText(
+            step.number,
+            75,
+            stepY + 31
+        );
+
+
+        // Title
+        ctx.textAlign = "left";
+
+        ctx.fillStyle = "#172554";
+        ctx.font = "900 16px Arial";
+
+        ctx.fillText(
+            step.title,
+            120,
+            stepY + 18
+        );
+
+
+        // Description
+        ctx.fillStyle = "#64748b";
+        ctx.font = "600 13px Arial";
+
+        wrapText(
+            ctx,
+            step.text,
+            120,
+            stepY + 41,
+            700,
+            19
+        );
+
+
+        // Separator
+        ctx.fillStyle = "#e2e8f0";
+
+        ctx.fillRect(
+            50,
+            stepY + 76,
+            800,
+            1
+        );
+
+
+        stepY += 90;
+    });
 
 
     // ==========================================
     // FOOTER
     // ==========================================
 
-    ctx.fillStyle = "#64748b";
-    ctx.font = "700 14px Arial";
-
-    ctx.fillText(
-        "SCREENSHOT • PAYMENT • ACCOUNT • CONFIRMATION",
-        W / 2,
-        howY + 92
-    );
+    const footerY =
+        stepY + 5;
 
     ctx.fillStyle = "#f4b400";
 
     ctx.fillRect(
         30,
-        howY + 115,
+        footerY,
         840,
         3
     );
+
+    ctx.textAlign = "center";
 
     ctx.fillStyle = "#172554";
     ctx.font = "900 17px Arial";
 
     ctx.fillText(
-        "GAME TOP-UP ZONE • FAST • SAFE • RELIABLE",
+        "GAME TOP-UP ZONE",
         W / 2,
-        howY + 145
+        footerY + 32
+    );
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "600 12px Arial";
+
+    ctx.fillText(
+        "FAST • SAFE • RELIABLE",
+        W / 2,
+        footerY + 52
     );
 
 
@@ -1484,10 +1624,80 @@ function renderPackagePoster(ctx, canvas) {
 
 
 // ==========================================
-// DOWNLOAD FUNCTION
+// TEXT WRAPPER
 // ==========================================
 
-function triggerDownload(canvas, filename) {
+function wrapText(
+    context,
+    text,
+    x,
+    y,
+    maxWidth,
+    lineHeight
+) {
+
+    const words =
+        text.split(" ");
+
+    let line = "";
+
+    for (
+        let n = 0;
+        n < words.length;
+        n++
+    ) {
+
+        const testLine =
+            line +
+            words[n] +
+            " ";
+
+        const metrics =
+            context.measureText(
+                testLine
+            );
+
+        const testWidth =
+            metrics.width;
+
+        if (
+            testWidth > maxWidth &&
+            n > 0
+        ) {
+
+            context.fillText(
+                line,
+                x,
+                y
+            );
+
+            line =
+                words[n] + " ";
+
+            y += lineHeight;
+
+        } else {
+
+            line = testLine;
+        }
+    }
+
+    context.fillText(
+        line,
+        x,
+        y
+    );
+}
+
+
+// ==========================================
+// DOWNLOAD
+// ==========================================
+
+function triggerDownload(
+    canvas,
+    filename
+) {
 
     const link =
         document.createElement("a");
@@ -1499,7 +1709,6 @@ function triggerDownload(canvas, filename) {
 
     link.click();
 }
-
 function openGitHubSettings() {
     window.open("https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-settings.yml", "_blank");
 }
