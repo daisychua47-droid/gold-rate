@@ -3,3387 +3,666 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MIR4 Gold Rate System</title>
-
 <style>
-
 /* =====================================================
    PROFESSIONAL GAME TOP-UP THEME
 ===================================================== */
-
 :root {
     --navy: #172554;
     --navy-dark: #0f172a;
     --blue: #2563eb;
     --blue-light: #eff6ff;
     --blue-border: #dbeafe;
-
     --gold: #f4b400;
     --gold-light: #fff8dc;
-
     --orange: #ea580c;
     --orange-dark: #c2410c;
-
     --green: #16a34a;
     --red: #dc2626;
-
     --bg: #f5f7fa;
     --white: #ffffff;
-
     --text: #172033;
     --muted: #64748b;
-
     --border: #e2e8f0;
-
-    --shadow:
-        0 4px 14px rgba(15, 23, 42, 0.08);
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
 }
 
-
-/* =====================================================
-   GLOBAL
-===================================================== */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     background: var(--bg);
     color: var(--text);
-
     min-height: 100vh;
     padding-bottom: 60px;
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
-
 header {
     position: relative;
-
     background: var(--navy);
-
     color: white;
-
     padding: 22px 120px;
-
     text-align: center;
-
     border-bottom: 3px solid var(--gold);
-
     min-height: 100px;
 }
-
-header h1 {
-    font-size: 28px;
-
-    font-weight: 800;
-
-    letter-spacing: .5px;
-}
-
-header p {
-    margin-top: 6px;
-
-    font-size: 13px;
-
-    color: #cbd5e1;
-}
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
-.container {
-    max-width: 1150px;
-
-    margin: 30px auto;
-
-    padding: 0 20px;
-}
-
-
-/* =====================================================
-   HOME MENU
-===================================================== */
-
-.menu {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-}
-
-.menu-card {
-    background: var(--white);
-
-    border: 1px solid var(--border);
-
-    border-radius: 12px;
-
-    padding: 35px 20px;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    box-shadow: var(--shadow);
-
-    transition:
-        transform .15s ease,
-        border-color .15s ease,
-        box-shadow .15s ease;
-}
-
-.menu-card:hover {
-    transform: translateY(-2px);
-
-    border-color: #bfdbfe;
-
-    box-shadow:
-        0 7px 18px rgba(15,23,42,.10);
-}
-
-.menu-icon {
-    width: 58px;
-    height: 58px;
-
-    margin: 0 auto 16px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: var(--navy);
-
-    color: var(--gold);
-
-    font-size: 25px;
-
-    font-weight: 800;
-}
-
-.menu-card h2 {
-    margin-bottom: 7px;
-
-    font-size: 20px;
-
-    color: var(--navy);
-}
-
-.menu-card p {
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   SECTIONS
-===================================================== */
-
-.section {
-    display: none;
-
-    background: var(--white);
-
-    padding: 28px;
-
-    border-radius: 12px;
-
-    border: 1px solid var(--border);
-
-    box-shadow: var(--shadow);
-}
-
-.section.active {
-    display: block;
-}
-
-.section h2 {
-    color: var(--navy);
-
-    font-size: 23px;
-
-    font-weight: 800;
-}
-
-.section h3 {
-    color: var(--navy);
-
-    font-size: 16px;
-
-    font-weight: 800;
-
-    margin-top: 5px;
-
-    padding-bottom: 8px;
-
-    border-bottom: 2px solid var(--blue-border);
-}
-
-
-/* =====================================================
-   BACK BUTTON
-===================================================== */
-
-.back {
-    border: 1px solid var(--border);
-
-    background: #f8fafc;
-
-    color: var(--navy);
-
-    padding: 9px 15px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    margin-bottom: 20px;
-
-    font-weight: 700;
-
-    transition: .15s;
-}
-
-.back:hover {
-    background: var(--blue-light);
-
-    border-color: #bfdbfe;
-
-    color: var(--blue);
-}
-
-
-/* =====================================================
-   MAIN DASHBOARD
-===================================================== */
-
-.dashboard {
-    display: grid;
-
-    grid-template-columns:
-        175px
-        minmax(430px, 1fr)
-        260px;
-
-    gap: 18px;
-
-    align-items: start;
-}
-
-
-/* =====================================================
-   DASHBOARD CARDS
-===================================================== */
-
-.dashboard-left,
-.dashboard-center,
-.dashboard-right {
-    background: var(--white);
-
-    border: 1px solid var(--border);
-
-    border-radius: 12px;
-
-    box-shadow: var(--shadow);
-}
-
-.dashboard-left {
-    padding: 14px;
-}
-
-.dashboard-center {
-    padding: 20px;
-}
-
-.dashboard-right {
-    padding: 18px;
-}
-
-
-/* =====================================================
-   LEFT MENU
-===================================================== */
-
-.dashboard-menu-title {
-    font-size: 12px;
-
-    font-weight: 800;
-
-    color: var(--muted);
-
-    margin-bottom: 10px;
-
-    padding: 4px 5px;
-
-    letter-spacing: .5px;
-}
-
-.dashboard-btn {
-    width: 100%;
-
-    border: 1px solid var(--border);
-
-    border-radius: 7px;
-
-    padding: 12px 8px;
-
-    margin-bottom: 8px;
-
-    background: #f8fafc;
-
-    color: var(--navy);
-
-    cursor: pointer;
-
-    font-weight: 700;
-
-    font-size: 13px;
-
-    transition: .15s;
-}
-
-.dashboard-btn:hover {
-    background: var(--blue-light);
-
-    color: var(--blue);
-
-    border-color: #bfdbfe;
-}
-
-.dashboard-btn.active {
-    background: var(--navy);
-
-    color: white;
-
-    border-color: var(--navy);
-}
-
-.dashboard-btn.admin {
-    margin-top: 18px;
-}
-
-
-/* =====================================================
-   CENTER GOLD TITLE
-===================================================== */
-
-.gold-center-title {
-    text-align: center;
-
-    font-size: 21px;
-
-    line-height: 1.3;
-
-    font-weight: 800;
-
-    color: var(--navy);
-
-    margin-bottom: 17px;
-}
-
-
-/* =====================================================
-   GOLD RATE
-===================================================== */
-
-.gold-center-rate {
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 6px;
-
-    overflow: hidden;
-
-    margin-bottom: 16px;
-}
-
-.gold-center-rate-label {
-    background: var(--navy);
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 23px;
-
-    font-weight: 800;
-
-    padding: 15px;
-}
-
-.gold-center-rate-value {
-    background: var(--gold-light);
-
-    color: var(--navy);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 39px;
-
-    font-weight: 900;
-
-    padding: 10px;
-}
-
-
-/* =====================================================
-   GOLD CENTER TABLE
-===================================================== */
-
-.gold-center-table {
-    width: 100%;
-
-    border-collapse: collapse;
-
-    border: 1px solid #cbd5e1;
-}
-
-.gold-center-table th {
-    background: var(--navy);
-
-    color: white;
-
-    padding: 10px;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    border: 1px solid #cbd5e1;
-}
-
-.gold-center-table td {
-    text-align: center;
-
-    padding: 9px;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    border: 1px solid #e2e8f0;
-}
-
-.gold-center-table tr:nth-child(even) td {
-    background: #f8fafc;
-}
-
-.gold-center-table tr:nth-child(odd) td {
-    background: white;
-}
-
-
-/* =====================================================
-   PAYMENT
-===================================================== */
-
-.dashboard-payment {
-    margin-top: 14px;
-
-    text-align: center;
-
-    font-size: 13px;
-
-    font-style: italic;
-
-    color: var(--muted);
-}
-
-.dashboard-payment strong {
-    color: var(--navy);
-}
-
-.dashboard-gcash {
-    margin-top: 8px;
-
-    background: var(--orange);
-
-    color: white;
-
-    text-align: center;
-
-    font-size: 18px;
-
-    font-weight: 800;
-
-    padding: 10px;
-
-    border-radius: 5px 5px 0 0;
-}
-
-.dashboard-gcash-name {
-    background: #fed7aa;
-
-    color: #7c2d12;
-
-    text-align: center;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    padding: 9px;
-
-    border-radius: 0 0 5px 5px;
-}
-
-
-/* =====================================================
-   POSTER BUTTON
-===================================================== */
-
-.dashboard-poster-btn {
-    width: 100%;
-
-    margin-top: 12px;
-
-    padding: 11px;
-
-    border: 1px solid var(--navy);
-
-    border-radius: 6px;
-
-    background: var(--navy);
-
-    color: white;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: .15s;
-}
-
-.dashboard-poster-btn:hover {
-    background: var(--blue);
-
-    border-color: var(--blue);
-}
-
-
-/* =====================================================
-   CRYPTO LIVE RATES
-===================================================== */
-
-.live-rate-title {
-    font-size: 16px;
-
-    font-weight: 800;
-
-    color: var(--navy);
-
-    margin-bottom: 12px;
-}
-
-.live-rate-box {
-    background: #f8fafc;
-
-    border: 1px solid var(--border);
-
-    border-radius: 8px;
-
-    overflow: hidden;
-}
-
-.live-rate-row {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 10px;
-
-    border-bottom: 1px solid var(--border);
-
-    font-size: 13px;
-}
-
-.live-rate-row:last-child {
-    border-bottom: none;
-}
-
-.live-rate-row span {
-    color: var(--muted);
-
-    font-weight: 600;
-}
-
-.live-rate-row strong {
-    font-size: 14px;
-
-    color: var(--navy);
-}
-
-.live-status {
-    margin-top: 13px;
-
-    font-size: 12px;
-
-    font-weight: 700;
-}
-
-.live-updated {
-    margin-top: 4px;
-
-    color: var(--muted);
-
-    font-size: 11px;
-}
-
-
-/* =====================================================
-   GOLD PAGE
-===================================================== */
-
-.gold-page-title {
-    text-align: center;
-
-    margin-bottom: 20px;
-}
-
-.gold-page-title h2 {
-    font-size: 25px;
-
-    font-weight: 800;
-
-    color: var(--navy);
-}
-
-
-/* =====================================================
-   GOLD RATE BOX
-===================================================== */
-
-.rate-box {
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 6px;
-
-    overflow: hidden;
-
-    margin-bottom: 22px;
-}
-
-.rate-label {
-    background: var(--navy);
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 26px;
-
-    font-weight: 800;
-
-    padding: 17px;
-}
-
-.rate-value {
-    background: var(--gold-light);
-
-    color: var(--navy);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 40px;
-
-    font-weight: 900;
-
-    padding: 10px;
-}
-
-
-/* =====================================================
-   GOLD TABLE
-===================================================== */
-
-.gold-table {
-    width: 100%;
-
-    border-collapse: collapse;
-
-    border: 1px solid #cbd5e1;
-
-    margin-top: 14px;
-}
-
-.gold-table th {
-    background: var(--navy);
-
-    color: white;
-
-    font-size: 20px;
-
-    padding: 12px;
-
-    border: 1px solid #cbd5e1;
-}
-
-.gold-table td {
-    text-align: center;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    padding: 10px;
-
-    border: 1px solid #e2e8f0;
-}
-
-.gold-table tr:nth-child(even) td {
-    background: #f8fafc;
-}
-
-.gold-table tr:nth-child(odd) td {
-    background: white;
-}
-
-
-/* =====================================================
-   GCASH
-===================================================== */
-
-.payment-note {
-    text-align: center;
-
-    font-size: 17px;
-
-    font-style: italic;
-
-    margin: 20px 0 10px;
-
-    color: var(--muted);
-}
-
-.payment-note strong {
-    color: var(--navy);
-
-    font-style: normal;
-}
-
-.gcash-number {
-    background: var(--orange);
-
-    color: white;
-
-    text-align: center;
-
-    font-size: 26px;
-
-    font-weight: 800;
-
-    padding: 13px;
-}
-
-.gcash-name {
-    background: #fed7aa;
-
-    color: #7c2d12;
-
-    text-align: center;
-
-    font-size: 21px;
-
-    font-weight: 700;
-
-    padding: 11px;
-}
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.poster-buttons {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 22px;
-}
-
-.btn {
-    flex: 1;
-
-    padding: 12px;
-
-    border: 1px solid var(--navy);
-
-    border-radius: 7px;
-
-    background: var(--navy);
-
-    color: white;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: .15s;
-}
-
-.btn:hover {
-    background: var(--blue);
-
-    border-color: var(--blue);
-}
-
-.btn-orange {
-    background: var(--orange);
-
-    border-color: var(--orange);
-}
-
-.btn-orange:hover {
-    background: var(--orange-dark);
-
-    border-color: var(--orange-dark);
-}
-
-
-/* =====================================================
-   INPUTS
-===================================================== */
-
-input,
-select {
-    width: 100%;
-
-    padding: 11px 12px;
-
-    margin-top: 6px;
-
-    margin-bottom: 17px;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 7px;
-
-    font-size: 15px;
-
-    color: var(--text);
-
-    background: white;
-
-    transition: .15s;
-}
-
-input:focus,
-select:focus {
-    outline: none;
-
-    border-color: var(--blue);
-
-    box-shadow:
-        0 0 0 3px rgba(37,99,235,.10);
-}
-
-label {
-    font-weight: 700;
-
-    color: var(--navy);
-
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   SELLER RESULT
-===================================================== */
-
-.result {
-    margin-top: 20px;
-
-    padding: 18px;
-
-    background: #f8fafc;
-
-    border: 1px solid var(--border);
-
-    border-radius: 8px;
-
-    display: none;
-}
-
-.result.show {
-    display: block;
-}
-
-.result h3 {
-    color: var(--navy);
-
-    border-bottom: 2px solid var(--blue-border);
-
-    padding-bottom: 8px;
-}
-
-.result-row {
-    display: flex;
-
-    justify-content: space-between;
-
-    padding: 10px 0;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.result-row:last-child {
-    border-bottom: none;
-}
-
-.result-total {
-    font-size: 20px;
-
-    font-weight: 800;
-
-    color: var(--navy);
-}
-
-
-/* =====================================================
-   ADMIN
-===================================================== */
-
-.admin-panel {
-    display: none;
-}
-
-.admin-panel.show {
-    display: block;
-}
-
-.error {
-    color: var(--red);
-
-    background: #fef2f2;
-
-    border: 1px solid #fecaca;
-
-    padding: 10px;
-
-    border-radius: 6px;
-
-    margin-bottom: 15px;
-
-    display: none;
-
-    font-weight: 700;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer {
-    text-align: center;
-
-    padding: 30px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   RESPONSIVE - TABLET
-===================================================== */
-
+header h1 { font-size: 28px; font-weight: 800; letter-spacing: .5px; }
+header p { margin-top: 6px; font-size: 13px; color: #cbd5e1; }
+
+.container { max-width: 1150px; margin: 30px auto; padding: 0 20px; }
+
+/* SECTIONS & DASHBOARD */
+.section { display: none; background: var(--white); padding: 28px; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.section.active { display: block; }
+.section h2 { color: var(--navy); font-size: 23px; font-weight: 800; }
+.section h3 { color: var(--navy); font-size: 16px; font-weight: 800; margin-top: 5px; padding-bottom: 8px; border-bottom: 2px solid var(--blue-border); }
+
+.back { border: 1px solid var(--border); background: #f8fafc; color: var(--navy); padding: 9px 15px; border-radius: 7px; cursor: pointer; margin-bottom: 20px; font-weight: 700; transition: .15s; }
+.back:hover { background: var(--blue-light); border-color: #bfdbfe; color: var(--blue); }
+
+.dashboard { display: grid; grid-template-columns: 175px minmax(430px, 1fr) 260px; gap: 18px; align-items: start; }
+.dashboard-left, .dashboard-center, .dashboard-right { background: var(--white); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+.dashboard-left { padding: 14px; }
+.dashboard-center { padding: 20px; }
+.dashboard-right { padding: 18px; }
+
+.dashboard-menu-title { font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 10px; padding: 4px 5px; letter-spacing: .5px; }
+.dashboard-btn { width: 100%; border: 1px solid var(--border); border-radius: 7px; padding: 12px 8px; margin-bottom: 8px; background: #f8fafc; color: var(--navy); cursor: pointer; font-weight: 700; font-size: 13px; transition: .15s; }
+.dashboard-btn:hover { background: var(--blue-light); color: var(--blue); border-color: #bfdbfe; }
+.dashboard-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+.dashboard-btn.admin { margin-top: 18px; }
+
+.gold-center-title { text-align: center; font-size: 21px; line-height: 1.3; font-weight: 800; color: var(--navy); margin-bottom: 17px; }
+.gold-center-rate { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+.gold-center-rate-label { background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; padding: 15px; }
+.gold-center-rate-value { background: var(--gold-light); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 39px; font-weight: 900; padding: 10px; }
+
+.gold-center-table { width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; }
+.gold-center-table th { background: var(--navy); color: white; padding: 10px; font-size: 15px; font-weight: 700; border: 1px solid #cbd5e1; }
+.gold-center-table td { text-align: center; padding: 9px; font-size: 16px; font-weight: 700; border: 1px solid #e2e8f0; }
+.gold-center-table tr:nth-child(even) td { background: #f8fafc; }
+.gold-center-table tr:nth-child(odd) td { background: white; }
+
+.dashboard-payment { margin-top: 14px; text-align: center; font-size: 13px; font-style: italic; color: var(--muted); }
+.dashboard-payment strong { color: var(--navy); }
+.dashboard-gcash { margin-top: 8px; background: var(--orange); color: white; text-align: center; font-size: 18px; font-weight: 800; padding: 10px; border-radius: 5px 5px 0 0; }
+.dashboard-gcash-name { background: #fed7aa; color: #7c2d12; text-align: center; font-size: 15px; font-weight: 700; padding: 9px; border-radius: 0 0 5px 5px; }
+
+.dashboard-poster-btn { width: 100%; margin-top: 12px; padding: 11px; border: 1px solid var(--navy); border-radius: 6px; background: var(--navy); color: white; font-weight: 700; cursor: pointer; transition: .15s; }
+.dashboard-poster-btn:hover { background: var(--blue); border-color: var(--blue); }
+
+/* LIVE RATES & SELLER */
+.live-rate-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+.live-rate-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.live-rate-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.live-rate-row:last-child { border-bottom: none; }
+.live-rate-row span { color: var(--muted); font-weight: 600; }
+.live-rate-row strong { font-size: 14px; color: var(--navy); }
+.live-status { margin-top: 13px; font-size: 12px; font-weight: 700; }
+.live-updated { margin-top: 4px; color: var(--muted); font-size: 11px; }
+
+.seller-live-rate { display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 17px; padding: 12px 14px; background: #f8fafc; border: 1px solid var(--border); border-radius: 7px; }
+.seller-live-rate span { color: var(--muted); font-size: 13px; font-weight: 600; }
+.seller-live-rate strong { color: var(--navy); font-size: 16px; font-weight: 800; }
+
+input, select { width: 100%; padding: 11px 12px; margin-top: 6px; margin-bottom: 17px; border: 1px solid #cbd5e1; border-radius: 7px; font-size: 15px; color: var(--text); background: white; transition: .15s; }
+input:focus, select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.10); }
+label { font-weight: 700; color: var(--navy); font-size: 14px; }
+
+.result { margin-top: 20px; padding: 18px; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; display: none; }
+.result.show { display: block; }
+.result-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.result-row:last-child { border-bottom: none; }
+.result-total { font-size: 20px; font-weight: 800; color: var(--navy); }
+
+.btn { flex: 1; padding: 12px; border: 1px solid var(--navy); border-radius: 7px; background: var(--navy); color: white; font-size: 14px; font-weight: 700; cursor: pointer; transition: .15s; }
+.btn:hover { background: var(--blue); border-color: var(--blue); }
+.btn-orange { background: var(--orange); border-color: var(--orange); }
+.btn-orange:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
+
+.error { color: var(--red); background: #fef2f2; border: 1px solid #fecaca; padding: 10px; border-radius: 6px; margin-bottom: 15px; display: none; font-weight: 700; }
+footer { text-align: center; padding: 30px; color: var(--muted); font-size: 13px; }
+
+.site-logo { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); width: 100px; height: auto; }
+
+/* SOCIAL BAR */
+.social-bar { position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px; padding: 10px 15px; background: #172554; border-top: 2px solid #f4b400; box-shadow: 0 -3px 12px rgba(15, 23, 42, 0.12); z-index: 9999; }
+.social-bar a { display: inline-block; padding: 8px 16px; color: white; text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 6px; background: rgba(255,255,255,0.08); transition: .15s; }
+.social-bar a:hover { background: #2563eb; }
+.social-bar a b { color: #f4b400; }
+
+/* ANNOUNCEMENTS */
+.announcement-box { margin-bottom: 18px; border: 1px solid var(--border); border-radius: 9px; overflow: hidden; box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06); }
+.announcement-title { padding: 10px 14px; text-align: center; color: white; background: var(--navy); font-size: 15px; font-weight: 800; }
+.announcement-message { padding: 13px 15px; text-align: center; background: #fff; color: var(--text); font-size: 14px; font-weight: 600; line-height: 1.6; }
+.announcement-box.promo .announcement-title { background: var(--gold); color: var(--navy); }
+.announcement-box.server .announcement-title { background: var(--orange); }
+.announcement-box.close .announcement-title { background: var(--red); }
+.announcement-box.maintenance .announcement-title { background: #475569; }
+
+/* DISCOUNTED PACKAGE & HOW TO BUY */
+.package-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr); gap: 22px; align-items: start; }
+.package-rate-panel { min-width: 0; }
+.package-usdt-box { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-bottom: 18px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.package-usdt-label { background: var(--navy); color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: 800; }
+.package-usdt-label small { display: block; margin-top: 4px; font-size: 11px; color: #cbd5e1; }
+.package-usdt-value { background: var(--gold-light); color: var(--navy); padding: 10px; text-align: center; }
+.package-usdt-value strong { display: block; font-size: 28px; font-weight: 900; }
+.package-usdt-value span { display: block; margin-top: 2px; color: var(--green); font-size: 11px; font-weight: 800; }
+
+.package-table { width: 100%; border-collapse: collapse; table-layout: fixed; border: 1px solid var(--border); }
+.package-table th { background: var(--navy); color: white; padding: 12px 8px; text-align: center; font-size: 14px; font-weight: 800; border: 1px solid var(--border); }
+.package-table td { padding: 14px 8px; text-align: center; vertical-align: middle; font-size: 16px; font-weight: 700; border: 1px solid var(--border); }
+.package-table tr:nth-child(even) td { background: #f8fafc; }
+.package-table tr:nth-child(odd) td { background: white; }
+
+.package-amount { color: var(--navy); font-size: 19px; font-weight: 900; }
+.package-actual { position: relative; display: inline-block; color: #64748b; font-size: 17px; font-weight: 700; }
+.package-actual::after { content: ""; position: absolute; left: -5px; right: -5px; top: 50%; height: 2px; background: #dc2626; transform: rotate(-4deg); }
+
+.package-final-box { display: inline-block; min-width: 110px; padding: 7px 14px; background: #fff1df; border-radius: 6px; }
+.package-final { color: #ea580c; font-size: 21px; font-weight: 900; }
+
+.package-procedure { margin-top: 0; padding: 22px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); min-width: 0; }
+.procedure-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.procedure-header > span { width: 44px; height: 44px; flex: 0 0 44px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 12px; font-size: 21px; }
+.procedure-header h3 { margin: 0; padding: 0; border: none; font-size: 19px; font-weight: 800; color: #111827; }
+.procedure-header p { margin: 3px 0 0; font-size: 12px; color: #6b7280; }
+.procedure-step { display: flex; gap: 13px; padding: 17px 0; border-top: 1px solid #eef0f2; }
+.procedure-number { flex: 0 0 35px; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--navy); color: white; font-size: 14px; font-weight: 800; }
+.procedure-content { flex: 1; min-width: 0; }
+.procedure-content h4 { margin: 0 0 5px; font-size: 13px; font-weight: 800; color: #111827; }
+.procedure-content p { margin: 0; font-size: 13px; line-height: 1.55; color: #6b7280; }
+
+/* RESPONSIVE STYLES */
 @media (max-width: 950px) {
-
-    .dashboard {
-        grid-template-columns:
-            155px
-            minmax(350px, 1fr);
-    }
-
-    .dashboard-right {
-        grid-column: 1 / -1;
-    }
-
-    .live-rate-box {
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .live-rate-row {
-        border-right: 1px solid var(--border);
-    }
+    .dashboard { grid-template-columns: 155px minmax(350px, 1fr); }
+    .dashboard-right { grid-column: 1 / -1; }
+    .live-rate-box { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .live-rate-row { border-right: 1px solid var(--border); }
+    .package-layout { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr); gap: 15px; }
 }
-
-
-/* =====================================================
-   RESPONSIVE - MOBILE
-===================================================== */
 
 @media (max-width: 700px) {
-
-    header {
-        padding: 18px 12px;
-    }
-
-    header h1 {
-        font-size: 21px;
-    }
-
-    header p {
-        font-size: 12px;
-    }
-
-    .container {
-        margin: 15px auto;
-
-        padding: 0 10px;
-    }
-
-
-    /* MAIN DASHBOARD */
-
-    .dashboard {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 12px;
-    }
-
-    .dashboard-left,
-    .dashboard-center,
-    .dashboard-right {
-        width: 100%;
-    }
-
-
-    /* MENU */
-
-    .dashboard-left {
-        display: grid;
-
-        grid-template-columns:
-            repeat(3, 1fr);
-
-        gap: 7px;
-
-        padding: 10px;
-    }
-
-    .dashboard-menu-title {
-        grid-column: 1 / -1;
-
-        margin-bottom: 1px;
-    }
-
-    .dashboard-btn {
-        margin-bottom: 0;
-
-        padding: 11px 5px;
-
-        font-size: 12px;
-    }
-
-    .dashboard-btn.admin {
-        margin-top: 0;
-    }
-
-
-    /* CENTER */
-
-    .dashboard-center {
-        padding: 14px;
-    }
-
-    .gold-center-title {
-        font-size: 18px;
-
-        margin-bottom: 13px;
-    }
-
-    .gold-center-rate-label {
-        font-size: 20px;
-
-        padding: 12px;
-    }
-
-    .gold-center-rate-value {
-        font-size: 32px;
-
-        padding: 8px;
-    }
-
-    .gold-center-table th,
-    .gold-center-table td {
-        font-size: 14px;
-
-        padding: 8px 5px;
-    }
-
-
-    /* CRYPTO */
-
-    .dashboard-right {
-        padding: 14px;
-    }
-
-    .live-rate-box {
-        display: block;
-    }
-
-    .live-rate-row {
-        border-right: none;
-
-        padding: 9px;
-    }
-
-
-    /* SECTIONS */
-
-    .section {
-        padding: 17px;
-    }
-
-    .section h2 {
-        font-size: 20px;
-    }
-
-
-    /* GOLD PAGE */
-
-    .gold-page-title h2 {
-        font-size: 21px;
-    }
-
-    .rate-label {
-        font-size: 21px;
-
-        padding: 13px;
-    }
-
-    .rate-value {
-        font-size: 32px;
-    }
-
-    .gold-table th {
-        font-size: 17px;
-
-        padding: 9px 5px;
-    }
-
-    .gold-table td {
-        font-size: 17px;
-
-        padding: 9px 5px;
-    }
-
-
-    /* GCASH */
-
-    .payment-note {
-        font-size: 15px;
-    }
-
-    .gcash-number {
-        font-size: 21px;
-    }
-
-    .gcash-name {
-        font-size: 18px;
-    }
-
-
-    /* BUTTONS */
-
-    .poster-buttons {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
-
-
-    /* INPUT */
-
-    input,
-    select {
-        font-size: 16px;
-
-        padding: 11px;
-    }
+    header { padding: 18px 12px; }
+    header h1 { font-size: 21px; }
+    header p { font-size: 12px; }
+    .container { margin: 15px auto; padding: 0 10px; }
+    .dashboard { display: flex; flex-direction: column; gap: 12px; }
+    .dashboard-left { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 10px; }
+    .dashboard-menu-title { grid-column: 1 / -1; margin-bottom: 1px; }
+    .dashboard-btn { margin-bottom: 0; padding: 11px 5px; font-size: 12px; }
+    .social-bar { gap: 6px; padding: 8px 10px; }
+    .social-bar a { flex: 1; text-align: center; padding: 8px 5px; font-size: 11px; }
+    .package-layout { display: flex; flex-direction: column; gap: 18px; }
 }
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media (max-width: 380px) {
-
-    .dashboard-btn {
-        font-size: 11px;
-    }
-
-    .gold-center-title {
-        font-size: 16px;
-    }
-
-    .gold-center-rate-label {
-        font-size: 18px;
-    }
-
-    .gold-center-rate-value {
-        font-size: 28px;
-    }
-
-    .gold-center-table th,
-    .gold-center-table td {
-        font-size: 13px;
-    }
-}
-
-
-.site-logo {
-    position: absolute;
-    left: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 100px;
-    height: auto;
-}
-
-/* =========================
-   FIXED SOCIAL BAR
-========================= */
-
-.social-bar {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 10px 15px;
-
-    background: #172554;
-
-    border-top: 2px solid #f4b400;
-
-    box-shadow:
-        0 -3px 12px rgba(15, 23, 42, 0.12);
-
-    z-index: 9999;
-}
-
-.social-bar a {
-    display: inline-block;
-
-    padding: 8px 16px;
-
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    border-radius: 6px;
-
-    background: rgba(255,255,255,0.08);
-
-    transition: .15s;
-}
-
-.social-bar a:hover {
-    background: #2563eb;
-}
-
-.social-bar a b {
-    color: #f4b400;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 700px) {
-
-    body {
-        padding-bottom: 55px;
-    }
-
-    .social-bar {
-        gap: 6px;
-        padding: 8px 10px;
-    }
-
-    .social-bar a {
-        flex: 1;
-        text-align: center;
-        padding: 8px 5px;
-        font-size: 11px;
-    }
-
-}   
-
-
-/* =====================================================
-   SELLER LIVE RATE
-===================================================== */
-
-.seller-live-rate {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-top: -5px;
-    margin-bottom: 17px;
-
-    padding: 12px 14px;
-
-    background: #f8fafc;
-
-    border: 1px solid var(--border);
-
-    border-radius: 7px;
-}
-
-.seller-live-rate span {
-    color: var(--muted);
-
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-.seller-live-rate strong {
-    color: var(--navy);
-
-    font-size: 16px;
-
-    font-weight: 800;
-}
-
-
-
-/* =========================================
-   MOBILE HEADER + LOGO FINAL FIX
-========================================= */
 
 @media (max-width: 600px) {
-
-    header {
-        display: grid !important;
-
-        grid-template-columns: 82px minmax(0, 1fr) !important;
-
-        min-height: 110px !important;
-
-        padding: 12px 10px !important;
-
-        align-items: center !important;
-
-        overflow: hidden !important;
-    }
-
-    header .site-logo {
-        position: static !important;
-
-        display: block !important;
-
-        width: 68px !important;
-
-        max-width: 68px !important;
-
-        height: auto !important;
-
-        margin: 0 auto !important;
-
-        transform: none !important;
-
-        grid-column: 1 !important;
-
-        grid-row: 1 / span 2 !important;
-    }
-
-    header h1 {
-        grid-column: 2 !important;
-
-        grid-row: 1 !important;
-
-        width: 100% !important;
-
-        margin: 0 !important;
-
-        padding: 0 !important;
-
-        font-size: 19px !important;
-
-        line-height: 1.15 !important;
-
-        text-align: center !important;
-
-        white-space: normal !important;
-
-        overflow-wrap: break-word !important;
-    }
-
-    header p {
-        grid-column: 2 !important;
-
-        grid-row: 2 !important;
-
-        width: 100% !important;
-
-        margin: 4px 0 0 !important;
-
-        padding: 0 !important;
-
-        font-size: 10px !important;
-
-        line-height: 1.2 !important;
-
-        text-align: center !important;
-    }
-}
-
-
-   /* =====================================================
-   ANNOUNCEMENT
-===================================================== */
-
-.announcement-box {
-    margin-bottom: 18px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
-}
-
-.announcement-title {
-    padding: 10px 14px;
-    text-align: center;
-    color: white;
-    background: var(--navy);
-    font-size: 15px;
-    font-weight: 800;
-}
-
-.announcement-message {
-    padding: 13px 15px;
-    text-align: center;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.6;
-}
-
-.announcement-box.promo .announcement-title {
-    background: var(--gold);
-    color: var(--navy);
-}
-
-.announcement-box.server .announcement-title {
-    background: var(--orange);
-}
-
-.announcement-box.close .announcement-title {
-    background: var(--red);
-}
-
-.announcement-box.maintenance .announcement-title {
-    background: #475569;
-}
-
-.announcement-box.general .announcement-title,
-.announcement-box.notice .announcement-title,
-.announcement-box.update .announcement-title,
-.announcement-box.event .announcement-title,
-.announcement-box.other .announcement-title {
-    background: var(--navy);
-}
-
-
-@media (max-width: 700px) {
-
-    .announcement-box {
-        margin-bottom: 14px;
-    }
-
-    .announcement-title {
-        font-size: 14px;
-        padding: 9px 10px;
-    }
-
-    .announcement-message {
-        font-size: 13px;
-        padding: 11px;
-    }
-
-}
-
-/* =====================================================
-   DISCOUNTED PACKAGE PAGE
-===================================================== */
-
-#packageRate {
-    width: 100%;
-}
-
-
-/* USDT LIVE RATE */
-
-.package-usdt-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    margin-bottom: 18px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-
-.package-usdt-label {
-    background: var(--navy);
-    color: white;
-    padding: 15px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 800;
-}
-
-
-.package-usdt-label small {
-    display: block;
-    margin-top: 4px;
-    font-size: 11px;
-    color: #cbd5e1;
-}
-
-
-.package-usdt-value {
-    background: var(--gold-light);
-    color: var(--navy);
-    padding: 10px;
-    text-align: center;
-}
-
-
-.package-usdt-value strong {
-    display: block;
-    font-size: 28px;
-    font-weight: 900;
-}
-
-
-.package-usdt-value span {
-    display: block;
-    margin-top: 2px;
-    color: var(--green);
-    font-size: 11px;
-    font-weight: 800;
-}
-
-
-/* =====================================================
-   PACKAGE TABLE
-===================================================== */
-
-.package-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    border: 1px solid var(--border);
-}
-
-
-.package-table th {
-    background: var(--navy);
-    color: white;
-    padding: 12px 8px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 800;
-    border: 1px solid var(--border);
-}
-
-
-.package-table td {
-    padding: 14px 8px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 16px;
-    font-weight: 700;
-    border: 1px solid var(--border);
-}
-
-
-.package-table tr:nth-child(even) td {
-    background: #f8fafc;
-}
-
-
-.package-table tr:nth-child(odd) td {
-    background: white;
-}
-
-
-/* PACKAGE */
-
-.package-amount {
-    color: var(--navy);
-    font-size: 19px;
-    font-weight: 900;
-}
-
-
-/* ACTUAL PRICE */
-
-.package-actual {
-    position: relative;
-    display: inline-block;
-    color: #64748b;
-    font-size: 17px;
-    font-weight: 700;
-}
-
-
-.package-actual::after {
-    content: "";
-    position: absolute;
-
-    left: -5px;
-    right: -5px;
-
-    top: 50%;
-
-    height: 2px;
-
-    background: #dc2626;
-
-    transform: rotate(-4deg);
-}
-
-
-/* PAY ONLY */
-
-.package-final-box {
-    display: inline-block;
-    min-width: 110px;
-
-    padding: 7px 14px;
-
-    background: #fff1df;
-
-    border-radius: 6px;
-}
-
-
-.package-final {
-    color: #ea580c;
-    font-size: 21px;
-    font-weight: 900;
-}
-
-
-/* =====================================================
-   GENERATE BUTTON
-===================================================== */
-
-#packageRate .dashboard-poster-btn {
-    width: 100%;
-    display: block;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .package-usdt-label {
-        font-size: 16px;
-        padding: 12px 6px;
-    }
-
-    .package-usdt-value {
-        padding: 8px 5px;
-    }
-
-    .package-usdt-value strong {
-        font-size: 22px;
-    }
-
-    .package-table th {
-        font-size: 11px;
-        padding: 9px 3px;
-    }
-
-    .package-table td {
-        font-size: 13px;
-        padding: 11px 3px;
-    }
-
-    .package-amount {
-        font-size: 16px;
-    }
-
-    .package-actual {
-        font-size: 13px;
-    }
-
-    .package-final-box {
-        min-width: 75px;
-        padding: 5px 7px;
-    }
-
-    .package-final {
-        font-size: 17px;
-    }
-
-}   
-
- /* =========================
-   HOW TO BUY
-========================= */
-
-.package-procedure {
-    margin-top: 25px;
-    padding: 22px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-}
-
-.procedure-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 22px;
-}
-
-.procedure-header > span {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f1f5f9;
-    border-radius: 12px;
-    font-size: 21px;
-}
-
-.procedure-header h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 800;
-    color: #111827;
-}
-
-.procedure-header p {
-    margin: 3px 0 0;
-    font-size: 12px;
-    color: #6b7280;
-}
-
-.procedure-step {
-    display: flex;
-    gap: 14px;
-    padding: 16px 0;
-    border-top: 1px solid #eef0f2;
-}
-
-.procedure-number {
-    flex: 0 0 34px;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #111827;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.procedure-content {
-    flex: 1;
-}
-
-.procedure-content h4 {
-    margin: 0 0 5px;
-    font-size: 13px;
-    font-weight: 800;
-    color: #111827;
-}
-
-.procedure-content p {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.55;
-    color: #6b7280;
-}
-
-/* =====================================================
-   PACKAGE 2-COLUMN LAYOUT
-===================================================== */
-
-.package-layout {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.15fr)
-        minmax(360px, 0.85fr);
-
-    gap: 22px;
-
-    align-items: start;
-}
-
-
-/* =====================================================
-   LEFT PACKAGE PANEL
-===================================================== */
-
-.package-rate-panel {
-    min-width: 0;
-}
-
-
-/* =====================================================
-   RIGHT HOW TO BUY
-===================================================== */
-
-.package-procedure {
-    margin-top: 0;
-
-    padding: 22px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.06);
-
-    min-width: 0;
-}
-
-
-/* PROCEDURE HEADER */
-
-.procedure-header {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-bottom: 18px;
-}
-
-
-.procedure-header > span {
-    width: 44px;
-    height: 44px;
-
-    flex: 0 0 44px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #f1f5f9;
-
-    border-radius: 12px;
-
-    font-size: 21px;
-}
-
-
-.procedure-header h3 {
-    margin: 0;
-
-    padding: 0;
-
-    border: none;
-
-    font-size: 19px;
-
-    font-weight: 800;
-
-    color: #111827;
-}
-
-
-.procedure-header p {
-    margin: 3px 0 0;
-
-    font-size: 12px;
-
-    color: #6b7280;
-}
-
-
-/* PROCEDURE STEP */
-
-.procedure-step {
-    display: flex;
-
-    gap: 13px;
-
-    padding: 17px 0;
-
-    border-top:
-        1px solid #eef0f2;
-}
-
-
-.procedure-number {
-    flex: 0 0 35px;
-
-    width: 35px;
-    height: 35px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: var(--navy);
-
-    color: white;
-
-    font-size: 14px;
-
-    font-weight: 800;
-}
-
-
-.procedure-content {
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-.procedure-content h4 {
-    margin: 0 0 5px;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    color: #111827;
-}
-
-
-.procedure-content p {
-    margin: 0;
-
-    font-size: 13px;
-
-    line-height: 1.55;
-
-    color: #6b7280;
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 950px) {
-
-    .package-layout {
-        grid-template-columns:
-            minmax(0, 1fr)
-            minmax(300px, 0.85fr);
-
-        gap: 15px;
-    }
-
-    .package-procedure {
-        padding: 17px;
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .package-layout {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 18px;
-    }
-
-
-    .package-rate-panel,
-    .package-procedure {
-        width: 100%;
-    }
-
-
-    .package-procedure {
-        margin-top: 0;
-
-        padding: 18px;
-    }
-
-
-    .procedure-step {
-        gap: 11px;
-
-        padding: 15px 0;
-    }
-
-
-    .procedure-content p {
-        font-size: 12px;
-    }
-
+    header { display: grid !important; grid-template-columns: 82px minmax(0, 1fr) !important; min-height: 110px !important; padding: 12px 10px !important; align-items: center !important; overflow: hidden !important; }
+    header .site-logo { position: static !important; display: block !important; width: 68px !important; max-width: 68px !important; height: auto !important; margin: 0 auto !important; transform: none !important; grid-column: 1 !important; grid-row: 1 / span 2 !important; }
+    header h1 { grid-column: 2 !important; grid-row: 1 !important; width: 100% !important; margin: 0 !important; font-size: 19px !important; line-height: 1.15 !important; text-align: center !important; }
+    header p { grid-column: 2 !important; grid-row: 2 !important; width: 100% !important; margin: 4px 0 0 !important; font-size: 10px !important; line-height: 1.2 !important; text-align: center !important; }
 }
 </style>
-
-    
 </head>
-
-
 <body>
 
 <header>
-
-    <img
-        src="./GAMETOPUPZONE LOGO.png"
-        alt="GAME TOP-UP ZONE"
-        class="site-logo"
-    >
-
+    <img src="./GAMETOPUPZONE LOGO.png" alt="GAME TOP-UP ZONE" class="site-logo">
     <h1>MIR4 GOLD RATE SYSTEM</h1>
-
     <p>Gold Rate & Crypto Selling Calculator</p>
-
 </header>
 
-
 <div class="container">
-
-
-<!-- =====================================================
-     MAIN DASHBOARD
-===================================================== -->
-
-<div id="home" class="dashboard">
-
-    <!-- LEFT -->
-    <div class="dashboard-left">
-
-        <div class="dashboard-menu-title">
-            MENU
+    <!-- HOME DASHBOARD -->
+    <div id="home" class="dashboard">
+        <div class="dashboard-left">
+            <div class="dashboard-menu-title">MENU</div>
+            <button class="dashboard-btn active" onclick="goHome()">GOLD RATE</button>
+            <button class="dashboard-btn" onclick="showSection('packageRate')">DISCOUNTED PACKAGE</button>
+            <button class="dashboard-btn" onclick="showSection('seller')">SELLER</button>
+            <button class="dashboard-btn admin" onclick="showSection('adminLogin')">ADMIN</button>
         </div>
 
-        <button
-            class="dashboard-btn active"
-            onclick="goHome()">
-
-            GOLD RATE
-
-        </button>
-
-       <button
-          class="dashboard-btn"
-          onclick="showSection('packageRate')">
-      
-          DISCOUNTED PACKAGE
-      
-      </button>
-
-        <button
-            class="dashboard-btn"
-            onclick="showSection('seller')">
-
-            SELLER
-
-        </button>
-
-        <button
-            class="dashboard-btn admin"
-            onclick="showSection('adminLogin')">
-
-            ADMIN
-
-        </button>
-
-    </div>
-
-
-  <!-- CENTER -->
-<div class="dashboard-center">
-
-    <!-- ANNOUNCEMENT -->
-    <div
-        id="announcementBox"
-        class="announcement-box"
-        style="display:none;">
-
-        <div
-            id="announcementTitle"
-            class="announcement-title">
-        </div>
-
-        <div
-            id="announcementMessage"
-            class="announcement-message">
-        </div>
-
-    </div>
-
-
-    <div class="gold-center-title">
-        MIR4 GOLD CONVERSION RATE SUMMARY
-    </div>
-
-
-        <div class="gold-center-rate">
-
-            <div class="gold-center-rate-label">
-                RATE
+        <div class="dashboard-center">
+            <div id="announcementBox" class="announcement-box" style="display:none;">
+                <div id="announcementTitle" class="announcement-title"></div>
+                <div id="announcementMessage" class="announcement-message"></div>
             </div>
 
-            <div
-                class="gold-center-rate-value"
-                id="goldRateDisplay">
-
-                4.60
-
+            <div class="gold-center-title">MIR4 GOLD CONVERSION RATE SUMMARY</div>
+            <div class="gold-center-rate">
+                <div class="gold-center-rate-label">RATE</div>
+                <div class="gold-center-rate-value" id="goldRateDisplay">4.60</div>
             </div>
 
-        </div>
-
-
-        <table class="gold-center-table">
-
-            <thead>
-
-                <tr>
-                    <th>GCASH</th>
-                    <th>GOLD</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="goldTableBody">
-            </tbody>
-
-        </table>
-
-
-        <div class="dashboard-payment">
-
-            All transactions must send to:
-            <strong>GCASH</strong>
-
-        </div>
-
-
-        <div
-            class="dashboard-gcash"
-            id="gcashNumberDisplay">
-
-            #09623189465
-
-        </div>
-
-
-        <div
-            class="dashboard-gcash-name"
-            id="gcashNameDisplay">
-
-            Ma•y gr••e c.
-
-        </div>
-
-
-       <button
-          class="dashboard-poster-btn"
-          onclick="generatePoster()">
-      
-          GENERATE PNG POSTER
-      
-      </button>
-
-    </div>
-
-
-    <!-- RIGHT -->
-    <div class="dashboard-right">
-
-        <div class="live-rate-title">
-            CRYPTO LIVE RATES (KUCOIN BASE)
-        </div>
-
-
-        <div class="live-rate-box">
-
-           <div class="live-rate-row">
-              <span>USDT</span>
-              <strong id="adminUsdtRate">--</strong>
-          </div>
-
-            <div class="live-rate-row">
-                <span>WEMIX</span>
-                <strong id="adminWemixRate">--</strong>
-            </div>
-
-            <div class="live-rate-row">
-                <span>EXDRA1</span>
-                <strong id="adminExdra1Rate">--</strong>
-            </div>
-
-            <div class="live-rate-row">
-                <span>EXDRA2</span>
-                <strong id="adminExdra2Rate">--</strong>
-            </div>
-
-            <div class="live-rate-row">
-                <span>EXDRA3</span>
-                <strong id="adminExdra3Rate">--</strong>
-            </div>
-
-            <div class="live-rate-row">
-                <span>EXDRA4</span>
-                <strong id="adminExdra4Rate">--</strong>
-            </div>
-
-        </div>
-
-
-        <div
-            id="liveRateStatus"
-            class="live-status">
-
-            ● LOADING...
-
-        </div>
-
-
-        <div
-            id="rateUpdated"
-            class="live-updated">
-
-            Loading live rates...
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     SELLER
-===================================================== -->
-
-<div id="seller" class="section">
-
-    <button class="back" onclick="goHome()">
-        ← Back
-    </button>
-
-    <h2>
-        CRYPTO SELLING CALCULATOR
-    </h2>
-
-    <br>
-
-
-    <label>
-        Token
-    </label>
-
-    <select id="token">
-
-        <option value="WEMIX">
-            WEMIX
-        </option>
-
-        <option value="EXDRA1">
-            EXDRA1
-        </option>
-
-        <option value="EXDRA2">
-            EXDRA2
-        </option>
-
-        <option value="EXDRA3">
-            EXDRA3
-        </option>
-
-        <option value="EXDRA4">
-            EXDRA4
-        </option>
-
-    </select>
-
-
-    <label>
-        Order Quantity
-    </label>
-
-    <input
-        type="number"
-        id="quantity"
-        placeholder="Enter order quantity"
-        min="0"
-        step="0.01"
-    >
-
-    <div class="seller-live-rate">
-       <span>Live Token Rate</span>
-       <strong id="sellerTokenRate">₱0.00</strong>
-   </div>
-
-
-    <button
-        class="btn btn-orange"
-        onclick="calculate()">
-        CALCULATE
-    </button>
-
-
-    <div id="sellerResult" class="result">
-        <h3>
-            CUSTOMER ORDER
-        </h3>
-        <br>
-
-
-        <div class="result-row">
-            <span>
-                Token
-            </span>
-            <strong id="resultToken"></strong>
-        </div>
-
-
-        <div class="result-row">
-            <span>
-                Quantity
-            </span>
-            <strong id="resultQuantity"></strong>
-        </div>
-
-
-        <div class="result-row">
-            <span>
-                Base Rate
-            </span>
-            <strong id="resultBase"></strong>
-        </div>
-
-       <div class="result-row">
-
-          <span>
-              WEMIX Needed
-          </span>
-      
-          <strong id="resultWemixNeeded"></strong>
-      
-      </div>
-
-
-        <div class="result-row">
-
-            <span>
-                Markup
-            </span>
-
-            <strong id="resultMarkup"></strong>
-
-        </div>
-
-       <div class="result-row">
-
-          <span>
-              Fee
-          </span>
-      
-          <strong id="resultFee"></strong>
-      
-      </div>
-
-
-        <div class="result-row">
-
-            <span>
-                Final Price / Token
-            </span>
-
-            <strong id="resultFinal"></strong>
-
-        </div>
-
-
-        <br>
-
-
-        <div class="result-row result-total">
-
-            <span>
-                TOTAL PHP
-            </span>
-
-            <strong id="resultPHP"></strong>
-
-        </div>
-
-
-        <div class="result-row result-total">
-
-            <span>
-                TOTAL USDT
-            </span>
-
-            <strong id="resultUSDT"></strong>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-<!-- =====================================================
-     DISCOUNTED PACKAGE
-===================================================== -->
-<div id="packageRate" class="section">
-
-    <button class="back" onclick="goHome()">
-        ← Back
-    </button>
-
-    <div class="package-layout">
-
-        <!-- =================================================
-             LEFT — PACKAGE RATE
-        ================================================= -->
-
-        <div class="package-rate-panel">
-
-            <h2>
-                DISCOUNTED PACKAGE RATE
-            </h2>
-
-            <br>
-
-
-            <!-- USDT LIVE RATE -->
-
-            <div class="package-usdt-box">
-
-                <div class="package-usdt-label">
-
-                    USDT / PHP
-
-                    <small>
-                        KUCOIN BASE
-                    </small>
-
-                </div>
-
-
-                <div class="package-usdt-value">
-
-                    <strong id="packageUsdtPHP">
-                        ₱0.00
-                    </strong>
-
-                    <span>
-                        ● LIVE RATE
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- PACKAGE TABLE -->
-
-            <table class="package-table">
-
+            <table class="gold-center-table">
                 <thead>
-
-                    <tr>
-
-                        <th>
-                            PACKAGE
-                        </th>
-
-                        <th>
-                            ACTUAL PRICE
-                        </th>
-
-                        <th>
-                            PAY ONLY
-                        </th>
-
-                    </tr>
-
+                    <tr><th>GCASH</th><th>GOLD</th></tr>
                 </thead>
-
-
-                <tbody id="packageTableBody">
-                </tbody>
-
+                <tbody id="goldTableBody"></tbody>
             </table>
 
-
-            <button
-                class="dashboard-poster-btn"
-                onclick="generatePackagePoster()">
-
-                GENERATE PNG POSTER
-
-            </button>
-
+            <div class="dashboard-payment">All transactions must send to: <strong>GCASH</strong></div>
+            <div class="dashboard-gcash" id="gcashNumberDisplay">#09623189465</div>
+            <div class="dashboard-gcash-name" id="gcashNameDisplay">Ma•y gr••e c.</div>
+            <button class="dashboard-poster-btn" onclick="generatePoster()">GENERATE PNG POSTER</button>
         </div>
 
-
-        <!-- =================================================
-             RIGHT — HOW TO BUY
-        ================================================= -->
-
-        <div class="package-procedure">
-
-            <div class="procedure-header">
-
-                <span>🛒</span>
-
-                <div>
-
-                    <h3>
-                        HOW TO BUY
-                    </h3>
-
-                    <p>
-                        Follow these simple steps
-                    </p>
-
-                </div>
-
+        <div class="dashboard-right">
+            <div class="live-rate-title">CRYPTO LIVE RATES (KUCOIN BASE)</div>
+            <div class="live-rate-box">
+                <div class="live-rate-row"><span>USDT</span><strong id="adminUsdtRate">--</strong></div>
+                <div class="live-rate-row"><span>WEMIX</span><strong id="adminWemixRate">--</strong></div>
+                <div class="live-rate-row"><span>EXDRA1</span><strong id="adminExdra1Rate">--</strong></div>
+                <div class="live-rate-row"><span>EXDRA2</span><strong id="adminExdra2Rate">--</strong></div>
+                <div class="live-rate-row"><span>EXDRA3</span><strong id="adminExdra3Rate">--</strong></div>
+                <div class="live-rate-row"><span>EXDRA4</span><strong id="adminExdra4Rate">--</strong></div>
             </div>
+            <div id="liveRateStatus" class="live-status">● LOADING...</div>
+            <div id="rateUpdated" class="live-updated">Loading live rates...</div>
+        </div>
+    </div>
 
+    <!-- SELLER SECTION -->
+    <div id="seller" class="section">
+        <button class="back" onclick="goHome()">← Back</button>
+        <h2>CRYPTO SELLING CALCULATOR</h2>
+        <br>
+        <label>Token</label>
+        <select id="token">
+            <option value="WEMIX">WEMIX</option>
+            <option value="EXDRA1">EXDRA1</option>
+            <option value="EXDRA2">EXDRA2</option>
+            <option value="EXDRA3">EXDRA3</option>
+            <option value="EXDRA4">EXDRA4</option>
+        </select>
 
-            <!-- STEP 1 -->
+        <label>Order Quantity</label>
+        <input type="number" id="quantity" placeholder="Enter order quantity" min="0" step="0.01">
 
-            <div class="procedure-step">
-
-                <div class="procedure-number">
-                    1
-                </div>
-
-                <div class="procedure-content">
-
-                    <h4>
-                        SCREENSHOT PACKAGE
-                    </h4>
-
-                    <p>
-                        Screenshot the package you want
-                        and wait for admin to reply.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- STEP 2 -->
-
-            <div class="procedure-step">
-
-                <div class="procedure-number">
-                    2
-                </div>
-
-                <div class="procedure-content">
-
-                    <h4>
-                        SEND PAYMENT
-                    </h4>
-
-                    <p>
-                        Send the payment after admin
-                        confirms the price.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- STEP 3 -->
-
-            <div class="procedure-step">
-
-                <div class="procedure-number">
-                    3
-                </div>
-
-                <div class="procedure-content">
-
-                    <h4>
-                        SEND ACCOUNT DETAILS
-                    </h4>
-
-                    <p>
-                        Send your account details after
-                        payment is confirmed.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- STEP 4 -->
-
-            <div class="procedure-step">
-
-                <div class="procedure-number">
-                    4
-                </div>
-
-                <div class="procedure-content">
-
-                    <h4>
-                        WAIT FOR ADMIN SIGNAL
-                    </h4>
-
-                    <p>
-                        Wait for admin's signal before
-                        opening your account once the
-                        package purchase is done.
-                    </p>
-
-                </div>
-
-            </div>
-
+        <div class="seller-live-rate">
+            <span>Live Token Rate</span>
+            <strong id="sellerTokenRate">₱0.00</strong>
         </div>
 
+        <button class="btn btn-orange" onclick="calculate()">CALCULATE</button>
+
+        <div id="sellerResult" class="result">
+            <h3>CUSTOMER ORDER</h3>
+            <br>
+            <div class="result-row"><span>Token</span><strong id="resultToken"></strong></div>
+            <div class="result-row"><span>Quantity</span><strong id="resultQuantity"></strong></div>
+            <div class="result-row"><span>Base Rate</span><strong id="resultBase"></strong></div>
+            <div class="result-row"><span>WEMIX Needed</span><strong id="resultWemixNeeded"></strong></div>
+            <div class="result-row"><span>Markup</span><strong id="resultMarkup"></strong></div>
+            <div class="result-row"><span>Fee</span><strong id="resultFee"></strong></div>
+            <div class="result-row"><span>Final Price / Token</span><strong id="resultFinal"></strong></div>
+            <br>
+            <div class="result-row result-total"><span>TOTAL PHP</span><strong id="resultPHP"></strong></div>
+            <div class="result-row result-total"><span>TOTAL USDT</span><strong id="resultUSDT"></strong></div>
+        </div>
     </div>
 
-</div>
+    <!-- DISCOUNTED PACKAGE SECTION -->
+    <div id="packageRate" class="section">
+        <button class="back" onclick="goHome()">← Back</button>
+        <div class="package-layout">
+            <div class="package-rate-panel">
+                <h2>DISCOUNTED PACKAGE RATE</h2>
+                <br>
+                <div class="package-usdt-box">
+                    <div class="package-usdt-label">USDT / PHP<small>KUCOIN BASE</small></div>
+                    <div class="package-usdt-value">
+                        <strong id="packageUsdtPHP">₱0.00</strong>
+                        <span>● LIVE RATE</span>
+                    </div>
+                </div>
 
-<!-- =====================================================
-     ADMIN LOGIN
-===================================================== -->
+                <table class="package-table">
+                    <thead>
+                        <tr><th>PACKAGE</th><th>ACTUAL PRICE</th><th>PAY ONLY</th></tr>
+                    </thead>
+                    <tbody id="packageTableBody"></tbody>
+                </table>
+                <button class="dashboard-poster-btn" onclick="generatePackagePoster()">GENERATE PNG POSTER</button>
+            </div>
 
-<div id="adminLogin" class="section">
-
-    <button class="back" onclick="goHome()">
-        ← Back
-    </button>
-
-
-    <h2>
-        ADMIN LOGIN
-    </h2>
-
-    <br>
-
-
-    <div id="loginError" class="error">
-        Incorrect password.
+            <div class="package-procedure">
+                <div class="procedure-header">
+                    <span>🛒</span>
+                    <div>
+                        <h3>HOW TO BUY</h3>
+                        <p>Follow these simple steps</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="procedure-number">1</div>
+                    <div class="procedure-content">
+                        <h4>SCREENSHOT PACKAGE</h4>
+                        <p>Screenshot the package you want and wait for admin to reply.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="procedure-number">2</div>
+                    <div class="procedure-content">
+                        <h4>SEND PAYMENT</h4>
+                        <p>Send the payment after admin confirms the price.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="procedure-number">3</div>
+                    <div class="procedure-content">
+                        <h4>SEND ACCOUNT DETAILS</h4>
+                        <p>Send your account details after payment is confirmed.</p>
+                    </div>
+                </div>
+                <div class="procedure-step">
+                    <div class="procedure-number">4</div>
+                    <div class="procedure-content">
+                        <h4>WAIT FOR ADMIN SIGNAL</h4>
+                        <p>Wait for admin's signal before opening your account once the package purchase is done.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-    <label>
-        Admin Password
-    </label>
-
-    <input
-        type="password"
-        id="adminPassword"
-        placeholder="Enter password"
-    >
-
-
-    <button
-        class="btn btn-orange"
-        onclick="loginAdmin()">
-
-        LOGIN
-
-    </button>
-
-</div>
-
-
-
-<!-- =====================================================
-     ADMIN PANEL
-===================================================== -->
-
-<div id="adminPanel" class="section">
-
-    <button class="back" onclick="goHome()">
-        ← Back
-    </button>
-
-
-    <h2>
-        ADMIN DASHBOARD
-    </h2>
-
-    <br>
-
-
-    <h3>
-        GOLD RATE
-    </h3>
-
-    <br>
-
-
-    <label>
-        Gold Rate
-    </label>
-
-    <input
-        type="number"
-        id="goldRateInput"
-        value="4.60"
-        step="0.01"
-    >
-
-
-    <h3>
-        GCASH INFORMATION
-    </h3>
-
-    <br>
-
-
-    <label>
-        GCash Number
-    </label>
-
-    <input
-        type="text"
-        id="gcashNumberInput"
-        value="09393413842"
-    >
-
-
-    <label>
-        GCash Name
-    </label>
-
-    <input
-        type="text"
-        id="gcashNameInput"
-        value="Da..y c"
-    >
-
-
-   <!-- =====================================================
-     ANNOUNCEMENT
-===================================================== -->
-
-<h3>
-    ANNOUNCEMENT
-</h3>
-
-<br>
-
-<label>
-    Enable Announcement
-</label>
-
-<select id="announcementEnabled">
-
-    <option value="false">
-        OFF
-    </option>
-
-    <option value="true">
-        ON
-    </option>
-
-</select>
-
-
-<label>
-    Announcement Type
-</label>
-
-<select id="announcementType">
-
-    <option value="PROMO">
-        🔥 PROMO
-    </option>
-
-    <option value="OTHER SERVER SPECIAL RATE">
-        ⚠️️ OTHER SERVER SPECIAL RATE
-    </option>
-
-    <option value="CLOSE">
-        🔴 CLOSE
-    </option>
-
-    <option value="MAINTENANCE">
-        🛠️ MAINTENANCE
-    </option>
-
-    <option value="GENERAL ANNOUNCEMENT">
-        📢 GENERAL ANNOUNCEMENT
-    </option>
-
-    <option value="IMPORTANT NOTICE">
-        ❗ IMPORTANT NOTICE
-    </option>
-
-    <option value="SYSTEM UPDATE">
-        🔄 SYSTEM UPDATE
-    </option>
-
-    <option value="EVENT">
-        🎉 EVENT
-    </option>
-
-    <option value="OTHER">
-        📢 OTHER
-    </option>
-
-</select>
-
-
-<label>
-    Announcement Title
-</label>
-
-<input
-    type="text"
-    id="announcementTitleInput"
-    placeholder="Example: WEEKEND PROMO"
->
-
-
-<label>
-    Announcement Message
-</label>
-
-<input
-    type="text"
-    id="announcementMessageInput"
-    placeholder="Example: 3,000 GOLD = ₱500"
->
-
-
-<label>
-    Start Date & Time
-</label>
-
-<input
-    type="datetime-local"
-    id="announcementStartInput"
->
-
-
-<label>
-    End Date & Time
-</label>
-
-<input
-    type="datetime-local"
-    id="announcementEndInput"
->
-
-
-<button
-    class="btn btn-orange"
-    onclick="openGitHubAnnouncement()">
-
-    OPEN GITHUB ANNOUNCEMENT
-
-</button>
-
-<div style="
-    margin-top:10px;
-    font-size:12px;
-    color:#777;
-    line-height:1.5;
-">
-
-    Enter these values in GitHub Actions,
-    then click <strong>Run workflow</strong>.
-
-</div>
-
-   
-
-   <button
-        class="btn btn-orange"
-        onclick="openGitHubSettings()">
-        OPEN GITHUB SETTINGS
-    </button>
-    
-    <div style="margin-top:10px; font-size:12px; color:#777;">
-        Enter the values in GitHub Actions, then click Run workflow.
+    <!-- ADMIN LOGIN SECTION -->
+    <div id="adminLogin" class="section">
+        <button class="back" onclick="goHome()">← Back</button>
+        <h2>ADMIN LOGIN</h2>
+        <br>
+        <div id="loginError" class="error">Incorrect password.</div>
+        <label>Admin Password</label>
+        <input type="password" id="adminPassword" placeholder="Enter password">
+        <button class="btn btn-orange" onclick="loginAdmin()">LOGIN</button>
     </div>
 
-</div>
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="section">
+        <button class="back" onclick="goHome()">← Back</button>
+        <h2>ADMIN DASHBOARD</h2>
+        <br>
+        <h3>GOLD RATE</h3>
+        <br>
+        <label>Gold Rate</label>
+        <input type="number" id="goldRateInput" value="4.60" step="0.01">
 
-</div>
+        <h3>GCASH INFORMATION</h3>
+        <br>
+        <label>GCash Number</label>
+        <input type="text" id="gcashNumberInput" value="09393413842">
+        <label>GCash Name</label>
+        <input type="text" id="gcashNameInput" value="Da..y c">
 
+        <h3>ANNOUNCEMENT</h3>
+        <br>
+        <label>Enable Announcement</label>
+        <select id="announcementEnabled">
+            <option value="false">OFF</option>
+            <option value="true">ON</option>
+        </select>
+        <label>Announcement Type</label>
+        <select id="announcementType">
+            <option value="PROMO">🔥 PROMO</option>
+            <option value="OTHER SERVER SPECIAL RATE">⚠️ OTHER SERVER SPECIAL RATE</option>
+            <option value="CLOSE">🔴 CLOSE</option>
+            <option value="MAINTENANCE">🛠️ MAINTENANCE</option>
+            <option value="GENERAL ANNOUNCEMENT">📢 GENERAL ANNOUNCEMENT</option>
+        </select>
+        <label>Announcement Title</label>
+        <input type="text" id="announcementTitleInput" placeholder="Example: WEEKEND PROMO">
+        <label>Announcement Message</label>
+        <input type="text" id="announcementMessageInput" placeholder="Example: 3,000 GOLD = ₱500">
+        
+        <button class="btn btn-orange" onclick="openGitHubAnnouncement()">OPEN GITHUB ANNOUNCEMENT</button>
+        <div style="margin-top:10px; font-size:12px; color:#777; line-height:1.5;">
+            Enter these values in GitHub Actions, then click <strong>Run workflow</strong>.
+        </div>
+        <button class="btn btn-orange" style="margin-top:15px;" onclick="openGitHubSettings()">OPEN GITHUB SETTINGS</button>
+    </div>
+</div>
 
 <div class="social-bar">
-
-    <a
-        href="https://discord.gg/hYqXJPyVjw"
-        target="_blank"
-        rel="noopener noreferrer">
-        Discord: <b>JOIN NOW</b>
-    </a>
-
-    <a
-        href="https://facebook.com/share/16FTGzDfQ6/"
-        target="_blank"
-        rel="noopener noreferrer">
-        Facebook: <b>VISIT PAGE</b>
-    </a>
-
+    <a href="https://discord.gg/hYqXJPyVjw" target="_blank" rel="noopener noreferrer">Discord: <b>JOIN NOW</b></a>
+    <a href="https://facebook.com/share/16FTGzDfQ6/" target="_blank" rel="noopener noreferrer">Facebook: <b>VISIT PAGE</b></a>
 </div>
 
-
-
 <script>
-
-/* =====================================================
-   SETTINGS
-===================================================== */
-
 let settings = {
-
     goldRate: 4.60,
-
     gcashNumber: "09393413842",
-
     gcashName: "Da..y c",
-
-    cryptoRates: {
-
-        WEMIX: 0,
-
-        EXDRA1: 0,
-
-        EXDRA2: 0,
-
-        EXDRA3: 0,
-
-        EXDRA4: 0
-
-    },
-
+    cryptoRates: { WEMIX: 0, EXDRA1: 0, EXDRA2: 0, EXDRA3: 0, EXDRA4: 0 },
     usdtPHP: 0,
-
     wemixUSDT: 0,
-
     ratesLoaded: false
-
 };
 
-
-/* =====================================================
-   GOLD AMOUNTS
-===================================================== */
-
-const goldAmounts = [
-    100,
-    200,
-    300,
-    400,
-    500,
-    1000,
-    2000,
-    3000
-];
-
-
-/* =====================================================
-   ANNOUNCEMENTS
-===================================================== */
+const goldAmounts = [100, 200, 300, 400, 500, 1000, 2000, 3000];
+const packageAmounts = [5, 10, 30, 100];
+const packageDiscount = 0.73;
+const packageFee = 0.05;
 
 async function loadAnnouncements() {
-
-    const box =
-        document.getElementById("announcementBox");
-
-    const title =
-        document.getElementById("announcementTitle");
-
-    const message =
-        document.getElementById("announcementMessage");
-
-
-    // Make sure announcement is hidden first
+    const box = document.getElementById("announcementBox");
+    const title = document.getElementById("announcementTitle");
+    const message = document.getElementById("announcementMessage");
     box.style.display = "none";
-
-
     try {
-
-        const response = await fetch(
-            "./announcement.json?time=" + Date.now()
-        );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to load announcement.json"
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        const announcements =
-            Array.isArray(data.announcements)
-                ? data.announcements
-                : [];
-
-
-        const now =
-            new Date();
-
-
-        /*
-         * Find all currently active announcements
-         */
-
-        const activeAnnouncements =
-            announcements.filter(function(item) {
-
-                if (item.enabled !== true) {
-                    return false;
-                }
-
-
-                // Start date
-                if (item.start) {
-
-                    const start =
-                        new Date(item.start);
-
-                    if (
-                        !isNaN(start.getTime()) &&
-                        now < start
-                    ) {
-                        return false;
-                    }
-
-                }
-
-
-                // End date
-                if (item.end) {
-
-                    const end =
-                        new Date(item.end);
-
-                    if (
-                        !isNaN(end.getTime()) &&
-                        now > end
-                    ) {
-                        return false;
-                    }
-
-                }
-
-
-                return true;
-
-            });
-
-
-        /*
-         * No active announcement
-         */
-
-        if (activeAnnouncements.length === 0) {
-
-            box.style.display = "none";
-
-            return;
-
-        }
-
-
-        /*
-         * Show first active announcement
-         */
-
-        const announcement =
-            activeAnnouncements[0];
-
-
-        title.textContent =
-            getAnnouncementIcon(announcement.type) +
-            " " +
-            (announcement.title || announcement.type || "ANNOUNCEMENT");
-
-
-        message.textContent =
-            announcement.message || "";
-
-
-        /*
-         * Change announcement color
-         */
-
-        box.className =
-            "announcement-box " +
-            getAnnouncementClass(announcement.type);
-
-
-        box.style.display = "block";
-
-
-    } catch (error) {
-
-        console.error(
-            "Announcement loading error:",
-            error
-        );
-
-
-        // If announcement file cannot be loaded,
-        // keep announcement hidden.
-
-        box.style.display = "none";
-
-    }
-
-}
-
-
-/* =====================================================
-   ANNOUNCEMENT ICON
-===================================================== */
-
-function getAnnouncementIcon(type) {
-
-    switch (
-        String(type || "").toUpperCase()
-    ) {
-
-        case "PROMO":
-            return "🔥";
-
-        case "OTHER SERVER SPECIAL RATE":
-            return "⚠️";
-
-        case "CLOSE":
-            return "🔴";
-
-        case "MAINTENANCE":
-            return "🛠️";
-
-        case "GENERAL ANNOUNCEMENT":
-            return "📢";
-
-        case "IMPORTANT NOTICE":
-            return "❗";
-
-        case "SYSTEM UPDATE":
-            return "🔄";
-
-        case "EVENT":
-            return "🎉";
-
-        default:
-            return "📢";
-
-    }
-
-}
-
-
-/* =====================================================
-   ANNOUNCEMENT COLOR CLASS
-===================================================== */
-
-function getAnnouncementClass(type) {
-
-    switch (
-        String(type || "").toUpperCase()
-    ) {
-
-        case "PROMO":
-            return "promo";
-
-        case "OTHER SERVER SPECIAL RATE":
-            return "server";
-
-        case "CLOSE":
-            return "close";
-
-        case "MAINTENANCE":
-            return "maintenance";
-
-        case "GENERAL ANNOUNCEMENT":
-            return "general";
-
-        case "IMPORTANT NOTICE":
-            return "notice";
-
-        case "SYSTEM UPDATE":
-            return "update";
-
-        case "EVENT":
-            return "event";
-
-        default:
-            return "other";
-
-    }
-
-}
-
-   
-/* =====================================================
-   settings
-===================================================== */
-async function loadSettings() {
-
-    try {
-
-        const response = await fetch(
-            "./settings.json?time=" + Date.now()
-        );
-
-        if (!response.ok) {
-            throw new Error("Unable to load settings.json");
-        }
-
+        const response = await fetch("./announcement.json?time=" + Date.now());
+        if (!response.ok) return;
         const data = await response.json();
+        const announcements = Array.isArray(data.announcements) ? data.announcements : [];
+        const now = new Date();
+        const active = announcements.filter(item => {
+            if (item.enabled !== true) return false;
+            if (item.start && now < new Date(item.start)) return false;
+            if (item.end && now > new Date(item.end)) return false;
+            return true;
+        });
+        if (active.length === 0) return;
+        const announcement = active[0];
+        title.textContent = (announcement.title || announcement.type || "ANNOUNCEMENT");
+        message.textContent = announcement.message || "";
+        box.className = "announcement-box " + (announcement.type ? announcement.type.toLowerCase() : "other");
+        box.style.display = "block";
+    } catch (error) {
+        box.style.display = "none";
+    }
+}
 
-        if (typeof data.goldRate === "number") {
-            settings.goldRate = data.goldRate;
-        }
-
-        if (data.gcashNumber) {
-            settings.gcashNumber = data.gcashNumber;
-        }
-
-        if (data.gcashName) {
-            settings.gcashName = data.gcashName;
-        }
-
-        console.log("Settings loaded:", data);
+async function loadSettings() {
+    try {
+        const response = await fetch("./settings.json?time=" + Date.now());
+        if (!response.ok) return;
+        const data = await response.json();
+        if (typeof data.goldRate === "number") settings.goldRate = data.goldRate;
+        if (data.gcashNumber) settings.gcashNumber = data.gcashNumber;
+        if (data.gcashName) settings.gcashName = data.gcashName;
         document.getElementById("goldRateInput").value = settings.goldRate;
         document.getElementById("gcashNumberInput").value = settings.gcashNumber;
         document.getElementById("gcashNameInput").value = settings.gcashName;
-
-    } catch (error) {
-
-        console.error(
-            "Settings loading error:",
-            error
-        );
-
-    }
-
+    } catch (error) {}
 }
-/* =====================================================
-   INITIALIZE
-===================================================== */
+
+async function loadLiveRates() {
+    try {
+        const response = await fetch("./rates.json?time=" + Date.now());
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        if (!data.success) throw new Error();
+        settings.cryptoRates.WEMIX = Number(data.rates.WEMIX);
+        settings.cryptoRates.EXDRA1 = Number(data.rates.EXDRA1);
+        settings.cryptoRates.EXDRA2 = Number(data.rates.EXDRA2);
+        settings.cryptoRates.EXDRA3 = Number(data.rates.EXDRA3);
+        settings.cryptoRates.EXDRA4 = Number(data.rates.EXDRA4);
+        settings.usdtPHP = Number(data.usdtPHP);
+        settings.wemixUSDT = Number(data.wemixUSDT);
+        settings.ratesLoaded = true;
+        updateLiveRateDisplay();
+    } catch (error) {
+        settings.ratesLoaded = false;
+        updateLiveRateDisplay();
+    }
+}
+
+function updateSellerLiveRate() {
+    const token = document.getElementById("token").value;
+    const rate = settings.cryptoRates[token];
+    const display = document.getElementById("sellerTokenRate");
+    display.textContent = (settings.ratesLoaded && rate > 0) ? "₱" + rate.toFixed(2) : "₱0.00";
+}
+
+function updateLiveRateDisplay() {
+    updateAdminRates();
+    updateSellerLiveRate();
+    updatePackageTable();
+    const status = document.getElementById("liveRateStatus");
+    if (status) {
+        status.textContent = settings.ratesLoaded ? "● LIVE RATES" : "● RATE UPDATE ERROR";
+        status.style.color = settings.ratesLoaded ? "#198754" : "#dc3545";
+    }
+    const updated = document.getElementById("rateUpdated");
+    if (updated) {
+        updated.textContent = settings.ratesLoaded ? "Live rates loaded automatically" : "Unable to load live rates";
+    }
+}
+
+function roundPackagePrice(value) {
+    if (!isFinite(value) || value <= 0) return 0;
+    const whole = Math.ceil(value);
+    if (whole % 10 === 5) return whole;
+    return Math.ceil((whole - 5) / 10) * 10 + 5;
+}
+
+function updatePackageTable() {
+    const table = document.getElementById("packageTableBody");
+    const usdtDisplay = document.getElementById("packageUsdtPHP");
+    if (!table) return;
+    const usdtPHP = Number(settings.usdtPHP);
+    if (settings.ratesLoaded && usdtPHP > 0) {
+        if (usdtDisplay) usdtDisplay.textContent = "₱" + usdtPHP.toFixed(2);
+    } else {
+        if (usdtDisplay) usdtDisplay.textContent = "₱0.00";
+        table.innerHTML = `<tr><td colspan="3">Live USDT/PHP rate unavailable.</td></tr>`;
+        return;
+    }
+    table.innerHTML = "";
+    packageAmounts.forEach(packageUSD => {
+        const actualPrice = packageUSD * usdtPHP;
+        const discountedPrice = actualPrice * packageDiscount * (1 + packageFee);
+        const finalPrice = roundPackagePrice(discountedPrice);
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><span class="package-amount">$${packageUSD}</span></td>
+            <td><span class="package-actual">₱${Math.round(actualPrice).toLocaleString()}</span></td>
+            <td><span class="package-final-box"><span class="package-final">₱${finalPrice.toLocaleString()}</span></span></td>
+        `;
+        table.appendChild(row);
+    });
+}
+
+function showSection(section) {
+    document.getElementById("home").style.display = "none";
+    document.querySelectorAll(".section").forEach(el => el.classList.remove("active"));
+    const target = document.getElementById(section);
+    if (target) target.classList.add("active");
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+}
+
+function goHome() {
+    document.querySelectorAll(".section").forEach(el => el.classList.remove("active"));
+    document.getElementById("home").style.display = "";
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+}
+
+function updateGoldTable() {
+    const table = document.getElementById("goldTableBody");
+    table.innerHTML = "";
+    goldAmounts.forEach(amount => {
+        const gold = Math.round(amount * settings.goldRate);
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${amount.toLocaleString()}</td><td>${gold.toLocaleString()}</td>`;
+        table.appendChild(row);
+    });
+}
+
+function updateGoldDisplay() {
+    document.getElementById("goldRateDisplay").textContent = settings.goldRate.toFixed(2);
+    document.getElementById("gcashNumberDisplay").textContent = "#" + settings.gcashNumber;
+    document.getElementById("gcashNameDisplay").textContent = settings.gcashName;
+    updateGoldTable();
+}
+
+function loginAdmin() {
+    const password = document.getElementById("adminPassword").value;
+    if (password === "123456") {
+        document.getElementById("loginError").style.display = "none";
+        document.getElementById("adminPassword").value = "";
+        showSection("adminPanel");
+    } else {
+        document.getElementById("loginError").style.display = "block";
+    }
+}
+
+function calculate() {
+    const token = document.getElementById("token").value;
+    const quantity = parseFloat(document.getElementById("quantity").value);
+    if (!quantity || quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+    const tokenRate = settings.cryptoRates[token];
+    const wemixRate = settings.cryptoRates.WEMIX;
+    if (!tokenRate || !wemixRate || tokenRate <= 0 || wemixRate <= 0) {
+        alert("Live rates are not available yet.");
+        return;
+    }
+    const wemixNeeded = quantity * (tokenRate / wemixRate);
+    let markup = wemixNeeded <= 30 ? 3 : (wemixNeeded <= 100 ? 2 : (wemixNeeded > 500 ? 0.60 : 1));
+    let fee = (token.startsWith("EXDRA")) ? wemixNeeded * 0.10 : 0;
+    const finalPrice = tokenRate + markup + fee;
+    const totalPHP = wemixNeeded * finalPrice;
+    const totalUSDT = totalPHP / settings.usdtPHP;
+
+    document.getElementById("resultToken").textContent = token;
+    document.getElementById("resultQuantity").textContent = quantity.toLocaleString();
+    document.getElementById("resultBase").textContent = "₱" + tokenRate.toFixed(2);
+    document.getElementById("resultWemixNeeded").textContent = wemixNeeded.toFixed(2);
+    document.getElementById("resultMarkup").textContent = "₱" + markup.toFixed(2);
+    document.getElementById("resultFee").textContent = "₱" + fee.toFixed(3);
+    document.getElementById("resultFinal").textContent = "₱" + finalPrice.toFixed(3);
+    document.getElementById("resultPHP").textContent = "₱" + totalPHP.toFixed(2);
+    document.getElementById("resultUSDT").textContent = "$" + totalUSDT.toFixed(2);
+    document.getElementById("sellerResult").classList.add("show");
+}
+
+function updateAdminRates() {
+    const values = {
+        adminUsdtRate: settings.usdtPHP,
+        adminWemixRate: settings.cryptoRates.WEMIX,
+        adminExdra1Rate: settings.cryptoRates.EXDRA1,
+        adminExdra2Rate: settings.cryptoRates.EXDRA2,
+        adminExdra3Rate: settings.cryptoRates.EXDRA3,
+        adminExdra4Rate: settings.cryptoRates.EXDRA4
+    };
+    Object.keys(values).forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = "₱" + Number(values[id]).toFixed(2);
+    });
+}
+
+function openGitHubSettings() {
+    window.open("https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-settings.yml", "_blank");
+}
+
+function openGitHubAnnouncement() {
+    window.open("https://github.com/daisychua47-droid/gold-rate/actions/workflows/update-announcement.yml", "_blank");
+}
+
 async function initialize() {
     await loadSettings();
     updateGoldTable();
@@ -3393,1598 +672,8 @@ async function initialize() {
     updatePackageTable();
 }
 
-async function loadLiveRates() {
-
-    try {
-
-        const response = await fetch(
-            "./rates.json?time=" + Date.now()
-        );
-
-        if (!response.ok) {
-            throw new Error("Unable to load rates.json");
-        }
-
-        const data = await response.json();
-
-        if (!data.success) {
-            throw new Error("Live rate update failed");
-        }
-
-        settings.cryptoRates.WEMIX =
-            Number(data.rates.WEMIX);
-
-        settings.cryptoRates.EXDRA1 =
-            Number(data.rates.EXDRA1);
-
-        settings.cryptoRates.EXDRA2 =
-            Number(data.rates.EXDRA2);
-
-        settings.cryptoRates.EXDRA3 =
-            Number(data.rates.EXDRA3);
-
-        settings.cryptoRates.EXDRA4 =
-            Number(data.rates.EXDRA4);
-
-
-        settings.usdtPHP =
-            Number(data.usdtPHP);
-
-
-        settings.wemixUSDT =
-            Number(data.wemixUSDT);
-
-
-        settings.ratesLoaded = true;
-
-
-        updateLiveRateDisplay();
-
-
-        console.log(
-            "Live crypto rates loaded:",
-            data
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Live rate error:",
-            error
-        );
-
-        settings.ratesLoaded = false;
-
-        updateLiveRateDisplay();
-
-    }
-
-}    
-
-function updateSellerLiveRate() {
-
-    const token =
-        document.getElementById("token").value;
-
-    const rate =
-        settings.cryptoRates[token];
-
-    const display =
-        document.getElementById("sellerTokenRate");
-
-    if (
-        settings.ratesLoaded &&
-        typeof rate === "number" &&
-        rate > 0
-    ) {
-
-        display.textContent =
-            "₱" + rate.toFixed(2);
-
-    } else {
-
-        display.textContent =
-            "₱0.00";
-
-    }
-}
-   
-
-function updateLiveRateDisplay() {
-
-    updateAdminRates();
-
-    updateSellerLiveRate();
-
-    updatePackageTable();
-
-    const status =
-        document.getElementById("liveRateStatus");
-
-    if (!status) return;
-
-
-    if (settings.ratesLoaded) {
-
-        status.textContent =
-            "● LIVE RATES";
-
-        status.style.color =
-            "#198754";
-
-    } else {
-
-        status.textContent =
-            "● RATE UPDATE ERROR";
-
-        status.style.color =
-            "#dc3545";
-
-    }
-
-
-    const updated =
-        document.getElementById("rateUpdated");
-
-    if (updated) {
-
-        updated.textContent =
-            settings.ratesLoaded
-                ? "Live rates loaded automatically"
-                : "Unable to load live rates";
-
-    }
-
-}
-
-
-/* =====================================================
-   DISCOUNTED PACKAGE (5 PACKAGES: $5, $10, $30, $50, $100)
-===================================================== */
-
-const packageAmounts = [
-    5,
-    10,
-    30,
-    50,
-    100
-];
-
-const packageDiscount = 0.73;
-
-const packageFee = 0.05;
-
-
-/* =====================================================
-   ROUND UP TO PRICE ENDING IN 5
-===================================================== */
-
-function roundPackagePrice(value) {
-
-    if (!isFinite(value) || value <= 0) {
-        return 0;
-    }
-
-
-    const whole =
-        Math.ceil(value);
-
-
-    /*
-       Already ends in 5
-       Example: 225 → 225
-    */
-
-    if (whole % 10 === 5) {
-        return whole;
-    }
-
-
-    /*
-       Otherwise go UP to the next
-       whole number ending in 5.
-    */
-
-    return Math.ceil(
-        (whole - 5) / 10
-    ) * 10 + 5;
-
-}
-
-
-/* =====================================================
-   UPDATE PACKAGE TABLE
-===================================================== */
-
-function updatePackageTable() {
-
-    const table =
-        document.getElementById(
-            "packageTableBody"
-        );
-
-
-    const usdtDisplay =
-        document.getElementById(
-            "packageUsdtPHP"
-        );
-
-
-    if (!table) {
-        return;
-    }
-
-
-    /*
-       Show current USDT/PHP
-    */
-
-    if (
-        settings.ratesLoaded &&
-        Number(settings.usdtPHP) > 0
-    ) {
-
-        if (usdtDisplay) {
-
-            usdtDisplay.textContent =
-                "₱" +
-                Number(settings.usdtPHP)
-                    .toFixed(2);
-
-        }
-
-    } else {
-
-        if (usdtDisplay) {
-
-            usdtDisplay.textContent =
-                "₱0.00";
-
-        }
-
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td colspan="3">
-
-                    Live USDT/PHP rate unavailable.
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    table.innerHTML = "";
-
-
-    const usdtPHP =
-        Number(settings.usdtPHP);
-
-
-    packageAmounts.forEach(
-        function(packageUSD) {
-
-
-            /*
-             * ACTUAL PRICE
-             *
-             * $USD × current USDT/PHP rate from rates.json
-             */
-
-            const actualPrice =
-                packageUSD *
-                usdtPHP;
-
-
-            /*
-             * DISCOUNTED PRICE
-             */
-
-            const discountedPrice =
-                actualPrice *
-                packageDiscount *
-                (1 + packageFee);
-
-
-            /*
-             * FINAL PRICE (Rounded ending in 5)
-             */
-
-            const finalPrice =
-                roundPackagePrice(
-                    discountedPrice
-                );
-
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML = `
-
-                <td>
-
-                    <span class="package-amount">
-
-                        $${packageUSD}
-
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span class="package-actual">
-
-                        ₱${Math.round(actualPrice)
-                            .toLocaleString()}
-
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span class="package-final-box">
-
-                        <span class="package-final">
-
-                            ₱${finalPrice
-                                .toLocaleString()}
-
-                        </span>
-
-                    </span>
-
-                </td>
-
-            `;
-
-
-            table.appendChild(row);
-
-        }
-    );
-
-}
-   
-
-/* =====================================================
-   SHOW SECTION
-===================================================== */
-function showSection(section) {
-
-    const home = document.getElementById("home");
-
-    // Hide home
-    home.style.display = "none";
-
-    // Hide all sections
-    document
-        .querySelectorAll(".section")
-        .forEach(function(el) {
-            el.classList.remove("active");
-        });
-
-    // Show selected section
-    const target = document.getElementById(section);
-
-    if (target) {
-        target.classList.add("active");
-    }
-
-    // Start at top
-    window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant"
-    });
-}
-/* =====================================================
-   HOME
-===================================================== */
-function goHome() {
-
-    document
-        .querySelectorAll(".section")
-        .forEach(function(el) {
-            el.classList.remove("active");
-        });
-
-    const home = document.getElementById("home");
-
-    // Remove inline display so responsive CSS works again
-    home.style.display = "";
-
-    // Go back to the top
-    window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant"
-    });
-
-}
-/* =====================================================
-   GOLD TABLE
-===================================================== */
-
-function updateGoldTable() {
-
-    const table =
-        document.getElementById("goldTableBody");
-
-    table.innerHTML = "";
-
-
-    goldAmounts.forEach(function(amount) {
-
-        const gold =
-            Math.round(amount * settings.goldRate);
-
-
-        const row =
-            document.createElement("tr");
-
-
-        row.innerHTML = `
-
-            <td>
-                ${amount.toLocaleString()}
-            </td>
-
-            <td>
-                ${gold.toLocaleString()}
-            </td>
-
-        `;
-
-
-        table.appendChild(row);
-
-    });
-
-}
-
-
-/* =====================================================
-   GOLD DISPLAY
-===================================================== */
-
-function updateGoldDisplay() {
-
-    document
-        .getElementById("goldRateDisplay")
-        .textContent =
-            settings.goldRate.toFixed(2);
-
-
-    document
-        .getElementById("gcashNumberDisplay")
-        .textContent =
-            "#" + settings.gcashNumber;
-
-
-    document
-        .getElementById("gcashNameDisplay")
-        .textContent =
-            settings.gcashName;
-
-
-    updateGoldTable();
-
-}
-
-/* =====================================================
-   GENERATE DISCOUNTED PACKAGE POSTER
-===================================================== */
-
-function generatePackagePoster() {
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    const width = 1400;
-    const height = 1100;
-
-    canvas.width = width;
-    canvas.height = height;
-
-
-    /* =================================================
-       COLORS
-    ================================================= */
-
-    const NAVY = "#172554";
-    const NAVY_DARK = "#0f172a";
-    const BLUE = "#1d4ed8";
-    const GOLD = "#f4b400";
-    const GOLD_LIGHT = "#fff8dc";
-    const WHITE = "#ffffff";
-    const LIGHT = "#f8fafc";
-    const BORDER = "#dbe2ea";
-    const TEXT = "#172033";
-    const MUTED = "#64748b";
-    const ORANGE = "#ea580c";
-    const RED = "#dc2626";
-    const GREEN = "#16a34a";
-
-
-    /* =================================================
-       BACKGROUND
-    ================================================= */
-
-    ctx.fillStyle = LIGHT;
-
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-
-    /* =================================================
-       HEADER
-    ================================================= */
-
-    ctx.fillStyle = NAVY;
-
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        180
-    );
-
-
-    /* GOLD LINE */
-
-    ctx.fillStyle = GOLD;
-
-    ctx.fillRect(
-        0,
-        175,
-        width,
-        5
-    );
-
-
-    /* =================================================
-       LOGO
-    ================================================= */
-
-    const logo = new Image();
-
-    logo.onload = function () {
-
-        const logoWidth = 190;
-
-        const logoHeight =
-            logo.height *
-            (logoWidth / logo.width);
-
-        ctx.drawImage(
-            logo,
-            40,
-            18,
-            logoWidth,
-            logoHeight
-        );
-
-
-        drawPackagePoster();
-
-    };
-
-
-    logo.onerror = function () {
-
-        drawPackagePoster();
-
-    };
-
-
-    logo.src =
-        "./GAMETOPUPZONE LOGO.png";
-
-
-    /* =================================================
-       MAIN POSTER
-    ================================================= */
-
-    function drawPackagePoster() {
-
-
-        /* =================================================
-           HEADER TITLE
-        ================================================= */
-
-        ctx.textAlign = "center";
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 42px Arial";
-
-        ctx.fillText(
-            "MIR4 GOLD RATE SYSTEM",
-            800,
-            65
-        );
-
-
-        ctx.fillStyle = GOLD;
-
-        ctx.font =
-            "bold 30px Arial";
-
-        ctx.fillText(
-            "DISCOUNTED PACKAGE RATE",
-            800,
-            108
-        );
-
-
-        ctx.fillStyle = "#cbd5e1";
-
-        ctx.font =
-            "bold 19px Arial";
-
-        ctx.fillText(
-            "FAST  •  SAFE  •  RELIABLE",
-            800,
-            145
-        );
-
-
-        /* =================================================
-           LEFT / RIGHT COLUMN
-        ================================================= */
-
-        const leftX = 40;
-        const leftW = 650;
-
-        const rightX = 720;
-        const rightW = 640;
-
-
-        /* =================================================
-           USDT RATE BOX
-        ================================================= */
-
-        const rateY = 205;
-        const rateH = 105;
-
-
-        /* LEFT RATE LABEL */
-
-        ctx.fillStyle = NAVY;
-
-        ctx.fillRect(
-            leftX,
-            rateY,
-            leftW / 2,
-            rateH
-        );
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 31px Arial";
-
-        ctx.fillText(
-            "USDT / PHP",
-            leftX + leftW / 4,
-            rateY + 47
-        );
-
-
-        ctx.font =
-            "bold 15px Arial";
-
-        ctx.fillStyle = "#cbd5e1";
-
-        ctx.fillText(
-            "KUCOIN BASE",
-            leftX + leftW / 4,
-            rateY + 76
-        );
-
-
-        /* RIGHT RATE VALUE */
-
-        ctx.fillStyle = GOLD_LIGHT;
-
-        ctx.fillRect(
-            leftX + leftW / 2,
-            rateY,
-            leftW / 2,
-            rateH
-        );
-
-
-        const usdtPHP =
-            Number(settings.usdtPHP) || 0;
-
-
-        ctx.fillStyle = NAVY;
-
-        ctx.font =
-            "bold 39px Arial";
-
-        ctx.fillText(
-            "₱" + usdtPHP.toFixed(2),
-            leftX + leftW * 0.75,
-            rateY + 52
-        );
-
-
-        ctx.fillStyle = GREEN;
-
-        ctx.font =
-            "bold 15px Arial";
-
-        ctx.fillText(
-            "● LIVE RATE",
-            leftX + leftW * 0.75,
-            rateY + 80
-        );
-
-
-        /* RATE BORDER */
-
-        ctx.strokeStyle = NAVY;
-
-        ctx.lineWidth = 3;
-
-        ctx.strokeRect(
-            leftX,
-            rateY,
-            leftW,
-            rateH
-        );
-
-
-        /* =================================================
-           PACKAGE TABLE
-        ================================================= */
-
-        const tableY = 335;
-        const headerH = 45;
-        const rowH = 55;
-
-        const col1 = 150;
-        const col2 = 230;
-        const col3 = 270;
-
-
-        /* TABLE HEADER */
-
-        ctx.fillStyle = NAVY;
-
-        ctx.fillRect(
-            leftX,
-            tableY,
-            leftW,
-            headerH
-        );
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 16px Arial";
-
-        ctx.textAlign = "center";
-
-
-        ctx.fillText(
-            "PACKAGE",
-            leftX + col1 / 2,
-            tableY + 28
-        );
-
-
-        ctx.fillText(
-            "ACTUAL PRICE",
-            leftX + col1 + col2 / 2,
-            tableY + 28
-        );
-
-
-        ctx.fillText(
-            "PAY ONLY",
-            leftX + col1 + col2 + col3 / 2,
-            tableY + 28
-        );
-
-
-        /* =================================================
-           PACKAGE ROWS
-        ================================================= */
-
-        const amounts =
-            Array.isArray(packageAmounts)
-                ? packageAmounts
-                : [5, 10, 30, 50, 100];
-
-
-        amounts.forEach(
-            function(packageUSD, index) {
-
-
-                const y =
-                    tableY +
-                    headerH +
-                    index * rowH;
-
-
-                /* ROW BACKGROUND */
-
-                ctx.fillStyle =
-                    index % 2 === 0
-                        ? WHITE
-                        : "#f1f5f9";
-
-
-                ctx.fillRect(
-                    leftX,
-                    y,
-                    leftW,
-                    rowH
-                );
-
-
-                /* ACTUAL PRICE */
-
-                const actualPrice =
-                    packageUSD *
-                    usdtPHP;
-
-
-                const discount =
-                    typeof packageDiscount !== "undefined"
-                        ? packageDiscount
-                        : 0.73;
-
-
-                const fee =
-                    typeof packageFee !== "undefined"
-                        ? packageFee
-                        : 0.05;
-
-
-                const discountedPrice =
-                    actualPrice *
-                    discount *
-                    (1 + fee);
-
-
-                /* FINAL PRICE */
-
-                let finalPrice;
-
-
-                if (
-                    typeof roundPackagePrice === "function"
-                ) {
-
-                    finalPrice =
-                        roundPackagePrice(
-                            discountedPrice
-                        );
-
-                } else {
-
-                    const whole =
-                        Math.ceil(
-                            discountedPrice
-                        );
-
-                    if (
-                        whole % 10 === 5
-                    ) {
-
-                        finalPrice = whole;
-
-                    } else {
-
-                        finalPrice =
-                            Math.ceil(
-                                (whole - 5) / 10
-                            ) * 10 + 5;
-
-                    }
-
-                }
-
-
-                /* PACKAGE */
-
-                ctx.fillStyle = NAVY;
-
-                ctx.font =
-                    "bold 20px Arial";
-
-                ctx.textAlign = "center";
-
-                ctx.fillText(
-                    "$" + packageUSD,
-                    leftX + col1 / 2,
-                    y + 34
-                );
-
-
-                /* ACTUAL PRICE */
-
-                const actualText =
-                    "₱" +
-                    Math.round(
-                        actualPrice
-                    ).toLocaleString();
-
-
-                ctx.fillStyle = "#475569";
-
-                ctx.font =
-                    "bold 17px Arial";
-
-
-                const actualX =
-                    leftX +
-                    col1 +
-                    col2 / 2;
-
-
-                ctx.fillText(
-                    actualText,
-                    actualX,
-                    y + 34
-                );
-
-
-                /* RED STRIKE THROUGH */
-
-                const textWidth =
-                    ctx.measureText(
-                        actualText
-                    ).width;
-
-
-                ctx.strokeStyle = RED;
-
-                ctx.lineWidth = 3;
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    actualX - textWidth / 2 - 4,
-                    y + 28
-                );
-
-                ctx.lineTo(
-                    actualX + textWidth / 2 + 4,
-                    y + 28
-                );
-
-                ctx.stroke();
-
-
-                /* PAY ONLY BOX */
-
-                const finalBoxX =
-                    leftX +
-                    col1 +
-                    col2 +
-                    15;
-
-
-                const finalBoxW =
-                    col3 - 30;
-
-
-                ctx.fillStyle =
-                    "#fff1df";
-
-
-                ctx.beginPath();
-
-                ctx.roundRect(
-                    finalBoxX,
-                    y + 8,
-                    finalBoxW,
-                    39,
-                    6
-                );
-
-                ctx.fill();
-
-
-                /* FINAL PRICE */
-
-                ctx.fillStyle = ORANGE;
-
-                ctx.font =
-                    "bold 21px Arial";
-
-                ctx.fillText(
-                    "₱" +
-                    finalPrice.toLocaleString(),
-                    leftX +
-                    col1 +
-                    col2 +
-                    col3 / 2,
-                    y + 34
-                );
-
-
-                /* ROW BORDER */
-
-                ctx.strokeStyle = BORDER;
-
-                ctx.lineWidth = 1;
-
-                ctx.strokeRect(
-                    leftX,
-                    y,
-                    leftW,
-                    rowH
-                );
-
-            }
-        );
-
-
-        /* =================================================
-           TABLE VERTICAL LINES
-        ================================================= */
-
-        ctx.strokeStyle = BORDER;
-
-        ctx.lineWidth = 1;
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            leftX + col1,
-            tableY
-        );
-
-        ctx.lineTo(
-            leftX + col1,
-            tableY +
-            headerH +
-            amounts.length * rowH
-        );
-
-        ctx.stroke();
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            leftX + col1 + col2,
-            tableY
-        );
-
-        ctx.lineTo(
-            leftX + col1 + col2,
-            tableY +
-            headerH +
-            amounts.length * rowH
-        );
-
-        ctx.stroke();
-
-
-        /* OUTER BORDER */
-
-        ctx.strokeStyle = NAVY;
-
-        ctx.lineWidth = 3;
-
-        ctx.strokeRect(
-            leftX,
-            tableY,
-            leftW,
-            headerH +
-            amounts.length * rowH
-        );
-
-
-        /* =================================================
-           HOW TO BUY
-        ================================================= */
-
-        const procedureY = 205;
-        const procedureH = 535;
-
-
-        /* PROCEDURE BOX */
-
-        ctx.fillStyle = WHITE;
-
-        ctx.beginPath();
-
-        ctx.roundRect(
-            rightX,
-            procedureY,
-            rightW,
-            procedureH,
-            14
-        );
-
-        ctx.fill();
-
-
-        ctx.strokeStyle = NAVY;
-
-        ctx.lineWidth = 3;
-
-        ctx.stroke();
-
-
-        /* HEADER */
-
-        ctx.fillStyle = NAVY;
-
-        ctx.beginPath();
-
-        ctx.roundRect(
-            rightX,
-            procedureY,
-            rightW,
-            105,
-            14
-        );
-
-        ctx.fill();
-
-
-        ctx.fillRect(
-            rightX,
-            procedureY + 80,
-            rightW,
-            25
-        );
-
-
-        ctx.textAlign = "left";
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 34px Arial";
-
-        ctx.fillText(
-            "🛒  HOW TO BUY",
-            rightX + 28,
-            procedureY + 47
-        );
-
-
-        ctx.fillStyle = GOLD;
-
-        ctx.font =
-            "bold 16px Arial";
-
-        ctx.fillText(
-            "FOLLOW THESE SIMPLE STEPS",
-            rightX + 30,
-            procedureY + 78
-        );
-
-
-        /* =================================================
-           PROCEDURE DATA
-        ================================================= */
-
-        const steps = [
-
-            {
-                title:
-                    "SCREENSHOT PACKAGE",
-
-                text:
-                    "Screenshot the package you want and wait for admin to reply."
-            },
-
-            {
-                title:
-                    "SEND PAYMENT",
-
-                text:
-                    "Send the payment after admin confirms the price."
-            },
-
-            {
-                title:
-                    "SEND ACCOUNT DETAILS",
-
-                text:
-                    "Send your account details after payment is confirmed."
-            },
-
-            {
-                title:
-                    "WAIT FOR ADMIN SIGNAL",
-
-                text:
-                    "Wait for admin's signal before opening your account once the package purchase is done."
-            }
-
-        ];
-
-
-        const stepStartY =
-            procedureY + 125;
-
-
-        const stepH = 96;
-
-
-        steps.forEach(
-            function(step, index) {
-
-
-                const y =
-                    stepStartY +
-                    index * stepH;
-
-
-                if (index > 0) {
-
-                    ctx.strokeStyle =
-                        "#e2e8f0";
-
-                    ctx.lineWidth = 1;
-
-                    ctx.beginPath();
-
-                    ctx.moveTo(
-                        rightX + 25,
-                        y
-                    );
-
-                    ctx.lineTo(
-                        rightX +
-                        rightW -
-                        25,
-                        y
-                    );
-
-                    ctx.stroke();
-
-                }
-
-
-                const circleX =
-                    rightX + 48;
-
-                const circleY =
-                    y + 42;
-
-
-                ctx.fillStyle = NAVY;
-
-                ctx.beginPath();
-
-                ctx.arc(
-                    circleX,
-                    circleY,
-                    22,
-                    0,
-                    Math.PI * 2
-                );
-
-                ctx.fill();
-
-
-                ctx.fillStyle = WHITE;
-
-                ctx.font =
-                    "bold 17px Arial";
-
-                ctx.textAlign = "center";
-
-                ctx.fillText(
-                    String(index + 1),
-                    circleX,
-                    circleY + 6
-                );
-
-
-                ctx.textAlign = "left";
-
-
-                ctx.fillStyle = NAVY;
-
-                ctx.font =
-                    "bold 17px Arial";
-
-                ctx.fillText(
-                    step.title,
-                    rightX + 85,
-                    y + 33
-                );
-
-
-                ctx.fillStyle = MUTED;
-
-                ctx.font =
-                    "15px Arial";
-
-
-                const maxWidth =
-                    rightW - 125;
-
-
-                const words =
-                    step.text.split(" ");
-
-
-                let line = "";
-
-                let lineY =
-                    y + 57;
-
-
-                words.forEach(
-                    function(word) {
-
-                        const testLine =
-                            line +
-                            word +
-                            " ";
-
-
-                        const testWidth =
-                            ctx.measureText(
-                                testLine
-                            ).width;
-
-
-                        if (
-                            testWidth >
-                            maxWidth &&
-                            line !== ""
-                        ) {
-
-                            ctx.fillText(
-                                line.trim(),
-                                rightX + 85,
-                                lineY
-                            );
-
-
-                            line =
-                                word +
-                                " ";
-
-
-                            lineY += 19;
-
-                        } else {
-
-                            line =
-                                testLine;
-
-                        }
-
-                    }
-                );
-
-
-                if (line.trim() !== "") {
-
-                    ctx.fillText(
-                        line.trim(),
-                        rightX + 85,
-                        lineY
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =================================================
-           GCASH PAYMENT AREA
-        ================================================= */
-
-        const gcashY = 770;
-        const gcashH = 125;
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.beginPath();
-
-        ctx.roundRect(
-            40,
-            gcashY,
-            width - 80,
-            gcashH,
-            12
-        );
-
-        ctx.fill();
-
-
-        ctx.strokeStyle = GOLD;
-
-        ctx.lineWidth = 3;
-
-        ctx.stroke();
-
-
-        ctx.fillStyle = "#2563eb";
-
-        ctx.beginPath();
-
-        ctx.roundRect(
-            55,
-            gcashY + 15,
-            280,
-            95,
-            10
-        );
-
-        ctx.fill();
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 32px Arial";
-
-        ctx.textAlign = "center";
-
-        ctx.fillText(
-            "GCash",
-            195,
-            gcashY + 72
-        );
-
-
-        ctx.fillStyle = ORANGE;
-
-        ctx.font =
-            "bold 31px Arial";
-
-        ctx.fillText(
-            "#" +
-            (
-                settings.gcashNumber ||
-                ""
-            ),
-            760,
-            gcashY + 58
-        );
-
-
-        ctx.fillStyle = "#7c2d12";
-
-        ctx.font =
-            "bold 19px Arial";
-
-        ctx.fillText(
-            settings.gcashName ||
-            "",
-            760,
-            gcashY + 88
-        );
-
-
-        /* =================================================
-           FOOTER
-        ================================================= */
-
-        ctx.fillStyle = NAVY;
-
-        ctx.fillRect(
-            0,
-            925,
-            width,
-            175
-        );
-
-
-        ctx.fillStyle = GOLD;
-
-        ctx.fillRect(
-            0,
-            925,
-            width,
-            5
-        );
-
-
-        ctx.textAlign = "center";
-
-
-        ctx.fillStyle = WHITE;
-
-        ctx.font =
-            "bold 28px Arial";
-
-        ctx.fillText(
-            "GAME TOP-UP ZONE",
-            width / 2,
-            980
-        );
-
-
-        ctx.fillStyle = "#cbd5e1";
-
-        ctx.font =
-            "bold 17px Arial";
-
-        ctx.fillText(
-            "FAST  •  SAFE  •  RELIABLE",
-            width / 2,
-            1015
-        );
-
-
-        ctx.fillStyle = GOLD;
-
-        ctx.font =
-            "bold 16px Arial";
-
-        ctx.fillText(
-            "PLAY MORE  •  PAY LESS",
-            width / 2,
-            1050
-        );
-
-
-        /* =================================================
-           DOWNLOAD
-        ================================================= */
-
-        const link =
-            document.createElement("a");
-
-
-        link.download =
-            "MIR4-DISCOUNTED-PACKAGE-" +
-            (
-                usdtPHP > 0
-                    ? usdtPHP.toFixed(2)
-                    : "RATE"
-            ) +
-            ".png";
-
-
-        link.href =
-            canvas.toDataURL(
-                "image/png"
-            );
-
-
-        link.click();
-
-    }
-
-}
+document.getElementById("token").addEventListener("change", updateSellerLiveRate);
+initialize();
 </script>
-
 </body>
 </html>
