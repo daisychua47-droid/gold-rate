@@ -3,10 +3,10 @@
         {
             "enabled": true,
             "type": "PROMO",
-            "title": "BERMONTHS PROMO",
-            "message": "2250 GOLD FOR 500 PHP",
+            "title": "BIRTHDAY PROMO",
+            "message": "🔥 TODAY ONLY! 🔥  Get 2,850 GOLD for just ₱500! 🎮💰  Don't miss this exclusive birthday promo from Game Topup Zone! 🎂💜",
             "start": "2026-09-01T00:00",
-            "end": "2026-09-01T23:59"
+            "end": "2026-12-31T23:59"
         }
     ]
 }
