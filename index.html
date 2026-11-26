@@ -259,8 +259,16 @@ footer { text-align: center; padding: 30px; color: var(--muted); font-size: 13px
             <option value="EXDRA4">EXDRA4</option>
         </select>
 
-        <label>Order Quantity</label>
-        <input type="number" id="quantity" placeholder="Enter order quantity" min="0" step="0.01">
+        <label>Calculation Mode</label>
+        <select id="sellerMode" onchange="updateSellerInputLabel()">
+            <option value="phpToToken">PHP Amount → Token Quantity</option>
+            <option value="tokenToPhp">Token Quantity → PHP Amount</option>
+        </select>
+        
+        <label id="sellerInputLabel">PHP Budget</label>
+        <input type="number" id="quantity"
+               placeholder="Enter PHP budget"
+               min="0" step="0.01">
 
         <div class="seller-live-rate">
             <span>Live Token Rate</span>
@@ -610,37 +618,109 @@ function loginAdmin() {
     }
 }
 
+
 function calculate() {
     const token = document.getElementById("token").value;
-    const quantity = parseFloat(document.getElementById("quantity").value);
-    if (!quantity || quantity <= 0) {
-        alert("Please enter a valid quantity.");
+    const mode = document.getElementById("sellerMode").value;
+    const inputValue = Number(document.getElementById("quantity").value);
+
+    if (!inputValue || inputValue <= 0) {
+        alert("Please enter a valid amount.");
         return;
     }
+
     const tokenRate = settings.cryptoRates[token];
     const wemixRate = settings.cryptoRates.WEMIX;
-    if (!tokenRate || !wemixRate || tokenRate <= 0 || wemixRate <= 0) {
+
+    if (!settings.ratesLoaded || !tokenRate || !wemixRate ||
+        tokenRate <= 0 || wemixRate <= 0) {
         alert("Live rates are not available yet.");
         return;
     }
-    const wemixNeeded = quantity * (tokenRate / wemixRate);
-    let markup = wemixNeeded <= 30 ? 3 : (wemixNeeded <= 100 ? 2 : (wemixNeeded > 500 ? 0.60 : 1));
-    let fee = (token.startsWith("EXDRA")) ? wemixNeeded * 0.10 : 0;
-    const finalPrice = tokenRate + markup + fee;
-    const totalPHP = wemixNeeded * finalPrice;
-    const totalUSDT = totalPHP / settings.usdtPHP;
+
+    // Existing selling-price calculation
+    function getOrderDetails(quantity) {
+        const wemixNeeded = quantity * (tokenRate / wemixRate);
+
+        const markup = wemixNeeded <= 30 ? 3 :
+            (wemixNeeded <= 100 ? 2 :
+            (wemixNeeded > 500 ? 0.60 : 1));
+
+        const fee = token.startsWith("EXDRA")
+            ? wemixNeeded * 0.10
+            : 0;
+
+        const finalPrice = tokenRate + markup + fee;
+        const totalPHP = wemixNeeded * finalPrice;
+
+        return {
+            quantity,
+            wemixNeeded,
+            markup,
+            fee,
+            finalPrice,
+            totalPHP
+        };
+    }
+
+    let order;
+
+    if (mode === "tokenToPhp") {
+        // Input is token quantity
+        order = getOrderDetails(inputValue);
+    } else {
+        // Input is PHP budget.
+        // Binary search finds the maximum quantity
+        // affordable under the current selling rules.
+        let low = 0;
+        let high = inputValue / tokenRate;
+
+        for (let i = 0; i < 60; i++) {
+            const middle = (low + high) / 2;
+            const test = getOrderDetails(middle);
+
+            if (test.totalPHP <= inputValue) {
+                low = middle;
+            } else {
+                high = middle;
+            }
+        }
+
+        order = getOrderDetails(low);
+    }
+
+    const totalUSDT = order.totalPHP / settings.usdtPHP;
 
     document.getElementById("resultToken").textContent = token;
-    document.getElementById("resultQuantity").textContent = quantity.toLocaleString();
-    document.getElementById("resultBase").textContent = "₱" + tokenRate.toFixed(2);
-    document.getElementById("resultWemixNeeded").textContent = wemixNeeded.toFixed(2);
-    document.getElementById("resultMarkup").textContent = "₱" + markup.toFixed(2);
-    document.getElementById("resultFee").textContent = "₱" + fee.toFixed(3);
-    document.getElementById("resultFinal").textContent = "₱" + finalPrice.toFixed(3);
-    document.getElementById("resultPHP").textContent = "₱" + totalPHP.toFixed(2);
-    document.getElementById("resultUSDT").textContent = "$" + totalUSDT.toFixed(2);
+    document.getElementById("resultQuantity").textContent =
+        order.quantity.toLocaleString(undefined, {
+            maximumFractionDigits: 6
+        });
+
+    document.getElementById("resultBase").textContent =
+        "₱" + tokenRate.toFixed(2);
+
+    document.getElementById("resultWemixNeeded").textContent =
+        order.wemixNeeded.toFixed(2);
+
+    document.getElementById("resultMarkup").textContent =
+        "₱" + order.markup.toFixed(2);
+
+    document.getElementById("resultFee").textContent =
+        "₱" + order.fee.toFixed(3);
+
+    document.getElementById("resultFinal").textContent =
+        "₱" + order.finalPrice.toFixed(3);
+
+    document.getElementById("resultPHP").textContent =
+        "₱" + order.totalPHP.toFixed(2);
+
+    document.getElementById("resultUSDT").textContent =
+        "$" + totalUSDT.toFixed(2);
+
     document.getElementById("sellerResult").classList.add("show");
 }
+
 
 function updateAdminRates() {
     const values = {
@@ -1716,7 +1796,19 @@ function wrapText(
     );
 }
 
+function updateSellerInputLabel() {
+    const mode = document.getElementById("sellerMode").value;
+    const label = document.getElementById("sellerInputLabel");
+    const input = document.getElementById("quantity");
 
+    if (mode === "phpToToken") {
+        label.textContent = "PHP Budget";
+        input.placeholder = "Enter PHP budget";
+    } else {
+        label.textContent = "Token Quantity";
+        input.placeholder = "Enter token quantity";
+    }
+}
 // ==========================================
 // DOWNLOAD
 // ==========================================
