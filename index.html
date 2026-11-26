@@ -423,7 +423,16 @@ let settings = {
 
 const goldAmounts = [100, 200, 300, 400, 500, 1000, 2000, 3000];
 const packageAmounts = [5, 10, 30, 50, 100];
-const packageDiscount = 0.73;
+const defaultPackageDiscounts = {
+    "5": 0.73,
+    "10": 0.73,
+    "30": 0.73,
+    "50": 0.73,
+    "100": 0.73
+};
+
+let packageDiscounts = { ...defaultPackageDiscounts };
+
 const packageFee = 0.05;
 
 async function loadAnnouncements() {
@@ -462,6 +471,12 @@ async function loadSettings() {
         if (typeof data.goldRate === "number") settings.goldRate = data.goldRate;
         if (data.gcashNumber) settings.gcashNumber = data.gcashNumber;
         if (data.gcashName) settings.gcashName = data.gcashName;
+        if (data.packageDiscounts) {
+            packageDiscounts = {
+                ...defaultPackageDiscounts,
+                ...data.packageDiscounts
+            };
+        }
         document.getElementById("goldRateInput").value = settings.goldRate;
         document.getElementById("gcashNumberInput").value = settings.gcashNumber;
         document.getElementById("gcashNameInput").value = settings.gcashName;
@@ -533,7 +548,14 @@ function updatePackageTable() {
     table.innerHTML = "";
     packageAmounts.forEach(packageUSD => {
         const actualPrice = packageUSD * usdtPHP;
-        const discountedPrice = actualPrice * packageDiscount * (1 + packageFee);
+        
+        const factor = Number(
+            packageDiscounts[String(packageUSD)] ??
+            defaultPackageDiscounts[String(packageUSD)]
+        );
+        
+        const discountedPrice = actualPrice * factor * (1 + packageFee);
+        
         const finalPrice = roundPackagePrice(discountedPrice);
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -1213,9 +1235,14 @@ function renderPackagePoster(ctx, canvas) {
             const actualPrice =
                 packageUSD * usdtPHP;
 
+         const factor = Number(
+                packageDiscounts[String(packageUSD)] ??
+                defaultPackageDiscounts[String(packageUSD)]
+            );
+            
             const discountedPrice =
                 actualPrice *
-                packageDiscount *
+                factor *
                 (1 + packageFee);
 
             const finalPrice =
